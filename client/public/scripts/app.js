@@ -115,6 +115,7 @@ module.exports = Bookmarks = Backbone.Collection.extend({
 ;require.register("initialize", function(exports, require, module) {
 $(document).ready(function() {
   var app;
+  Swag.Config.partialsPath = './views/templates/';
   app = require("application");
   app.initialize();
 });
@@ -311,7 +312,6 @@ module.exports = View = (function(_super) {
   };
 
   View.prototype.getRenderData = function() {
-    console.log("GET RENDER DATa", this.communities);
     return {
       communities: this.communities
     };

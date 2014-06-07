@@ -12,7 +12,6 @@ module.exports = class View extends BaseView
     @communities = []
 
   getRenderData: ->
-    console.log "GET RENDER DATa", @communities
     {@communities}
 
   fileLoaded: (e) =>
