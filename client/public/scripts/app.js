@@ -141,7 +141,7 @@ module.exports = function(fileText, separator) {
 
 ;require.register("libs/dataMapping", function(exports, require, module) {
 module.exports = function(fileText, separator, header) {
-  var communities, finalLine, index, line, lines, localLine, value, _i, _j, _len, _len1;
+  var communities, key, line, lines, localLine, _i, _len;
   if (separator == null) {
     separator = " ";
   }
@@ -159,16 +159,11 @@ module.exports = function(fileText, separator, header) {
     line = lines[_i];
     if (line.length) {
       localLine = line.split(separator);
-      finalLine = {};
-      for (index = _j = 0, _len1 = localLine.length; _j < _len1; index = ++_j) {
-        value = localLine[index];
-        if (index !== 0) {
-          finalLine[header[index]] = value;
-        }
-      }
-      communities[localLine[0]] = finalLine;
+      key = "" + localLine[0] + localLine[1];
+      communities[key] = localLine;
     }
   }
+  communities["header"] = header;
   return communities;
 };
 });
@@ -433,11 +428,12 @@ module.exports = View = (function(_super) {
   };
 
   View.prototype.validate = function() {
-    var error;
+    var error, initialDataLength;
     error = "";
-    if (!(this.initialData.length || this.finalData.length)) {
+    initialDataLength = _.keys(this.initialData).length;
+    if (!(initialDataLength || this.finalData.length)) {
       error = "Please upload both the input data and the resulting data of the community detection algorithm.";
-    } else if (!this.initialData.length) {
+    } else if (!initialDataLength) {
       error = "Please upload the input data file used by the community detection algorithm.";
     } else if (!this.finalData.length) {
       error = "Please upload the outputted communities file before continuing.";
