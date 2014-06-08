@@ -1,5 +1,6 @@
 BaseView = require "./view"
-lineReturn = require "../libs/lineReturn"
+dataMapping = require "../libs/dataMapping"
+communityMapping = require "../libs/communityMapping"
 ResultsView = require "./results"
 
 module.exports = class View extends BaseView
@@ -11,7 +12,7 @@ module.exports = class View extends BaseView
     "change #final": "loadFile"
 
   init: =>
-    @initialData = []
+    @initialData = {}
     @finalData = []
 
   afterRender: =>
@@ -19,11 +20,11 @@ module.exports = class View extends BaseView
     @$el.find("#resultsTemplate").append resultsView.render().$el
 
   processInitial: =>
-    @initialData = lineReturn(event.target.result)
+    @initialData = dataMapping(event.target.result, ",", true)
     @render()
 
   processFinal: =>
-    @finalData = lineReturn(event.target.result)
+    @finalData = communityMapping(event.target.result)
     @render()
 
   loadFile: (e) =>

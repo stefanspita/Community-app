@@ -121,15 +121,52 @@ $(document).ready(function() {
 });
 });
 
-;require.register("libs/lineReturn", function(exports, require, module) {
-module.exports = function(fileText) {
+;require.register("libs/communityMapping", function(exports, require, module) {
+module.exports = function(fileText, separator) {
   var communities, line, lines, _i, _len;
+  if (separator == null) {
+    separator = " ";
+  }
   communities = [];
   lines = fileText.split(/\r\n|\r|\n/g);
   for (_i = 0, _len = lines.length; _i < _len; _i++) {
     line = lines[_i];
     if (line.length) {
-      communities.push(line.split(" "));
+      communities.push(line.split(separator));
+    }
+  }
+  return communities;
+};
+});
+
+;require.register("libs/dataMapping", function(exports, require, module) {
+module.exports = function(fileText, separator, header) {
+  var communities, finalLine, index, line, lines, localLine, value, _i, _j, _len, _len1;
+  if (separator == null) {
+    separator = " ";
+  }
+  if (header == null) {
+    header = false;
+  }
+  communities = {};
+  lines = fileText.split(/\r\n|\r|\n/g);
+  if (header) {
+    header = lines[0];
+    header = header.split(separator);
+    lines.splice(0, 1);
+  }
+  for (_i = 0, _len = lines.length; _i < _len; _i++) {
+    line = lines[_i];
+    if (line.length) {
+      localLine = line.split(separator);
+      finalLine = {};
+      for (index = _j = 0, _len1 = localLine.length; _j < _len1; index = ++_j) {
+        value = localLine[index];
+        if (index !== 0) {
+          finalLine[header[index]] = value;
+        }
+      }
+      communities[localLine[0]] = finalLine;
     }
   }
   return communities;
@@ -286,14 +323,16 @@ module.exports = Bookmark = Backbone.View.extend({
 });
 
 ;require.register("views/communityHome", function(exports, require, module) {
-var BaseView, ResultsView, View, lineReturn,
+var BaseView, ResultsView, View, communityMapping, dataMapping,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 BaseView = require("./view");
 
-lineReturn = require("../libs/lineReturn");
+dataMapping = require("../libs/dataMapping");
+
+communityMapping = require("../libs/communityMapping");
 
 ResultsView = require("./results");
 
@@ -319,7 +358,7 @@ module.exports = View = (function(_super) {
   };
 
   View.prototype.init = function() {
-    this.initialData = [];
+    this.initialData = {};
     return this.finalData = [];
   };
 
@@ -333,12 +372,12 @@ module.exports = View = (function(_super) {
   };
 
   View.prototype.processInitial = function() {
-    this.initialData = lineReturn(event.target.result);
+    this.initialData = dataMapping(event.target.result, ",", true);
     return this.render();
   };
 
   View.prototype.processFinal = function() {
-    this.finalData = lineReturn(event.target.result);
+    this.finalData = communityMapping(event.target.result);
     return this.render();
   };
 
