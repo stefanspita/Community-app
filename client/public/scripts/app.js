@@ -121,7 +121,7 @@ $(document).ready(function() {
 });
 });
 
-;require.register("libs/communityPreparator", function(exports, require, module) {
+;require.register("libs/lineReturn", function(exports, require, module) {
 module.exports = function(fileText) {
   var communities, line, lines, _i, _len;
   communities = [];
@@ -129,9 +129,7 @@ module.exports = function(fileText) {
   for (_i = 0, _len = lines.length; _i < _len; _i++) {
     line = lines[_i];
     if (line.length) {
-      communities.push({
-        nodes: line.split(" ")
-      });
+      communities.push(line.split(" "));
     }
   }
   return communities;
@@ -186,32 +184,10 @@ module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partial
 require.register("templates/communityHome", function(exports, require, module) {
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
-  var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+  var foundHelper, self=this;
 
-function program1(depth0,data) {
-  
-  var buffer = "", stack1, stack2;
-  buffer += "\r\n    <h3>";
-  stack1 = "Community";
-  foundHelper = helpers.lowercase;
-  stack2 = foundHelper || depth0.lowercase;
-  if(typeof stack2 === functionType) { stack1 = stack2.call(depth0, stack1, { hash: {} }); }
-  else if(stack2=== undef) { stack1 = helperMissing.call(depth0, "lowercase", stack1, { hash: {} }); }
-  else { stack1 = stack2; }
-  buffer += escapeExpression(stack1) + "</h3>\r\n";
-  return buffer;}
 
-  buffer += "<h1>Community Detection Algorithms Visualization App</h1>\r\n\r\n<label>Please Choose a file to load into the system:</label>\r\n<br />\r\n<input id=\"load-file\" type=\"file\" value=\"Choose File\"/>\r\n\r\n";
-  foundHelper = helpers.communities;
-  stack1 = foundHelper || depth0.communities;
-  stack2 = helpers.each;
-  tmp1 = self.program(1, program1, data);
-  tmp1.hash = {};
-  tmp1.fn = tmp1;
-  tmp1.inverse = self.noop;
-  stack1 = stack2.call(depth0, stack1, tmp1);
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  return buffer;});
+  return "<h1>Community Detection Algorithms Visualization App</h1>\r\n\r\n<div class=\"box\">\r\n    <label>Please Choose the data file:</label>\r\n    <br />\r\n    <input type=\"file\" name=\"files\" id=\"initial\" />\r\n</div>\r\n\r\n<div class=\"box\">\r\n    <label>Please Choose the communities file:</label>\r\n    <br />\r\n    <input type=\"file\" name=\"files\" id=\"final\" />\r\n</div>\r\n\r\n<h2>Results</h2>\r\n<div id=\"resultsTemplate\"></div>";});
 });
 
 require.register("templates/home", function(exports, require, module) {
@@ -221,6 +197,35 @@ module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partial
 
 
   return "<h1>Welcome on My Own Bookmarks</h1>\r\n<p>This application will help you manage your bookmarks!</p>\r\n<form>\r\n    <label>Title:</label>\r\n    <input type=\"text\" name=\"title\"/>\r\n    <label>Url:</label>\r\n    <input type=\"text\" name=\"url\"/>\r\n    <input id=\"add-bookmark\" type=\"submit\" value=\"Add a new bookmark\"/>\r\n</form>\r\n<ul></ul>";});
+});
+
+require.register("templates/results", function(exports, require, module) {
+module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "<p class=\"error\">";
+  foundHelper = helpers.error;
+  stack1 = foundHelper || depth0.error;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "error", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</p>";
+  return buffer;}
+
+  foundHelper = helpers.error;
+  stack1 = foundHelper || depth0.error;
+  stack2 = helpers['if'];
+  tmp1 = self.program(1, program1, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.noop;
+  stack1 = stack2.call(depth0, stack1, tmp1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n";
+  return buffer;});
 });
 
 require.register("views/app_view", function(exports, require, module) {
@@ -281,20 +286,25 @@ module.exports = Bookmark = Backbone.View.extend({
 });
 
 ;require.register("views/communityHome", function(exports, require, module) {
-var BaseView, View, communityPreparator,
+var BaseView, ResultsView, View, lineReturn,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 BaseView = require("./view");
 
-communityPreparator = require("../libs/communityPreparator");
+lineReturn = require("../libs/lineReturn");
+
+ResultsView = require("./results");
 
 module.exports = View = (function(_super) {
   __extends(View, _super);
 
   function View() {
-    this.fileLoaded = __bind(this.fileLoaded, this);
+    this.loadFile = __bind(this.loadFile, this);
+    this.processFinal = __bind(this.processFinal, this);
+    this.processInitial = __bind(this.processInitial, this);
+    this.afterRender = __bind(this.afterRender, this);
     this.init = __bind(this.init, this);
     return View.__super__.constructor.apply(this, arguments);
   }
@@ -304,32 +314,96 @@ module.exports = View = (function(_super) {
   View.prototype.template = require("../templates/communityHome");
 
   View.prototype.events = {
-    "change #load-file": "fileLoaded"
+    "change #initial": "loadFile",
+    "change #final": "loadFile"
   };
 
   View.prototype.init = function() {
-    return this.communities = [];
+    this.initialData = [];
+    return this.finalData = [];
   };
 
-  View.prototype.getRenderData = function() {
-    return {
-      communities: this.communities
-    };
+  View.prototype.afterRender = function() {
+    var resultsView;
+    resultsView = new ResultsView({
+      initialData: this.initialData,
+      finalData: this.finalData
+    });
+    return this.$el.find("#resultsTemplate").append(resultsView.render().$el);
   };
 
-  View.prototype.fileLoaded = function(e) {
-    var fileRef, reader;
+  View.prototype.processInitial = function() {
+    this.initialData = lineReturn(event.target.result);
+    return this.render();
+  };
+
+  View.prototype.processFinal = function() {
+    this.finalData = lineReturn(event.target.result);
+    return this.render();
+  };
+
+  View.prototype.loadFile = function(e) {
+    var fileRef, inputId, reader;
+    inputId = $(e.target).attr("id");
     fileRef = e.target.files[0];
     reader = new FileReader();
     reader.onload = ((function(_this) {
       return function(theFile) {
-        return function(e) {
-          _this.communities = communityPreparator(e.target.result);
-          return _this.render();
+        return function(event) {
+          if (inputId === "initial") {
+            return _this.processInitial();
+          } else {
+            return _this.processFinal();
+          }
         };
       };
     })(this))(fileRef);
     return reader.readAsText(fileRef);
+  };
+
+  return View;
+
+})(BaseView);
+});
+
+;require.register("views/results", function(exports, require, module) {
+var BaseView, View,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+BaseView = require("./view");
+
+module.exports = View = (function(_super) {
+  __extends(View, _super);
+
+  function View() {
+    return View.__super__.constructor.apply(this, arguments);
+  }
+
+  View.prototype.template = require("../templates/results");
+
+  View.prototype.init = function() {
+    this.initialData = this.options.initialData;
+    return this.finalData = this.options.finalData;
+  };
+
+  View.prototype.getRenderData = function() {
+    return {
+      error: this.validate()
+    };
+  };
+
+  View.prototype.validate = function() {
+    var error;
+    error = "";
+    if (!(this.initialData.length || this.finalData.length)) {
+      error = "Please upload both the input data and the resulting data of the community detection algorithm.";
+    } else if (!this.initialData.length) {
+      error = "Please upload the input data file used by the community detection algorithm.";
+    } else if (!this.finalData.length) {
+      error = "Please upload the outputted communities file before continuing.";
+    }
+    return error;
   };
 
   return View;

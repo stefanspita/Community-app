@@ -1,0 +1,11 @@
+div.box {
+    max-width:48%;
+    border: 1px solid #000000;
+    margin: 5px;
+    padding:3px;
+    display: inline-block;
+}
+
+.error {
+    color: red;
+}

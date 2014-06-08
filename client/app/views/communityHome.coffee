@@ -1,26 +1,41 @@
 BaseView = require "./view"
-communityPreparator = require "../libs/communityPreparator"
+lineReturn = require "../libs/lineReturn"
+ResultsView = require "./results"
 
 module.exports = class View extends BaseView
   el: "body"
   template: require("../templates/communityHome")
 
   events:
-    "change #load-file": "fileLoaded"
+    "change #initial": "loadFile"
+    "change #final": "loadFile"
 
   init: =>
-    @communities = []
+    @initialData = []
+    @finalData = []
 
-  getRenderData: ->
-    {@communities}
+  afterRender: =>
+    resultsView = new ResultsView({@initialData, @finalData})
+    @$el.find("#resultsTemplate").append resultsView.render().$el
 
-  fileLoaded: (e) =>
+  processInitial: =>
+    @initialData = lineReturn(event.target.result)
+    @render()
+
+  processFinal: =>
+    @finalData = lineReturn(event.target.result)
+    @render()
+
+  loadFile: (e) =>
+    inputId = $(e.target).attr("id")
     fileRef = e.target.files[0]
     reader = new FileReader()
-
     reader.onload = ((theFile) =>
-      (e) =>
-        @communities = communityPreparator(e.target.result)
-        @render()
+      (event) =>
+        if inputId is "initial"
+          @processInitial()
+        else
+          @processFinal()
     )(fileRef)
     reader.readAsText fileRef
+

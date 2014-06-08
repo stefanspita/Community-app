@@ -1,9 +1,16 @@
 <h1>Community Detection Algorithms Visualization App</h1>
 
-<label>Please Choose a file to load into the system:</label>
-<br />
-<input id="load-file" type="file" value="Choose File"/>
+<div class="box">
+    <label>Please Choose the data file:</label>
+    <br />
+    <input type="file" name="files" id="initial" />
+</div>
 
-{{#each communities}}
-    <h3>{{lowercase "Community"}}</h3>
-{{/each}}
+<div class="box">
+    <label>Please Choose the communities file:</label>
+    <br />
+    <input type="file" name="files" id="final" />
+</div>
+
+<h2>Results</h2>
+<div id="resultsTemplate"></div>
