@@ -231,6 +231,44 @@ module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partial
   return "<h1>Welcome on My Own Bookmarks</h1>\r\n<p>This application will help you manage your bookmarks!</p>\r\n<form>\r\n    <label>Title:</label>\r\n    <input type=\"text\" name=\"title\"/>\r\n    <label>Url:</label>\r\n    <input type=\"text\" name=\"url\"/>\r\n    <input id=\"add-bookmark\" type=\"submit\" value=\"Add a new bookmark\"/>\r\n</form>\r\n<ul></ul>";});
 });
 
+require.register("templates/option", function(exports, require, module) {
+module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  helpers = helpers || Handlebars.helpers;
+  var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\r\n        <option value=\"";
+  stack1 = depth0;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, ".", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "\">";
+  stack1 = depth0;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, ".", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "</option>\r\n    ";
+  return buffer;}
+
+  buffer += "<select name=\"";
+  foundHelper = helpers.name;
+  stack1 = foundHelper || depth0.name;
+  if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+  else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "name", { hash: {} }); }
+  buffer += escapeExpression(stack1) + "\">\r\n    <option value=\"\"></option>\r\n    ";
+  foundHelper = helpers.headers;
+  stack1 = foundHelper || depth0.headers;
+  stack2 = helpers.each;
+  tmp1 = self.program(1, program1, data);
+  tmp1.hash = {};
+  tmp1.fn = tmp1;
+  tmp1.inverse = self.noop;
+  stack1 = stack2.call(depth0, stack1, tmp1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n</select>\r\n<a class=\"delete\" href=\"javascript:void(0);\">Remove</a>";
+  return buffer;});
+});
+
 require.register("templates/results", function(exports, require, module) {
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   helpers = helpers || Handlebars.helpers;
@@ -256,7 +294,7 @@ function program1(depth0,data) {
   tmp1.inverse = self.noop;
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n";
+  buffer += "\r\n<form class=\"options\">\r\n\r\n</form>\r\n<a id=\"addOption\" href=\"javascript:void(0)\">Add new Filter</a>";
   return buffer;});
 });
 
@@ -363,7 +401,7 @@ module.exports = View = (function(_super) {
       initialData: this.initialData,
       finalData: this.finalData
     });
-    return this.$el.find("#resultsTemplate").append(resultsView.render().$el);
+    return this.$el.find("#resultsTemplate").html(resultsView.render().$el);
   };
 
   View.prototype.processInitial = function() {
@@ -400,7 +438,7 @@ module.exports = View = (function(_super) {
 })(BaseView);
 });
 
-;require.register("views/results", function(exports, require, module) {
+;require.register("views/option", function(exports, require, module) {
 var BaseView, View,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -414,17 +452,77 @@ module.exports = View = (function(_super) {
     return View.__super__.constructor.apply(this, arguments);
   }
 
+  View.prototype.template = require("../templates/option");
+
+  View.prototype.events = {
+    "click a.delete": "deleteOption"
+  };
+
+  View.prototype.init = function() {};
+
+  View.prototype.getRenderData = function() {
+    return this.options;
+  };
+
+  View.prototype.deleteOption = function() {
+    this.remove();
+    Backbone.trigger('filterOption:removed');
+  };
+
+  return View;
+
+})(BaseView);
+});
+
+;require.register("views/results", function(exports, require, module) {
+var BaseView, OptionView, View,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+BaseView = require("./view");
+
+OptionView = require("./option");
+
+module.exports = View = (function(_super) {
+  __extends(View, _super);
+
+  function View() {
+    return View.__super__.constructor.apply(this, arguments);
+  }
+
   View.prototype.template = require("../templates/results");
+
+  View.prototype.events = {
+    "click #addOption": "addOption",
+    "change select": "updateData"
+  };
 
   View.prototype.init = function() {
     this.initialData = this.options.initialData;
-    return this.finalData = this.options.finalData;
+    this.finalData = this.options.finalData;
+    this.optionCount = 0;
+    return this.listenTo(Backbone, 'filterOption:removed', this.updateData);
   };
 
   View.prototype.getRenderData = function() {
     return {
       error: this.validate()
     };
+  };
+
+  View.prototype.afterRender = function() {
+    if (this.initialData.header) {
+      this.$("addOption").show();
+      return this.addOption();
+    } else {
+      return this.$("#addOption").hide();
+    }
+  };
+
+  View.prototype.updateData = function() {
+    var data;
+    data = this.$("form").serializeObject();
+    return console.log(data);
   };
 
   View.prototype.validate = function() {
@@ -439,6 +537,16 @@ module.exports = View = (function(_super) {
       error = "Please upload the outputted communities file before continuing.";
     }
     return error;
+  };
+
+  View.prototype.addOption = function() {
+    var optionView;
+    this.optionCount += 1;
+    optionView = new OptionView({
+      name: "option" + this.optionCount,
+      headers: this.initialData.header
+    });
+    return this.$el.find("form").append(optionView.render().$el);
   };
 
   return View;
