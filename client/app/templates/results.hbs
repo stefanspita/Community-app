@@ -1,5 +1,14 @@
-{{#if error}}<p class="error">{{error}}</p>{{/if}}
-<form class="options"></form>
-{{!<a id="addOption" href="javascript:void(0)">Add new Filter</a>}}
+<div class="leftMenu">
+    <ul class="byCat">
+        <li class="active" data-template="attributeCorrelation">Correlation</li>
+        <li>Other Stuff</li>
+    </ul>
+</div>
 
-<div id="graph"></div>
+<div class="filter">
+    {{#if error}}<p class="error">{{error}}</p>{{/if}}
+    <form class="options"></form>
+    {{!<a id="addOption" href="javascript:void(0)">Add new Filter</a>}}
+</div>
+
+<div id="mainTemplate"></div>

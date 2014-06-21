@@ -1,3 +1,9 @@
+body {
+    width:90%;
+    margin:auto;
+    text-align: center;
+}
+
 div.box {
     max-width:48%;
     border: 1px solid #000000;
@@ -8,4 +14,40 @@ div.box {
 
 .error {
     color: red;
+}
+.leftMenu {
+    float:left;
+    width:20%;
+    border-right:3px solid grey;
+}
+
+.mainTemplate {
+    float: right;
+    width: 78%;
+}
+
+ul.byCat {
+    margin: 0 0 0 10px;
+    padding: 0;
+    list-style: none;
+    border: none;
+    display: inline-block;
+
+}
+.byCat li {
+    display: block;
+    border-right: none;
+    background: #FF6A00;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 20px;
+    letter-spacing: -0.03em;
+    width: 120px;
+    text-align: center;
+    height: 40px;
+    color: #ffffff;
+    border: 1px solid white;
+}
+.byCat li.active {
+    background: #43708C;
 }
