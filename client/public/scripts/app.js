@@ -101,6 +101,251 @@ module.exports = {
 };
 });
 
+;require.register("charts/barsLine", function(exports, require, module) {
+var colors, defaults;
+
+defaults = {
+  width: 700,
+  height: 350,
+  margin: {
+    top: 10,
+    right: 10,
+    bottom: 50,
+    left: 40
+  },
+  margin2: {
+    top: 330,
+    right: 10,
+    bottom: 20,
+    left: 40
+  },
+  xKey: "date",
+  yKey: "balance",
+  data: [],
+  eventData: [],
+  eventChange: function() {},
+  onClick: function() {},
+  processData: function(raw) {
+    var item, line, minus, plus, year, _i, _len, _results;
+    _results = [];
+    for (_i = 0, _len = raw.length; _i < _len; _i++) {
+      item = raw[_i];
+      plus = item.plus;
+      minus = item.minus;
+      year = item.year;
+      line = item.line;
+      _results.push({
+        plus: plus,
+        minus: minus,
+        year: year,
+        line: line
+      });
+    }
+    return _results;
+  }
+};
+
+colors = require("./colors");
+
+module.exports = function(opts) {
+  var blue1, blue2, blues, color, colorInterpolate, colorRed, colorScale, colorScaleMinus, data, defaultWidth, draw, focus, formatPercent, height, line, margin, margin2, max, maxTicks, min, minus, netLine, options, plus, red1, red2, redInterpolate, reds, skip, svg, width, xAxis, xbar, xg, xpad, y, yAxis, yExtent, year, years, yg, _ref, _ref1, _ref2, _ref3;
+  defaultWidth = 700;
+  options = _.extend({}, defaults, {
+    width: defaultWidth
+  }, opts);
+  margin = options.margin, margin2 = options.margin2;
+  if (options.yKey2) {
+    margin.right = 40;
+  }
+  width = options.width - margin.left - margin.right;
+  height = options.height - margin.top - margin.bottom;
+  formatPercent = d3.format("s");
+  xbar = d3.scale.ordinal().rangeRoundBands([0, width], .1);
+  y = d3.scale.linear().range([height, 0.]);
+  blues = colors.blue;
+  blue1 = (_ref = opts.blue1) != null ? _ref : blues[0];
+  blue2 = (_ref1 = opts.blue2) != null ? _ref1 : blues[4];
+  colorInterpolate = d3.interpolateRgb(blue1, blue2);
+  colorScale = d3.scale.linear().range([1, 0]);
+  colorScaleMinus = d3.scale.linear().range([1, 0]);
+  color = function(y) {
+    return colorInterpolate(colorScale(y));
+  };
+  reds = colors.orange;
+  red1 = (_ref2 = opts.red1) != null ? _ref2 : reds[0];
+  red2 = (_ref3 = opts.red2) != null ? _ref3 : reds[2];
+  redInterpolate = d3.interpolateRgb(red1, red2);
+  colorRed = function(y) {
+    return redInterpolate(colorScaleMinus(y));
+  };
+  xAxis = d3.svg.axis().scale(xbar).orient("bottom").tickSize(6);
+  yAxis = d3.svg.axis().scale(y).orient("left").tickFormat(formatPercent).ticks(5);
+  svg = d3.select(options.elem).append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
+  svg.append("defs").append("clipPath").attr("id", "clip").append("rect").attr("width", width + 50).attr("height", height);
+  focus = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  data = options.processData(options.data);
+  years = _.pluck(data, "year");
+  xbar.domain(years);
+  maxTicks = 20;
+  if (years.length > maxTicks) {
+    skip = Math.round(years.length / maxTicks);
+    xAxis.tickValues((function() {
+      var _i, _len, _results;
+      _results = [];
+      for ((skip > 0 ? (_i = 0, _len = years.length) : _i = years.length - 1); skip > 0 ? _i < _len : _i >= 0; _i += skip) {
+        year = years[_i];
+        _results.push(year);
+      }
+      return _results;
+    })());
+  }
+  max = d3.max(data, d3.get("plus"));
+  min = d3.min(data, d3.get("minus"));
+  yExtent = [min, max];
+  y.domain(yExtent);
+  colorScale.domain([0, max]);
+  colorScaleMinus.domain([min, 0]);
+  plus = focus.selectAll(".plus").data(data).enter().append("rect").attr("class", "plus").attr("x", function(d) {
+    return xbar(d.year);
+  }).attr("width", xbar.rangeBand()).attr("y", function(d) {
+    return y(0);
+  }).attr("height", 0).attr("fill", function(d) {
+    return color(d.plus);
+  }).on("click", options.onClick);
+  minus = focus.selectAll(".minus").data(data).enter().append("rect").attr("class", "minus").attr("x", function(d) {
+    return xbar(d.year);
+  }).attr("width", xbar.rangeBand()).attr("y", function(d) {
+    return y(0);
+  }).attr("height", 0).attr("fill", function(d) {
+    return colorRed(d.minus);
+  }).on("click", options.onClick);
+  (draw = function() {
+    plus.transition().delay(function(d, i) {
+      return i * 50;
+    }).duration(1000).attr("y", function(d) {
+      return y(d.plus);
+    }).attr("height", function(d) {
+      return y(0) - y(d.plus);
+    });
+    return minus.transition().delay(function(d, i) {
+      return i * 50;
+    }).duration(1000).attr("y", y(0)).attr("height", function(d) {
+      return y(d.minus) - y(0);
+    });
+  })();
+  xg = focus.append("g").attr("class", "x axis withRect").attr("transform", "translate(0," + y(0) + ")").call(xAxis);
+  xg.selectAll("g").insert("rect", "text").attr("width", 55).attr("height", 14).attr("x", -58).attr("rx", 3).attr("ry", 3).attr("fill", "#66E0FF").attr("transform", "rotate(-45)");
+  xg.selectAll("text").style("text-anchor", "end").attr("dx", "-.8em").attr("dy", ".15em").attr("transform", "rotate(-45)");
+  yg = focus.append("g").attr("class", "y axis").call(yAxis);
+  if (options.line) {
+    xpad = xbar.rangeBand() / 2;
+    line = d3.svg.line().x(function(d) {
+      return xpad + xbar(d.year);
+    }).y(d3.get("line", y));
+    netLine = focus.append("path").datum(data).attr("d", line).attr("class", "line").style("stroke", "#506930").style("stroke-width", "5px");
+  }
+  return function(freshData) {
+    if (_.isFunction(freshData)) {
+      data = freshData(options.data);
+    } else {
+      data = options.processData(freshData);
+    }
+    max = d3.max(data, d3.get("plus"));
+    min = d3.min(data, d3.get("minus"));
+    yExtent = [min, max];
+    y.domain(yExtent);
+    colorScale.domain([0, max]);
+    colorScaleMinus.domain([min, 0]);
+    plus.data(data).transition().duration(1000).delay(function(d, i) {
+      return i * 50;
+    }).attr("y", function(d) {
+      return y(d.plus);
+    }).attr("height", function(d) {
+      return y(0) - y(d.plus);
+    }).attr("fill", function(d) {
+      return color(d.plus);
+    });
+    minus.data(data).transition().duration(1000).delay(function(d, i) {
+      return i * 50;
+    }).attr("y", y(0)).attr("height", function(d) {
+      return y(d.minus) - y(0);
+    }).attr("fill", function(d) {
+      return colorRed(d.minus);
+    });
+    xg.transition().duration(1000).attr("transform", "translate(0," + y(0) + ")");
+    yg.transition().duration(1000).call(yAxis);
+    if (netLine) {
+      return netLine.datum(data).transition().duration(2000).attr("d", line);
+    }
+  };
+};
+});
+
+;require.register("charts/colors", function(exports, require, module) {
+var all, allColors, blue, color, colors, green, grey, i, key, mix, mix2, orange, red, stacked, _i, _j, _k, _len, _len1, _ref, _ref1;
+
+grey = "#404040,#4b4b4b,#575757,#646464,#717171".split(",");
+
+blue = "#3e7ba1,#478eba,#51a2d4,#5fbdf9,#6dd8ff".split(",");
+
+green = "#506930,#5c7837,#698a3f,#7ca14a,#8db854".split(",");
+
+orange = "#ff6c00,#ff8e00,#ff8e00,#ffa500,#ffbc00".split(",");
+
+red = "#A13E3E,#BA4747,#D45151,#F95F5F,#FF6D6D".split(",");
+
+stacked = "#ff8e00,#51a2d4,#ff6c00,#3e7ba1,#ffa500,#5fbdf9,#ff8e00,#51a2d4,#ff6c00,#3e7ba1,#ffa500,#5fbdf9".split(",");
+
+allColors = {
+  orange: orange,
+  blue: blue,
+  green: green,
+  red: red,
+  grey: grey
+};
+
+all = [].concat(blue, green, orange, red, grey);
+
+mix = [];
+
+mix2 = [];
+
+_ref = [2, 3, 4, 1, 0];
+for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+  i = _ref[_i];
+  _ref1 = ["green", "blue", "orange", "grey", "red"];
+  for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+    color = _ref1[_j];
+    mix.push(allColors[color][i]);
+  }
+}
+
+for (i = _k = 2; _k <= 4; i = ++_k) {
+  for (key in allColors) {
+    colors = allColors[key];
+    if (key !== "grey") {
+      mix2.push(colors[i]);
+    }
+  }
+}
+
+allColors.mix = mix;
+
+allColors.mix2 = mix2;
+
+allColors.orangeBlue = [orange[0]].concat(blue);
+
+allColors.spectral = ["#9e0142", "#d53e4f", "#f46d43", "#fdae61", "#fee08b", "#ffffbf", "#e6f598", "#abdda4", "#66c2a5", "#3288bd", "#5e4fa2"];
+
+allColors.spectral2 = ["#a50026", "#d73027", "#f46d43", "#fdae61", "#fee08b", "#ffffbf", "#d9ef8b", "#a6d96a", "#66bd63", "#1a9850", "#006837"];
+
+allColors.spectral3 = ["#fcfbfd", "#efedf5", "#dadaeb", "#bcbddc", "#9e9ac8", "#807dba", "#6a51a3", "#54278f", "#3f007d", "#fff5eb", "#fee6ce", "#fdd0a2", "#fdae6b", "#fd8d3c", "#f16913", "#d94801", "#a63603", "#7f2704"];
+
+allColors.mix3 = stacked;
+
+module.exports = allColors;
+});
+
 ;require.register("collections/bookmarks", function(exports, require, module) {
 var Bookmark, Bookmarks;
 
@@ -110,6 +355,23 @@ module.exports = Bookmarks = Backbone.Collection.extend({
   model: Bookmark,
   url: "bookmarks"
 });
+});
+
+;require.register("data/possibleValues", function(exports, require, module) {
+module.exports = {
+  cct1000: [-1, 1, 2],
+  cct1001: [-1, 1, 2],
+  cct1002: [-1, 1, 2],
+  cct1003: [-1, 1, 2],
+  cct1004: [-1, 1, 2],
+  cct1005: [-1, 1, 2],
+  cct1006: [-1, 1, 2],
+  cct1007: [-1, 1, 2],
+  cct1008: [-1, 1, 2],
+  cct1009: [-1, 1, 2],
+  cct1010: [-1, 1, 2],
+  cct1011: [-1, 1, 2]
+};
 });
 
 ;require.register("initialize", function(exports, require, module) {
@@ -141,7 +403,7 @@ module.exports = function(fileText, separator) {
 
 ;require.register("libs/dataMapping", function(exports, require, module) {
 module.exports = function(fileText, separator, header) {
-  var communities, key, line, lines, localLine, _i, _len;
+  var communities, line, lines, localLine, _i, _len;
   if (separator == null) {
     separator = " ";
   }
@@ -159,13 +421,28 @@ module.exports = function(fileText, separator, header) {
     line = lines[_i];
     if (line.length) {
       localLine = line.split(separator);
-      key = "" + localLine[0] + localLine[1];
-      communities[key] = localLine;
+      communities[localLine[0]] = localLine;
     }
   }
   communities["header"] = header;
   return communities;
 };
+});
+
+;require.register("libs/forceInt", function(exports, require, module) {
+module.exports = function(str) {
+  var out;
+  str = ("" + str).replace(/,/g, "").replace(/\s/g, "").replace(/%/g, "");
+  out = Math.round(str);
+  if (_.isNaN(out)) {
+    out = 0;
+  }
+  return out;
+};
+});
+
+;require.register("libs/tempViews", function(exports, require, module) {
+module.exports = {};
 });
 
 ;require.register("models/bookmark", function(exports, require, module) {
@@ -219,7 +496,7 @@ module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partial
   var foundHelper, self=this;
 
 
-  return "<h1>Community Detection Algorithms Visualization App</h1>\r\n\r\n<div class=\"box\">\r\n    <label>Please Choose the data file:</label>\r\n    <br />\r\n    <input type=\"file\" name=\"files\" id=\"initial\" />\r\n</div>\r\n\r\n<div class=\"box\">\r\n    <label>Please Choose the communities file:</label>\r\n    <br />\r\n    <input type=\"file\" name=\"files\" id=\"final\" />\r\n</div>\r\n\r\n<h2>Results</h2>\r\n<div id=\"resultsTemplate\"></div>";});
+  return "<h1>Community Visualization App</h1>\r\n\r\n<div class=\"box\">\r\n    <label>Please Choose the data file:</label>\r\n    <br />\r\n    <input type=\"file\" name=\"files\" id=\"initial\" />\r\n</div>\r\n\r\n<div class=\"box\">\r\n    <label>Please Choose the communities file:</label>\r\n    <br />\r\n    <input type=\"file\" name=\"files\" id=\"final\" />\r\n</div>\r\n\r\n<h2>Results</h2>\r\n<div id=\"resultsTemplate\"></div>";});
 });
 
 require.register("templates/home", function(exports, require, module) {
@@ -265,7 +542,7 @@ function program1(depth0,data) {
   tmp1.inverse = self.noop;
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n</select>\r\n<a class=\"delete\" href=\"javascript:void(0);\">Remove</a>";
+  buffer += "\r\n</select>\r\n";
   return buffer;});
 });
 
@@ -294,7 +571,8 @@ function program1(depth0,data) {
   tmp1.inverse = self.noop;
   stack1 = stack2.call(depth0, stack1, tmp1);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n<form class=\"options\">\r\n\r\n</form>\r\n<a id=\"addOption\" href=\"javascript:void(0)\">Add new Filter</a>";
+  buffer += "\r\n<form class=\"options\"></form>\r\n";
+  buffer += "\r\n\r\n<div id=\"graph\"></div>";
   return buffer;});
 });
 
@@ -475,7 +753,8 @@ module.exports = View = (function(_super) {
 });
 
 ;require.register("views/results", function(exports, require, module) {
-var BaseView, OptionView, View,
+var BarsLine, BaseView, OptionView, View, dataMap, forceInt, getSummary, possibleValues,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -483,10 +762,61 @@ BaseView = require("./view");
 
 OptionView = require("./option");
 
+forceInt = require("../libs/forceInt");
+
+BarsLine = require("../charts/barsLine");
+
+possibleValues = require("../data/possibleValues");
+
+getSummary = function(results, indexes, headers) {
+  var h, i, r, summary, val, _i, _len, _ref;
+  i = indexes[0];
+  h = headers[i];
+  summary = [];
+  _ref = possibleValues[h];
+  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+    val = _ref[_i];
+    r = _.countBy(results, function(community) {
+      if (community.attributesSet > 2) {
+        return (forceInt(community.attributeVals["" + i]["" + val]) / community.attributesSet * 100).toFixed(2);
+      } else {
+        return false;
+      }
+    });
+    summary.push({
+      val: val,
+      count: r
+    });
+  }
+  return summary;
+};
+
+dataMap = function(result) {
+  var a, b, final, _ref;
+  final = [];
+  _ref = result.count;
+  for (a in _ref) {
+    b = _ref[a];
+    if (a !== "false") {
+      final.push({
+        plus: b,
+        minus: 0,
+        year: a
+      });
+    }
+  }
+  final = _.sortBy(final, function(v) {
+    return forceInt(v.year);
+  });
+  return final;
+};
+
 module.exports = View = (function(_super) {
   __extends(View, _super);
 
   function View() {
+    this.getCorrelationPercentages = __bind(this.getCorrelationPercentages, this);
+    this.afterRender = __bind(this.afterRender, this);
     return View.__super__.constructor.apply(this, arguments);
   }
 
@@ -511,18 +841,72 @@ module.exports = View = (function(_super) {
   };
 
   View.prototype.afterRender = function() {
-    if (this.initialData.header) {
+    if (this.validate() === "") {
       this.$("addOption").show();
       return this.addOption();
-    } else {
-      return this.$("#addOption").hide();
     }
   };
 
   View.prototype.updateData = function() {
-    var data;
-    data = this.$("form").serializeObject();
-    return console.log(data);
+    var correlationResults, data, indexes, val, _i, _len, _results;
+    data = this.$("form").serializeArray();
+    indexes = this.getIndexes(data);
+    correlationResults = this.getCorrelationPercentages(indexes);
+    correlationResults = getSummary(correlationResults, indexes, this.initialData.header);
+    this.$('#graph').empty();
+    _results = [];
+    for (_i = 0, _len = correlationResults.length; _i < _len; _i++) {
+      val = correlationResults[_i];
+      this.$('#graph').append(" <h3>Number of communities matching value " + val.val + "</h3> ");
+      _results.push(BarsLine({
+        data: val,
+        elem: this.$('#graph')[0],
+        processData: dataMap
+      }));
+    }
+    return _results;
+  };
+
+  View.prototype.getCorrelationPercentages = function(indexes) {
+    var attributeVals, attributesSet, community, correlationResults, i, index, _i, _j, _len, _len1, _ref;
+    correlationResults = [];
+    _ref = this.finalData;
+    for (index = _i = 0, _len = _ref.length; _i < _len; index = ++_i) {
+      community = _ref[index];
+      attributesSet = _.countBy(community, (function(_this) {
+        return function(node) {
+          var i, _j, _len1;
+          if (_this.initialData[node]) {
+            for (_j = 0, _len1 = indexes.length; _j < _len1; _j++) {
+              i = indexes[_j];
+              if (_this.initialData[node][i] > -10) {
+                return true;
+              }
+            }
+          }
+          return false;
+        };
+      })(this));
+      attributeVals = {};
+      for (_j = 0, _len1 = indexes.length; _j < _len1; _j++) {
+        i = indexes[_j];
+        attributeVals["" + i] = _.countBy(community, (function(_this) {
+          return function(node) {
+            if (_this.initialData[node]) {
+              return _this.initialData[node][i];
+            } else {
+              return false;
+            }
+          };
+        })(this));
+      }
+      correlationResults.push({
+        totalNodes: community.length,
+        attributesSet: forceInt(attributesSet["true"]),
+        attributeVals: attributeVals
+      });
+    }
+    return correlationResults;
   };
 
   View.prototype.validate = function() {
@@ -549,16 +933,30 @@ module.exports = View = (function(_super) {
     return this.$el.find("form").append(optionView.render().$el);
   };
 
+  View.prototype.getIndexes = function(data) {
+    var index, indexes, option, _i, _len;
+    indexes = [];
+    for (index = _i = 0, _len = data.length; _i < _len; index = ++_i) {
+      option = data[index];
+      if (option.value) {
+        indexes.push(_.indexOf(this.initialData.header, option.value));
+      }
+    }
+    return indexes;
+  };
+
   return View;
 
 })(BaseView);
 });
 
 ;require.register("views/view", function(exports, require, module) {
-var $, View, bindingFn,
+var $, View, bindingFn, tempViews,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+tempViews = require('../libs/tempViews');
 
 $ = jQuery;
 
@@ -627,6 +1025,7 @@ module.exports = View = (function(_super) {
 
   View.prototype.render = function() {
     this.$el.html(this.template(this.getRenderData()));
+    this.renderTempViews();
     this.afterRender();
     if (this.bindings && this.model) {
       this.setupBindings();
@@ -694,6 +1093,28 @@ module.exports = View = (function(_super) {
 
   View.prototype.detach = function() {
     return this.$el.detach();
+  };
+
+  View.prototype.renderTempViews = function() {
+    var view;
+    view = this;
+    return this.$('view').each(function() {
+      var SubView, elem, id, subView, viewData, _base, _name;
+      elem = $(this);
+      id = elem.attr("data-id");
+      viewData = tempViews[id];
+      SubView = _.require(viewData.viewName, "views/" + viewData.viewName, "BSM/views/" + viewData.viewName);
+      if (_.isFunction(SubView)) {
+        view.subViews[id] = subView = new SubView(_.extend({}, view.options, viewData.data));
+        if ((_base = view.subViewsByType)[_name = viewData.viewName] == null) {
+          _base[_name] = [];
+        }
+        view.subViewsByType[viewData.viewName].push(subView);
+        return elem.replaceWith(subView.el);
+      } else {
+        return console.warn("Invalid subview data", viewData);
+      }
+    });
   };
 
   return View;

@@ -1,3 +1,4 @@
+tempViews = require '../libs/tempViews'
 $ = jQuery
 
 bindingFn = (selector, $) ->
@@ -46,6 +47,7 @@ module.exports = class View extends Backbone.View
 
   render: =>
     @$el.html (@template @getRenderData())
+    @renderTempViews()
     @afterRender()
     @setupBindings() if (@bindings and @model)
     this
@@ -89,3 +91,22 @@ module.exports = class View extends Backbone.View
 
   detach: =>
     @$el.detach()
+
+
+  renderTempViews: ->
+    view = @
+    #console.warn "renderTemp", view.constructor.name
+    @$('view').each ->
+      elem = $(@)
+      id = elem.attr("data-id")
+      viewData = tempViews[id]
+      SubView = _.require viewData.viewName, "views/#{viewData.viewName}", "BSM/views/#{viewData.viewName}"
+      if _.isFunction(SubView)
+        view.subViews[id] = subView = new SubView _.extend({}, view.options, viewData.data)
+        view.subViewsByType[viewData.viewName] ?= []
+        view.subViewsByType[viewData.viewName].push subView
+        elem.replaceWith subView.el
+        #delete tempViews[id] #memory...
+
+      else
+        console.warn "Invalid subview data", viewData

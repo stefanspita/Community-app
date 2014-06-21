@@ -8,7 +8,6 @@ module.exports = (fileText, separator = " ", header = false) ->
   for line in lines
     if line.length
       localLine = line.split(separator)
-      key = "#{localLine[0]}#{localLine[1]}"
-      communities[key] = localLine
+      communities[localLine[0]] = localLine
   communities["header"] = header
   communities
