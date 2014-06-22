@@ -20,9 +20,9 @@ div.box {
     width:20%;
 }
 
-.mainTemplate {
+#mainTemplate {
     float: right;
-    width: 78%;
+    width: 80%;
 }
 
 ul.byCat {
@@ -31,7 +31,6 @@ ul.byCat {
     list-style: none;
     border: none;
     display: inline-block;
-
 }
 .byCat li {
     display: block;
@@ -49,4 +48,15 @@ ul.byCat {
 }
 .byCat li.active {
     background: #43708C;
+}
+
+.detail h3 {
+    width:48%;
+    text-align: center;
+    float: right;
+}
+.detail {
+    text-align: left;
+    display: inline-block;
+    width:100%;
 }

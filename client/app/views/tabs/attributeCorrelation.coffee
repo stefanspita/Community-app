@@ -2,6 +2,7 @@ BaseView = require "../view"
 forceInt = require "../../libs/forceInt"
 BarsLine = require "../../charts/barsLine"
 possibleValues = require "../../data/possibleValues"
+DetailView= require "./correlationDetail"
 
 getSummary = (results, indexes, headers) ->
   i = indexes[0]
@@ -14,15 +15,6 @@ getSummary = (results, indexes, headers) ->
       else return false
     summary.push {val, count:r}
   return summary
-
-dataMap = (result) ->
-  final = []
-  for a, b of result.count
-    unless a is "false"
-      final.push {plus:b, minus:0, year:a}
-  final = _.sortBy final, (v) ->
-    forceInt(v.year)
-  return final
 
 module.exports = class View extends BaseView
   template: require("../../templates/tabs/attributeCorrelation")
@@ -39,14 +31,11 @@ module.exports = class View extends BaseView
     indexes = @getIndexes(@formData)
     correlationResults = @getCorrelationPercentages(indexes)
     correlationResults = getSummary(correlationResults, indexes, @initialData.header)
-    @$('#graph').empty()
+    @$('#detail').empty()
 
     for val in correlationResults
-      @$('#graph').append """ <h3>Number of communities matching value #{val.val}</h3> """
-      BarsLine
-        data:val
-        elem:@$('#graph')[0]
-        processData: dataMap
+      detailView = new DetailView({data:val, title:"Number of communities matching value #{val.val}"})
+      @$('.detail').append detailView.render().$el
 
   getCorrelationPercentages: (indexes) =>
     correlationResults = []

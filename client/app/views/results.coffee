@@ -33,8 +33,8 @@ module.exports = class View extends BaseView
   updateData: =>
     formData = @$("form").serializeArray()
     template = @$('.byCat li.active').data("template")
+    @$("#mainTemplate").empty()
     if template and formData
-      @$("#mainTemplate").empty()
       tabView = @templateSwitch(template, formData)
       @$("#mainTemplate").append tabView.render().$el
 
