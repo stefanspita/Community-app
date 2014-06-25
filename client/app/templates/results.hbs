@@ -1,14 +1,11 @@
 <div class="leftMenu">
     <ul class="byCat">
         <li class="active" data-template="attributeCorrelation">Correlation</li>
-        <li>Randomization Tool</li>
+        <li data-template="randomizationTool">Randomization Tool</li>
     </ul>
 </div>
 
-<div class="filter">
-    {{#if error}}<p class="error">{{error}}</p>{{/if}}
-    <form class="options"></form>
-    {{!<a id="addOption" href="javascript:void(0)">Add new Filter</a>}}
-</div>
+{{#if error}}<p class="error">{{error}}</p>{{/if}}
+
 
 <div id="mainTemplate"></div>

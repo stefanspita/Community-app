@@ -1,48 +1,41 @@
 BaseView = require "./view"
-OptionView = require "./option"
 AttributeCorrelation = require "./tabs/attributeCorrelation"
+RandomizationTool = require "./tabs/randomizationTool"
 
 module.exports = class View extends BaseView
   template: require("../templates/results")
 
   events:
-    "click #addOption": "addOption"
-    "change select": "updateData"
     "click .byCat li": "showTab"
 
   init: ->
     @initialData = @options.initialData
     @finalData = @options.finalData
-    @optionCount = 0
-    @listenTo Backbone, 'filterOption:removed', @updateData
 
   showTab: (e) =>
     $elem = $(e.target)
     @$('.byCat li').removeClass "active"
     $elem.addClass("active")
-    @updateData()
+    @templateSwitch()
 
   getRenderData: ->
     {error:@validate()}
 
-  afterRender: =>
+  afterRender: ->
     if @validate() is ""
-      @$("addOption").show()
-      @addOption()
+      @templateSwitch()
 
-  updateData: =>
-    formData = @$("form").serializeArray()
+  templateSwitch: ->
     template = @$('.byCat li.active').data("template")
-    @$("#mainTemplate").empty()
-    if template and formData
-      tabView = @templateSwitch(template, formData)
-      @$("#mainTemplate").append tabView.render().$el
-
-  templateSwitch: (template, formData) ->
     switch template
       when "attributeCorrelation"
+        formData = @$("form").serializeArray()
         view = new AttributeCorrelation({@finalData, @initialData, formData})
-    return view
+      when "randomizationTool"
+        view = new RandomizationTool({@finalData})
+    @$("#mainTemplate").empty()
+    if view
+      @$("#mainTemplate").append view.render().$el
 
   validate: ->
     error = ""
@@ -54,8 +47,3 @@ module.exports = class View extends BaseView
     else unless @finalData.length
       error = "Please upload the outputted communities file before continuing."
     error
-
-  addOption: ->
-    @optionCount += 1
-    optionView = new OptionView({name:"option#{@optionCount}", headers:@initialData.header})
-    @$el.find("form").append optionView.render().$el

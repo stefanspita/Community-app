@@ -3,6 +3,7 @@ forceInt = require "../../libs/forceInt"
 BarsLine = require "../../charts/barsLine"
 possibleValues = require "../../data/possibleValues"
 DetailView= require "./correlationDetail"
+OptionView = require "../option"
 
 getSummary = (results, indexes, headers) ->
   i = indexes[0]
@@ -19,16 +20,26 @@ getSummary = (results, indexes, headers) ->
 module.exports = class View extends BaseView
   template: require("../../templates/tabs/attributeCorrelation")
 
+  events:
+    "click #addOption": "addOption"
+    "change select": "updateData"
+
   init: ->
     @initialData = @options.initialData
     @finalData = @options.finalData
-    @formData = @options.formData
+    @optionCount = 0
+    @listenTo Backbone, 'filterOption:removed', @updateData
 
   afterRender: =>
     @updateData()
+    afterRender: =>
+    @$("addOption").show()
+    @addOption()
 
   updateData: ->
+    @formData = @$("form").serializeArray()
     indexes = @getIndexes(@formData)
+    unless indexes.length then return
     correlationResults = @getCorrelationPercentages(indexes)
     correlationResults = getSummary(correlationResults, indexes, @initialData.header)
     @$('#detail').empty()
@@ -61,3 +72,8 @@ module.exports = class View extends BaseView
       if option.value
         indexes.push _.indexOf @initialData.header, option.value
     indexes
+
+  addOption: ->
+    @optionCount += 1
+    optionView = new OptionView({name:"option#{@optionCount}", headers:@initialData.header})
+    @$el.find("form").append optionView.render().$el
