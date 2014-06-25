@@ -22,20 +22,20 @@ module.exports = class View extends BaseView
     {error:@validate()}
 
   afterRender: ->
-    if @validate() is ""
-      @templateSwitch()
+    @templateSwitch()
 
   templateSwitch: ->
-    template = @$('.byCat li.active').data("template")
-    switch template
-      when "attributeCorrelation"
-        formData = @$("form").serializeArray()
-        view = new AttributeCorrelation({@finalData, @initialData, formData})
-      when "randomizationTool"
-        view = new RandomizationTool({@finalData})
-    @$("#mainTemplate").empty()
-    if view
-      @$("#mainTemplate").append view.render().$el
+    if @validate() is ""
+      template = @$('.byCat li.active').data("template")
+      switch template
+        when "attributeCorrelation"
+          formData = @$("form").serializeArray()
+          view = new AttributeCorrelation({@finalData, @initialData, formData})
+        when "randomizationTool"
+          view = new RandomizationTool({@finalData})
+      @$("#mainTemplate").empty()
+      if view
+        @$("#mainTemplate").append view.render().$el
 
   validate: ->
     error = ""
