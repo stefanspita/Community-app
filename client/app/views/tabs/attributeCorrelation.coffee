@@ -9,7 +9,7 @@ getSummary = (results, indexes, headers) ->
   i = indexes[0]
   h = headers[i]
   summary = []
-  for val in possibleValues[h]
+  for val in possibleValues[h].options
     r = _.countBy results, (community) ->
       if community.attributesSet > 2
         return (forceInt(community.attributeVals["#{i}"]["#{val}"]) / community.attributesSet * 100).toFixed(2)

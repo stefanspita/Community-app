@@ -1,5 +1,5 @@
 AppHome = require("views/communityHome")
-module.exports = Router = Backbone.Router.extend
+module.exports = class Router extends Backbone.Router
   routes:
     "": "main"
 

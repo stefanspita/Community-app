@@ -2,5 +2,8 @@
 $(document).ready ->
   Swag.Config.partialsPath = './views/templates/'
   app = require("application")
-  app.initialize()
+  storeInit = require "./models/store"
+  Router = require("router")
+  app.router = new Router()
+  Backbone.history.start()
   return

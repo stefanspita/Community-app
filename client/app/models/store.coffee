@@ -1,0 +1,1 @@
+module.exports = class Store extends Backbone.Model
