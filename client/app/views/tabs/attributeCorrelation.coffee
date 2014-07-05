@@ -1,7 +1,7 @@
 BaseView = require "../view"
 forceInt = require "../../libs/forceInt"
-BarsLine = require "../../charts/barsLine"
 possibleValues = require "../../data/possibleValues"
+answerTypes = require "../../data/answerTypes"
 DetailView= require "./correlationDetail"
 OptionView = require "../option"
 
@@ -14,8 +14,12 @@ getSummary = (results, indexes, headers) ->
       if community.attributesSet > 2
         return (forceInt(community.attributeVals["#{i}"]["#{val}"]) / community.attributesSet * 100).toFixed(2)
       else return false
-    summary.push {val, count:r}
-  return summary
+    r = _.omit r, ["0.00", "false"]
+    if _.keys(r).length
+      answerType = possibleValues[h].answersType
+      answerText = answerTypes[answerType][val]
+      summary.push {val, count:r, answerText}
+  {summary, question:possibleValues[h].question}
 
 module.exports = class View extends BaseView
   template: require("../../templates/tabs/attributeCorrelation")
@@ -31,9 +35,8 @@ module.exports = class View extends BaseView
     @listenTo Backbone, 'filterOption:removed', @updateData
 
   afterRender: =>
-    @updateData()
-    afterRender: =>
-    @$("addOption").show()
+    #@updateData()
+    #@$("#addOption").show()
     @addOption()
 
   updateData: ->
@@ -41,11 +44,12 @@ module.exports = class View extends BaseView
     indexes = @getIndexes(@formData)
     unless indexes.length then return
     correlationResults = @getCorrelationPercentages(indexes)
-    correlationResults = getSummary(correlationResults, indexes, @initialData.header)
-    @$('#detail').empty()
+    {summary, question} = getSummary(correlationResults, indexes, @initialData.header)
+    @$(".question").html question
+    @$('.detail').empty()
 
-    for val in correlationResults
-      detailView = new DetailView({data:val, title:"Number of communities matching value #{val.val}"})
+    for val in summary
+      detailView = new DetailView({data:val})
       @$('.detail').append detailView.render().$el
 
   getCorrelationPercentages: (indexes) =>

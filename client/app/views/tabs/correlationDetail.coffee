@@ -5,8 +5,7 @@ BarsLine = require "../../charts/barsLine"
 dataMap = (result) ->
   final = []
   for a, b of result.count
-    unless a in ["false", "0.00"]
-      final.push {plus:b, minus:0, year:a}
+    final.push {plus:b, minus:0, year:a}
   final = _.sortBy final, (v) ->
     forceInt(v.year)
   return final
@@ -23,4 +22,4 @@ module.exports = class View extends BaseView
       width:400
 
   getRenderData: =>
-    {title: @options.title}
+    {title:"Answer: #{@options.data.answerText}"}
