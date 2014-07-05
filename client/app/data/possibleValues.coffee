@@ -174,64 +174,63 @@ module.exports =
   cct4164:{ options:[1], answersType:"standard", question:"Respondent received treatment for eating disorder: in-patient admission to NHS hospital"}
   cct4165:{ options:[1], answersType:"standard", question:"Respondent received treatment for eating disorder: other/don't know"}
   cct5000:{ options:[1, 2], answersType:"standard", question:"Respondent has ever smoked a whole cigarette (including roll-ups)"}
-
-  cct5001:{ options:[1, 2, 9], question:"Age when respondent smoked first whole cigarette (years)"}
-  cct5005:{ options:[1, 2, 9], question:"Number of cigarettes respondent smoked altogether in lifetime"}
-  cct5010:{ options:[1, 2, 9], question:"Respondent smoked cigarettes in past 30 days"}
-  cct5011:{ options:[1, 2, 9], question:"Age when respondent last smoked whole cigarette (years)"}
-  cct5012:{ options:[1, 2, 9], question:"Respondent smokes every day"}
-  cct5013:{ options:[1, 2, 9], question:"Number of cigarettes respondent smokes every day on average"}
-  cct5014:{ options:[1, 2, 9], question:"Respondent smokes every week"}
-  cct5015:{ options:[1, 2, 9], question:"Number of cigarettes respondent smokes every week on average"}
-  cct5020:{ options:[1, 2, 9], question:"Respondent has ever had a whole alcoholic drink"}
-  cct5025:{ options:[1, 2, 9], question:"Age when respondent first had whole alcoholic drink"}
-  cct5030:{ options:[1, 2, 9], question:"Frequency respondent has drinks containing alcohol"}
-  cct5031:{ options:[1, 2, 9], question:"Number of units respondent has on typical day when drinking"}
-  cct5032:{ options:[1, 2, 9], question:"Frequency respondent had six or more units on one occasion in past year"}
-  cct5033:{ options:[1, 2, 9], question:"Frequency found self unable to stop drinking once started in past year"}
-  cct5034:{ options:[1, 2, 9], question:"Frequency respondent failed to do what was normally expected of respondent (e.g. school/college, work, sport, go out) because of respondent's drinking in past year"}
-  cct5035:{ options:[1, 2, 9], question:"Frequency respondent needed first drink in morning to get going after heavy drinking session in past year"}
-  cct5036:{ options:[1, 2, 9], question:"Frequency respondent had feeling of guilt or remorse after drinking in past year"}
-  cct5037:{ options:[1, 2, 9], question:"Frequency respondent been unable to remember what happened night before because of drinking in past year"}
-  cct5038:{ options:[1, 2, 9], question:"Respondent or someone else been injured as a result of respondent's drinking"}
-  cct5039:{ options:[1, 2, 9], question:"Relative/friend/doctor/other health worker been concerned about respondent's drinking or suggested that respondent cut down"}
-  cct5050:{ options:[1, 2, 9], question:"Respondent tried cannabis"}
-  cct5051:{ options:[1, 2, 9], question:"Age respondent first tried cannabis"}
-  cct5052:{ options:[1, 2, 9], question:"Last time respondent tried cannabis"}
-  cct5053:{ options:[1, 2, 9], question:"Age when respondent last tried cannabis (years)"}
-  cct5055:{ options:[1, 2, 9], question:"Frequency used cannabis in past 12 months"}
-  cct5056:{ options:[1, 2, 9], question:"Number of joints/spliffs, pipes or bongs have on typical day when smoke cannabis"}
-  cct5070:{ options:[1, 2, 9], question:"Respondent used cannabis before midday"}
-  cct5071:{ options:[1, 2, 9], question:"Respondent used cannabis when alone"}
-  cct5072:{ options:[1, 2, 9], question:"Respondent had memory problems when using cannabis"}
-  cct5073:{ options:[1, 2, 9], question:"Respondent's friends or family members told respondent that respondent ought to reduce cannabis use"}
-  cct5074:{ options:[1, 2, 9], question:"Respondent tried to reduce or stop cannabis use without succeeding"}
-  cct5075:{ options:[1, 2, 9], question:"Respondent had problems (e.g. argument, fight, accident, bad result at school, other problems) because of use of cannabis"}
-  cct5100:{ options:[1, 2, 9], question:"Drug ever used in life by respondent: cocaine"}
-  cct5101:{ options:[1, 2, 9], question:"Drug used in last year by respondent: cocaine"}
-  cct5102:{ options:[1, 2, 9], question:"Drug used in last 3 months by respondent: cocaine"}
-  cct5110:{ options:[1, 2, 9], question:"Drug ever used in life by respondent: crack"}
-  cct5111:{ options:[1, 2, 9], question:"Drug used in last year by respondent: crack"}
-  cct5112:{ options:[1, 2, 9], question:"Drug used in last 3 months by respondent: crack"}
-  cct5120:{ options:[1, 2, 9], question:"Drug ever used in life by respondent: amphetamine type stimulants"}
-  cct5121:{ options:[1, 2, 9], question:"Drug used in last year by respondent: amphetamine type stimulants"}
-  cct5122:{ options:[1, 2, 9], question:"Drug used in last 3 months by respondent: amphetamine type stimulants"}
-  cct5130:{ options:[1, 2, 9], question:"Drug ever used in life by respondent: inhalants"}
-  cct5131:{ options:[1, 2, 9], question:"Drug used in last year by respondent: inhalants"}
-  cct5132:{ options:[1, 2, 9], question:"Drug used in last 3 months by respondent: inhalants"}
-  cct5140:{ options:[1, 2, 9], question:"Drug ever used in life by respondent: sedatives or sleeping pills"}
-  cct5141:{ options:[1, 2, 9], question:"Drug used in last year by respondent: sedatives or sleeping pills"}
-  cct5142:{ options:[1, 2, 9], question:"Drug used in last 3 months by respondent: sedatives or sleeping pills"}
-  cct5150:{ options:[1, 2, 9], question:"Drug ever used in life by respondent: hallucinogens"}
-  cct5151:{ options:[1, 2, 9], question:"Drug used in last year by respondent: hallucinogens"}
-  cct5152:{ options:[1, 2, 9], question:"Drug used in last 3 months by respondent: hallucinogens"}
-  cct5160:{ options:[1, 2, 9], question:"Drug ever used in life by respondent: opiods"}
-  cct5161:{ options:[1, 2, 9], question:"Drug used in last year by respondent: opiods"}
-  cct5162:{ options:[1, 2, 9], question:"Drug used in last 3 months by respondent: opiods"}
-  cct5170:{ options:[1, 2, 9], question:"Drug ever used in life by respondent: other stimulants (e.g. mephedrone, khat)"}
-  cct5171:{ options:[1, 2, 9], question:"Drug used in last year by respondent: other stimulants (e.g. mephedrone, khat)"}
-  cct5172:{ options:[1, 2, 9], question:"Drug used in last 3 months by respondent: other stimulants (e.g. mephedrone, khat)"}
-  cct5180:{ options:[1, 2, 9], question:"Drug ever used in life by respondent: other"}
-  cct5181:{ options:[1, 2, 9], question:"Drug used in last year by respondent: other"}
-  cct5182:{ options:[1, 2, 9], question:"Drug used in last 3 months by respondent: other"}
+  cct5001:{ options:[1..19], answersType:false, question:"Age when respondent smoked first whole cigarette (years)"}
+  cct5005:{ options:[1..5], answersType:"cct5005", question:"Number of cigarettes respondent smoked altogether in lifetime"}
+  cct5010:{ options:[1, 2], answersType:"standard", question:"Respondent smoked cigarettes in past 30 days"}
+  cct5011:{ options:[1..19], answersType:false, question:"Age when respondent last smoked whole cigarette (years)"}
+  cct5012:{ options:[1, 2], answersType:"standard", question:"Respondent smokes every day"}
+  cct5013:{ options:[0..35], answersType:false, question:"Number of cigarettes respondent smokes every day on average"}
+  cct5014:{ options:[1, 2], answersType:"standard", question:"Respondent smokes every week"}
+  cct5015:{ options:[0..150], answersType:"standard", question:"Number of cigarettes respondent smokes every week on average"}
+  cct5020:{ options:[1, 2], answersType:"standard", question:"Respondent has ever had a whole alcoholic drink"}
+  cct5025:{ options:[1..19], answersType:false, question:"Age when respondent first had whole alcoholic drink"}
+  cct5030:{ options:[1..5], answersType:"cct5030", question:"Frequency respondent has drinks containing alcohol"}
+  cct5031:{ options:[1..5], answersType:"cct5031", question:"Number of units respondent has on typical day when drinking"}
+  cct5032:{ options:[1..6], answersType:"drinkFrequency", question:"Frequency respondent had six or more units on one occasion in past year"}
+  cct5033:{ options:[1..6], answersType:"drinkFrequency", question:"Frequency found self unable to stop drinking once started in past year"}
+  cct5034:{ options:[1..6], answersType:"drinkFrequency", question:"Frequency respondent failed to do what was normally expected of respondent (e.g. school/college, work, sport, go out) because of respondent's drinking in past year"}
+  cct5035:{ options:[1..6], answersType:"drinkFrequency", question:"Frequency respondent needed first drink in morning to get going after heavy drinking session in past year"}
+  cct5036:{ options:[1..6], answersType:"drinkFrequency", question:"Frequency respondent had feeling of guilt or remorse after drinking in past year"}
+  cct5037:{ options:[1..6], answersType:"drinkFrequency", question:"Frequency respondent been unable to remember what happened night before because of drinking in past year"}
+  cct5038:{ options:[1..3], answersType:"cct5038", question:"Respondent or someone else been injured as a result of respondent's drinking"}
+  cct5039:{ options:[1..3], answersType:"cct5038", question:"Relative/friend/doctor/other health worker been concerned about respondent's drinking or suggested that respondent cut down"}
+  cct5050:{ options:[1, 2], answersType:"standard", question:"Respondent tried cannabis"}
+  cct5051:{ options:[1..19], answersType:false, question:"Age respondent first tried cannabis"}
+  cct5052:{ options:[1..6], answersType:"cct5052", question:"Last time respondent tried cannabis"}
+  cct5053:{ options:[1..20], answersType:false, question:"Age when respondent last tried cannabis (years)"}
+  cct5055:{ options:[1..5], answersType:"drugFrequency", question:"Frequency used cannabis in past 12 months"}
+  cct5056:{ options:[1..40], answersType:false, question:"Number of joints/spliffs, pipes or bongs have on typical day when smoke cannabis"}
+  cct5070:{ options:[0..4], answersType:"drugFrequency2", question:"Respondent used cannabis before midday"}
+  cct5071:{ options:[0..4], answersType:"drugFrequency2", question:"Respondent used cannabis when alone"}
+  cct5072:{ options:[0..4], answersType:"drugFrequency2", question:"Respondent had memory problems when using cannabis"}
+  cct5073:{ options:[0..4], answersType:"drugFrequency2", question:"Respondent's friends or family members told respondent that respondent ought to reduce cannabis use"}
+  cct5074:{ options:[0..4], answersType:"drugFrequency2", question:"Respondent tried to reduce or stop cannabis use without succeeding"}
+  cct5075:{ options:[0..4], answersType:"drugFrequency2", question:"Respondent had problems (e.g. argument, fight, accident, bad result at school, other problems) because of use of cannabis"}
+  cct5100:{ options:[1, 2], answersType:"standard", question:"Drug ever used in life by respondent: cocaine"}
+  cct5101:{ options:[1, 2], answersType:"standard", question:"Drug used in last year by respondent: cocaine"}
+  cct5102:{ options:[1, 2], answersType:"standard", question:"Drug used in last 3 months by respondent: cocaine"}
+  cct5110:{ options:[1, 2], answersType:"standard", question:"Drug ever used in life by respondent: crack"}
+  cct5111:{ options:[1, 2], answersType:"standard", question:"Drug used in last year by respondent: crack"}
+  cct5112:{ options:[1, 2], answersType:"standard", question:"Drug used in last 3 months by respondent: crack"}
+  cct5120:{ options:[1, 2], answersType:"standard", question:"Drug ever used in life by respondent: amphetamine type stimulants"}
+  cct5121:{ options:[1, 2], answersType:"standard", question:"Drug used in last year by respondent: amphetamine type stimulants"}
+  cct5122:{ options:[1, 2], answersType:"standard", question:"Drug used in last 3 months by respondent: amphetamine type stimulants"}
+  cct5130:{ options:[1, 2], answersType:"standard", question:"Drug ever used in life by respondent: inhalants"}
+  cct5131:{ options:[1, 2], answersType:"standard", question:"Drug used in last year by respondent: inhalants"}
+  cct5132:{ options:[1, 2], answersType:"standard", question:"Drug used in last 3 months by respondent: inhalants"}
+  cct5140:{ options:[1, 2], answersType:"standard", question:"Drug ever used in life by respondent: sedatives or sleeping pills"}
+  cct5141:{ options:[1, 2], answersType:"standard", question:"Drug used in last year by respondent: sedatives or sleeping pills"}
+  cct5142:{ options:[1, 2], answersType:"standard", question:"Drug used in last 3 months by respondent: sedatives or sleeping pills"}
+  cct5150:{ options:[1, 2], answersType:"standard", question:"Drug ever used in life by respondent: hallucinogens"}
+  cct5151:{ options:[1, 2], answersType:"standard", question:"Drug used in last year by respondent: hallucinogens"}
+  cct5152:{ options:[1, 2], answersType:"standard", question:"Drug used in last 3 months by respondent: hallucinogens"}
+  cct5160:{ options:[1, 2], answersType:"standard", question:"Drug ever used in life by respondent: opiods"}
+  cct5161:{ options:[1, 2], answersType:"standard", question:"Drug used in last year by respondent: opiods"}
+  cct5162:{ options:[1, 2], answersType:"standard", question:"Drug used in last 3 months by respondent: opiods"}
+  cct5170:{ options:[1, 2], answersType:"standard", question:"Drug ever used in life by respondent: other stimulants (e.g. mephedrone, khat)"}
+  cct5171:{ options:[1, 2], answersType:"standard", question:"Drug used in last year by respondent: other stimulants (e.g. mephedrone, khat)"}
+  cct5172:{ options:[1, 2], answersType:"standard", question:"Drug used in last 3 months by respondent: other stimulants (e.g. mephedrone, khat)"}
+  cct5180:{ options:[1, 2], answersType:"standard", question:"Drug ever used in life by respondent: other"}
+  cct5181:{ options:[1, 2], answersType:"standard", question:"Drug used in last year by respondent: other"}
+  cct5182:{ options:[1, 2], answersType:"standard", question:"Drug used in last 3 months by respondent: other"}
 
