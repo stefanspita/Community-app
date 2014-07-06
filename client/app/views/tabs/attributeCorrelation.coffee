@@ -12,9 +12,9 @@ getSummary = (results, indexes, headers) ->
   for val in possibleValues[h].options
     r = _.countBy results, (community) ->
       if community.attributesSet > 2
-        return (forceInt(community.attributeVals["#{i}"]["#{val}"]) / community.attributesSet * 100).toFixed(2)
+        return Math.floor(forceInt(community.attributeVals["#{i}"]["#{val}"]) / community.attributesSet * 5) * 20
       else return false
-    r = _.omit r, ["0.00", "false"]
+    r = _.omit r, ["false"]
     if _.keys(r).length
       answerType = possibleValues[h].answersType
       answerText = answerTypes[answerType][val]
@@ -79,5 +79,5 @@ module.exports = class View extends BaseView
 
   addOption: ->
     @optionCount += 1
-    optionView = new OptionView({name:"option#{@optionCount}", headers:@initialData.header})
+    optionView = new OptionView({name:"option#{@optionCount}", headers:_.keys(possibleValues)})
     @$el.find("form").append optionView.render().$el

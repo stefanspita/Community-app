@@ -5,9 +5,13 @@ BarsLine = require "../../charts/barsLine"
 dataMap = (result) ->
   final = []
   for a, b of result.count
-    final.push {plus:b, minus:0, year:a}
+    a = forceInt(a)
+    if a is 100
+      year = a
+    else year = "#{a}-#{a+19}"
+    final.push {plus:b, minus:0, year, sorter:a}
   final = _.sortBy final, (v) ->
-    forceInt(v.year)
+    v.sorter
   return final
 
 module.exports = class View extends BaseView
