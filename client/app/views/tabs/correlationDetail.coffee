@@ -6,9 +6,9 @@ dataMap = (result) ->
   final = []
   for a, b of result.count
     a = forceInt(a)
-    if a is 100
-      year = a
-    else year = "#{a}-#{a+19}"
+    if a is 80
+      year = "#{a}-#{a+20}%"
+    else year = "#{a}-#{a+19}%"
     final.push {plus:b, minus:0, year, sorter:a}
   final = _.sortBy final, (v) ->
     v.sorter

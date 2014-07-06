@@ -12,7 +12,9 @@ getSummary = (results, indexes, headers) ->
   for val in possibleValues[h].options
     r = _.countBy results, (community) ->
       if community.attributesSet > 2
-        return Math.floor(forceInt(community.attributeVals["#{i}"]["#{val}"]) / community.attributesSet * 5) * 20
+        percentage = Math.floor(forceInt(community.attributeVals["#{i}"]["#{val}"]) / community.attributesSet * 5) * 20
+        if percentage > 80 then return 80
+        return percentage
       else return false
     r = _.omit r, ["false"]
     if _.keys(r).length
