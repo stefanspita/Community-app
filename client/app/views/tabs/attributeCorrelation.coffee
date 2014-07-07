@@ -31,8 +31,8 @@ module.exports = class View extends BaseView
     "change select": "updateData"
 
   init: ->
-    @initialData = @options.initialData
-    @finalData = @options.finalData
+    @initialData = @store.get("initialData")
+    @finalData = @store.get("finalData")
     @optionCount = 0
     @listenTo Backbone, 'filterOption:removed', @updateData
 

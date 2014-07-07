@@ -1,2 +1,7 @@
-<p>{{numberOfNodes}} nodes available to be be grouped into communities.</p>
+<p>Nodes are available to be be grouped into communities.</p>
+{{#if noOfComms}}
+    <p>A random community group was already generated. If you want to generate an entirely new sample, please click the link below.</p>
+{{else}}
+    <p>No random community group was generated yet. If you want to generate one, please click the link below.</p>
+{{/if}}
 <a class="randomize" href="javascript:void(0)">Randomize nodes and Save</a>

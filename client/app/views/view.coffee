@@ -1,3 +1,4 @@
+app = require "application"
 $ = jQuery
 
 bindingFn = (selector, $) ->
@@ -14,6 +15,7 @@ module.exports = class View extends Backbone.View
   init: ->
 
   initialize: =>
+    @store = app.store
     @subViews = {}
     @subViewsByType = {}
     @init.apply this, arguments

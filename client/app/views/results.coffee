@@ -9,8 +9,8 @@ module.exports = class View extends BaseView
     "click .byCat li": "showTab"
 
   init: ->
-    @initialData = @options.initialData
-    @finalData = @options.finalData
+    @initialData = @store.get("initialData") ? {}
+    @finalData = @store.get("finalData") ? {}
 
   showTab: (e) =>
     $elem = $(e.target)
@@ -30,9 +30,9 @@ module.exports = class View extends BaseView
       switch template
         when "attributeCorrelation"
           formData = @$("form").serializeArray()
-          view = new AttributeCorrelation({@finalData, @initialData, formData})
+          view = new AttributeCorrelation({formData})
         when "randomizationTool"
-          view = new RandomizationTool({@finalData})
+          view = new RandomizationTool()
       @$("#mainTemplate").empty()
       if view
         @$("#mainTemplate").append view.render().$el

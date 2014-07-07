@@ -11,20 +11,16 @@ module.exports = class View extends BaseView
     "change #initial": "loadFile"
     "change #final": "loadFile"
 
-  init: =>
-    @initialData = {}
-    @finalData = []
-
   afterRender: =>
-    resultsView = new ResultsView({@initialData, @finalData})
+    resultsView = new ResultsView()
     @$el.find("#resultsTemplate").html resultsView.render().$el
 
   processInitial: =>
-    @initialData = dataMapping(event.target.result, ",", true)
+    @store.set {initialData: dataMapping(event.target.result, ",", true)}
     @render()
 
   processFinal: =>
-    @finalData = communityMapping(event.target.result)
+    @store.set {finalData: communityMapping(event.target.result)}
     @render()
 
   loadFile: (e) =>

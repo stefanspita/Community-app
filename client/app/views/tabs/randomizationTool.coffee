@@ -7,15 +7,17 @@ module.exports = class View extends BaseView
     "click a.randomize":"randomize"
 
   init: ->
-    @finalData = @options.finalData
-    @nodesList = _.unique(_.flatten(@finalData))
+    @finalData = @store.get("finalData")
+    @randomCommunities = @store.get("randomCommunities")
 
   getRenderData: ->
-    { numberOfNodes:@nodesList.length }
+    { noOfComms:@randomCommunities?.length }
 
-  randomize: ->
+  randomize: =>
+    @nodesList = _.unique(_.flatten(@finalData))
     randomOrder = _.sample(@nodesList, @nodesList.length)
     nodesInComms = Math.round(randomOrder.length / @finalData.length)
-    randomComms = _.values(_.groupBy randomOrder, (node, index) ->
+    @randomCommunities = _.values(_.groupBy randomOrder, (node, index) ->
       return Math.floor(index / nodesInComms))
-    console.log randomComms
+    @store.set {randomCommunities:@randomCommunities}
+    @render()
