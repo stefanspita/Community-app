@@ -461,66 +461,66 @@ module.exports =
   fh8466:{ options:[1, 2], answersType:"fh8461", question:"Number of times YP has tried nicotine gum : TF3"}
 
   fh8510:{ options:[1, 2], answersType:"standard", question:"YP has ever had a whole drink : TF3"}
-  fh8511:{ options:[1, 2], answersType:"standard", question:"YPs alcohol drinking pattern : TF3"}
-  fh8512:{ options:[1, 2], answersType:"standard", question:"YPs age in years when first had a full drink : TF3"}
-  fh8513:{ options:[1, 2], answersType:"standard", question:"YPs estimate of number of occasions in their life on which they had had a full drink of alcohol : TF3"}
-  fh8520:{ options:[1, 2], answersType:"standard", question:"Largest number of whole drinks YP has ever consumed in 24 hours : TF3"}
-  fh8521:{ options:[1, 2], answersType:"standard", question:"Largest number of whole drinks YP has ever consumed in 24 hours, in the last 2 years : TF3"}
-  fh8530:{ options:[1, 2], answersType:"standard", question:"Number full drinks needed to make YP feel tipsy or have a buzz, first 5 or so times ever had a full drink : TF3"}
-  fh8531:{ options:[1, 2], answersType:"standard", question:"Number full drinks needed to make YP feel dizzy or slur speech, first 5 or so times ever had a full drink : TF3"}
-  fh8532:{ options:[1, 2], answersType:"standard", question:"Number full drinks needed to make YP stumble or find it hard to walk properly, first 5 or so times ever had a full drink : TF3"}
-  fh8533:{ options:[1, 2], answersType:"standard", question:"Number full drinks needed to make YP pass out or fall asleep when didn't want to, first 5 or so times ever had a full drink : TF3"}
-  fh8540:{ options:[1, 2], answersType:"standard", question:"Number times YP has had a full drink of alcohol, in the past 2 years : TF3"}
-  fh8541:{ options:[1, 2], answersType:"standard", question:"Number times YP has had a full drink of alcohol, in the last 6 months : TF3"}
-  fh8542:{ options:[1, 2], answersType:"standard", question:"Number times YP has had a full drink of alcohol, in the last 30 days : TF3"}
-  fh8545:{ options:[1, 2], answersType:"standard", question:"Number drinks YP usually has on a typical day when they have had a drink, in the last 6 months : TF3"}
-  fh8550:{ options:[1, 2], answersType:"standard", question:"Number full drinks needed to make YP feel tipsy or have a buzz, over the last 6 months : TF3"}
-  fh8551:{ options:[1, 2], answersType:"standard", question:"Number full drinks needed to make YP feel dizzy or slur speech, over the last 6 months : TF3"}
-  fh8552:{ options:[1, 2], answersType:"standard", question:"Number full drinks needed to make YP stumble or find it hard to walk properly, over the last 6 months : TF3"}
-  fh8553:{ options:[1, 2], answersType:"standard", question:"Number full drinks needed to make YP pass out or fall asleep when didn't want to, over the last 6 months : TF3"}
+  fh8511:{ options:[1..6], answersType:"fh8511", question:"YPs alcohol drinking pattern : TF3"}
+  fh8512:{ options:false, answersType:false, question:"YPs age in years when first had a full drink : TF3"}
+  fh8513:{ options:[1..8], answersType:"numbers", question:"YPs estimate of number of occasions in their life on which they had had a full drink of alcohol : TF3"}
+  fh8520:{ options:false, answersType:false, question:"Largest number of whole drinks YP has ever consumed in 24 hours : TF3"}
+  fh8521:{ options:false, answersType:false, question:"Largest number of whole drinks YP has ever consumed in 24 hours, in the last 2 years : TF3"}
+  fh8530:{ options:false, answersType:false, question:"Number full drinks needed to make YP feel tipsy or have a buzz, first 5 or so times ever had a full drink : TF3"}
+  fh8531:{ options:false, answersType:false, question:"Number full drinks needed to make YP feel dizzy or slur speech, first 5 or so times ever had a full drink : TF3"}
+  fh8532:{ options:false, answersType:false, question:"Number full drinks needed to make YP stumble or find it hard to walk properly, first 5 or so times ever had a full drink : TF3"}
+  fh8533:{ options:false, answersType:false, question:"Number full drinks needed to make YP pass out or fall asleep when didn't want to, first 5 or so times ever had a full drink : TF3"}
+  fh8540:{ options:[1..8], answersType:"numbers", question:"Number times YP has had a full drink of alcohol, in the past 2 years : TF3"}
+  fh8541:{ options:[1..8], answersType:"numbers", question:"Number times YP has had a full drink of alcohol, in the last 6 months : TF3"}
+  fh8542:{ options:[1..8], answersType:"numbers", question:"Number times YP has had a full drink of alcohol, in the last 30 days : TF3"}
+  fh8545:{ options:false, answersType:false, question:"Number drinks YP usually has on a typical day when they have had a drink, in the last 6 months : TF3"}
+  fh8550:{ options:false, answersType:false, question:"Number full drinks needed to make YP feel tipsy or have a buzz, over the last 6 months : TF3"}
+  fh8551:{ options:false, answersType:false, question:"Number full drinks needed to make YP feel dizzy or slur speech, over the last 6 months : TF3"}
+  fh8552:{ options:false, answersType:false, question:"Number full drinks needed to make YP stumble or find it hard to walk properly, over the last 6 months : TF3"}
+  fh8553:{ options:false, answersType:false, question:"Number full drinks needed to make YP pass out or fall asleep when didn't want to, over the last 6 months : TF3"}
   fh8560:{ options:[1, 2], answersType:"standard", question:"YP has had 4 full drinks in 24 hours, in the last 2 years : TF3"}
-  fh8561:{ options:[1, 2], answersType:"standard", question:"Number of times YP has had 4 full drinks in 24 hours, in the last 2 years : TF3"}
+  fh8561:{ options:[1..8], answersType:"numbers", question:"Number of times YP has had 4 full drinks in 24 hours, in the last 2 years : TF3"}
   fh8562:{ options:[1, 2], answersType:"standard", question:"YP has had 5+ full drinks in 24 hours, in the last 2 years : TF3"}
-  fh8563:{ options:[1, 2], answersType:"standard", question:"Number of times YP has had 5+ full drinks in 24 hours, in the last 2 years : TF3"}
+  fh8563:{ options:[1..8], answersType:"numbers", question:"Number of times YP has had 5+ full drinks in 24 hours, in the last 2 years : TF3"}
   fh8564:{ options:[1, 2], answersType:"standard", question:"YP has set a limit on how much they would drink but drank more, in the last 2 years : TF3"}
-  fh8565:{ options:[1, 2], answersType:"standard", question:"Number of times YP has set a limit on how much they would drink but drank more, in the last 2 years : TF3"}
+  fh8565:{ options:[1..8], answersType:"numbers", question:"Number of times YP has set a limit on how much they would drink but drank more, in the last 2 years : TF3"}
   fh8566:{ options:[1, 2], answersType:"standard", question:"YP has felt they needed to stop drinking or cut back on your drinking, in the last 2 years : TF3"}
-  fh8567:{ options:[1, 2], answersType:"standard", question:"Number of times YP has felt they needed to stop drinking or cut back on your drinking, in the last 2 years : TF3"}
+  fh8567:{ options:[1..8], answersType:"numbers", question:"Number of times YP has felt they needed to stop drinking or cut back on your drinking, in the last 2 years : TF3"}
   fh8568:{ options:[1, 2], answersType:"standard", question:"YP has spent a great deal of their day drinking alcohol, in the last 2 years : TF3"}
-  fh8569:{ options:[1, 2], answersType:"standard", question:"Number of times YP has spent a great deal of their day drinking alcohol, in the last 2 years : TF3"}
+  fh8569:{ options:[1..8], answersType:"numbers", question:"Number of times YP has spent a great deal of their day drinking alcohol, in the last 2 years : TF3"}
   fh8570:{ options:[1, 2], answersType:"standard", question:"YP has not done things they would usually do because they would rather drink, in the last 2 years : TF3"}
-  fh8571:{ options:[1, 2], answersType:"standard", question:"Number of times YP has not done things they would usually do because they would rather drink, in the last 2 years : TF3"}
+  fh8571:{ options:[1..8], answersType:"numbers", question:"Number of times YP has not done things they would usually do because they would rather drink, in the last 2 years : TF3"}
   fh8572:{ options:[1, 2], answersType:"standard", question:"YP has continued to drink even though it was causing them problems, in the last 2 years : TF3"}
-  fh8573:{ options:[1, 2], answersType:"standard", question:"Number of times YP has continued to drink even though it was causing them problems, in the last 2 years : TF3"}
+  fh8573:{ options:[1..8], answersType:"numbers", question:"Number of times YP has continued to drink even though it was causing them problems, in the last 2 years : TF3"}
   fh8574:{ options:[1, 2], answersType:"standard", question:"YP has been unable to keep up with school work/sports/job because of drinking, in the last 2 years : TF3"}
-  fh8575:{ options:[1, 2], answersType:"standard", question:"Number of times YP has been unable to keep up with school work/sports/job because of drinking, in the last 2 years : TF3"}
+  fh8575:{ options:[1..8], answersType:"numbers", question:"Number of times YP has been unable to keep up with school work/sports/job because of drinking, in the last 2 years : TF3"}
   fh8576:{ options:[1, 2], answersType:"standard", question:"YP has used alcohol in a dangerous situation such as when skateboarding, in the last 2 years : TF3"}
-  fh8577:{ options:[1, 2], answersType:"standard", question:"Number of times YP has used alcohol in a dangerous situation such as when skateboarding, in the last 2 years : TF3"}
+  fh8577:{ options:[1..8], answersType:"numbers", question:"Number of times YP has used alcohol in a dangerous situation such as when skateboarding, in the last 2 years : TF3"}
   fh8578:{ options:[1, 2], answersType:"standard", question:"YP has been accidentally physically hurt while drinking, in the last 2 years : TF3"}
-  fh8579:{ options:[1, 2], answersType:"standard", question:"Number of times YP has been accidentally physically hurt while drinking, in the last 2 years : TF3"}
+  fh8579:{ options:[1..8], answersType:"numbers", question:"Number of times YP has been accidentally physically hurt while drinking, in the last 2 years : TF3"}
   fh8580:{ options:[1, 2], answersType:"standard", question:"YP has had their parents or friends complain about their drinking, in the last 2 years : TF3"}
-  fh8581:{ options:[1, 2], answersType:"standard", question:"Number of times YP has had their parents or friends complain about their drinking, in the last 2 years : TF3"}
+  fh8581:{ options:[1..8], answersType:"numbers", question:"Number of times YP has had their parents or friends complain about their drinking, in the last 2 years : TF3"}
   fh8582:{ options:[1, 2], answersType:"standard", question:"YP has got into fights when they had been drinking, in the last 2 years : TF3"}
-  fh8583:{ options:[1, 2], answersType:"standard", question:"Number of times YP has got into fights when they had been drinking, in the last 2 years : TF3"}
+  fh8583:{ options:[1..8], answersType:"numbers", question:"Number of times YP has got into fights when they had been drinking, in the last 2 years : TF3"}
   fh8584:{ options:[1, 2], answersType:"standard", question:"YP has had a problem with the police because they had been drinking, in the last 2 years : TF3"}
-  fh8585:{ options:[1, 2], answersType:"standard", question:"Number of times YP has had a problem with the police because they had been drinking, in the last 2 years : TF3"}
+  fh8585:{ options:[1..8], answersType:"numbers", question:"Number of times YP has had a problem with the police because they had been drinking, in the last 2 years : TF3"}
   fh8586:{ options:[1, 2], answersType:"standard", question:"YP has drank so much they couldn't remember things they had done while drinking, in the last 2 years : TF3"}
-  fh8587:{ options:[1, 2], answersType:"standard", question:"Number of times YP has drank so much they couldn't remember things they had done while drinking, in the last 2 years : TF3"}
+  fh8587:{ options:[1..8], answersType:"numbers", question:"Number of times YP has drank so much they couldn't remember things they had done while drinking, in the last 2 years : TF3"}
   fh8610:{ options:[1, 2], answersType:"standard", question:"YP has ever tried cannabis : TF3"}
-  fh8611:{ options:[1, 2], answersType:"standard", question:"YPs description of their cannabis taking : TF3"}
-  fh8612:{ options:[1, 2], answersType:"standard", question:"Age of YP when first tried cannabis : TF3"}
-  fh8613:{ options:[1, 2], answersType:"standard", question:"Number times YP has used or taken cannabis in total : TF3"}
+  fh8611:{ options:[1..6], answersType:"fh8611", question:"YPs description of their cannabis taking : TF3"}
+  fh8612:{ options:false, answersType:false, question:"Age of YP when first tried cannabis : TF3"}
+  fh8613:{ options:[1..5], answersType:"cct5005", question:"Number times YP has used or taken cannabis in total : TF3"}
   fh8615:{ options:[1, 2], answersType:"standard", question:"YP has used or taken cannabis since their 15th birthday : TF3"}
-  fh8616:{ options:[1, 2], answersType:"standard", question:"Last time YP used cannabis : TF3"}
-  fh8620:{ options:[1, 2], answersType:"standard", question:"Form of cannabis YP has taken most frequently in the last year : TF3"}
+  fh8616:{ options:[1..7], answersType:"fh8616", question:"Last time YP used cannabis : TF3"}
+  fh8620:{ options:[1..4], answersType:"fh8620", question:"Form of cannabis YP has taken most frequently in the last year : TF3"}
   fh8621:{ options:[1, 2], answersType:"standard", question:"YP has taken cannabis in the form of marijuana, in last year : TF3"}
   fh8622:{ options:[1, 2], answersType:"standard", question:"YP has taken cannabis in the form of resin, in last year : TF3"}
   fh8623:{ options:[1, 2], answersType:"standard", question:"YP has taken cannabis in other form, in last year : TF3"}
-  fh8624:{ options:[1, 2], answersType:"standard", question:"Method YP has most commonly used for taking cannabis : TF3"}
-  fh8631:{ options:[1, 2], answersType:"standard", question:"Number of joints/spliffs/pipes/bongs YP would have, on a typical day : TF3"}
+  fh8624:{ options:[1..4], answersType:"fh8624", question:"Method YP has most commonly used for taking cannabis : TF3"}
+  fh8631:{ options:false, answersType:false, question:"Number of joints/spliffs/pipes/bongs YP would have, on a typical day : TF3"}
   fh8632:{ options:[1, 2], answersType:"standard", question:"YP usually smokes with friends/other people who share the cannabis : TF3"}
-  fh8633:{ options:[1, 2], answersType:"standard", question:"Number of people YP most commonly shares the cannabis with : TF3"}
-  fh8661:{ options:[1, 2], answersType:"standard", question:"YP has ever used cannabis when they were alone, in the past 12 months : TF3"}
+  fh8633:{ options:false, answersType:false, question:"Number of people YP most commonly shares the cannabis with : TF3"}
+  fh8661:{ options:[1..5], answersType:"drugFrequency3", question:"YP has ever used cannabis when they were alone, in the past 12 months : TF3"}
   fh8670:{ options:[1, 2], answersType:"standard", question:"YP has tried inhaling or sniffing poppers, since their 15th birthday : TF3"}
   fh8671:{ options:[1, 2], answersType:"standard", question:"YP has tried inhaling or sniffing solvents, since their 15th birthday : TF3"}
   fh8672:{ options:[1, 2], answersType:"standard", question:"YP has tried inhaling or sniffing aerosols, since their 15th birthday : TF3"}
@@ -554,25 +554,25 @@ module.exports =
   fh8729:{ options:[1, 2], answersType:"standard", question:"YP has tried, taken or used benzodiazepines, in the last 12 months : TF3"}
   fh8730:{ options:[1, 2], answersType:"standard", question:"YP has tried, taken or used ritalin, in the last 12 months : TF3"}
   fh8820:{ options:[1, 2], answersType:"standard", question:"YP spends some of their free time with other young people : TF3"}
-  fh8821:{ options:[1, 2], answersType:"standard", question:"YP enjoys spending free time with other young people : TF3"}
-  fh8822:{ options:[1, 2], answersType:"standard", question:"Sexes of the young people YP has spent free time with : TF3"}
+  fh8821:{ options:[1..4], answersType:"fh8821", question:"YP enjoys spending free time with other young people : TF3"}
+  fh8822:{ options:[1, 2, 3], answersType:"fh8822", question:"Sexes of the young people YP has spent free time with : TF3"}
   fh8844:{ options:[1, 2], answersType:"standard", question:"Before the last time YP kissed young person on mouth, YP had been drinking alcohol : TF3"}
-  fh8845:{ options:[1, 2], answersType:"standard", question:"YPs degree of intoxication before they kissed young person on mouth : TF3"}
+  fh8845:{ options:[1..5], answersType:"fh8845", question:"YPs degree of intoxication before they kissed young person on mouth : TF3"}
   fh8846:{ options:[1, 2], answersType:"standard", question:"Before the last time YP kissed young person on mouth, YP had been using drugs : TF3"}
   fh8864:{ options:[1, 2], answersType:"standard", question:"Before the last time another young person kissed YP on mouth, YP had been drinking alcohol : TF3"}
-  fh8865:{ options:[1, 2], answersType:"standard", question:"YPs degree of intoxication before being kissed on mouth : TF3"}
+  fh8865:{ options:[1..5], answersType:"fh8845", question:"YPs degree of intoxication before being kissed on mouth : TF3"}
   fh8866:{ options:[1, 2], answersType:"standard", question:"Before the last time another young person kissed YP on mouth, YP had been using drugs : TF3"}
   fh8905:{ options:[1, 2], answersType:"standard", question:"Before the last time YP had lain down with another young person, YP had been drinking alcohol before laying down together : TF3"}
-  fh8906:{ options:[1, 2], answersType:"standard", question:"YPs degree of intoxication before laying down with another young person : TF3"}
+  fh8906:{ options:[1..5], answersType:"fh8845", question:"YPs degree of intoxication before laying down with another young person : TF3"}
   fh8907:{ options:[1, 2], answersType:"standard", question:"Before the last time YP had lain down with another young person, YP had been using drugs : TF3"}
   fh8925:{ options:[1, 2], answersType:"standard", question:"Before the last time YP was touched under their clothes, YP had been drinking alcohol : TF3"}
-  fh8926:{ options:[1, 2], answersType:"standard", question:"YPs degree of intoxication before being touched under their clothes : TF3"}
+  fh8926:{ options:[1..5], answersType:"fh8845", question:"YPs degree of intoxication before being touched under their clothes : TF3"}
   fh8927:{ options:[1, 2], answersType:"standard", question:"Before the last time YP was touched under their clothes, YP had been using drugs : TF3"}
   fh8946:{ options:[1, 2], answersType:"standard", question:"Before the last time YP touched another young person under their clothes, YP had been drinking alcohol : TF3"}
-  fh8947:{ options:[1, 2], answersType:"standard", question:"YPs degree of intoxication before touching young person under their clothes : TF3"}
+  fh8947:{ options:[1..5], answersType:"fh8845", question:"YPs degree of intoxication before touching young person under their clothes : TF3"}
   fh8948:{ options:[1, 2], answersType:"standard", question:"Before the last time YP touched another young person under their clothes, YP had been using drugs : TF3"}
   fh8966:{ options:[1, 2], answersType:"standard", question:"Before the last time YP was undressed with another young person, YP had been drinking alcohol : TF3"}
-  fh8967:{ options:[1, 2], answersType:"standard", question:"YPs degree of intoxication before being undressed with another young person : TF3"}
+  fh8967:{ options:[1..5], answersType:"fh8845", question:"YPs degree of intoxication before being undressed with another young person : TF3"}
   fh8968:{ options:[1, 2], answersType:"standard", question:"Before the last time YP was undressed with another young person, YP had been using drugs : TF3"}
   fh8969:{ options:[1, 2], answersType:"standard", question:"YP or other young person had condom with them when YP was undressed with another young person, with private parts showing : TF3"}
   fh8973:{ options:[1, 2], answersType:"standard", question:"Reason for YP allowing themselves to be undressed with another young person - to avoid being dumped : TF3"}
@@ -581,9 +581,9 @@ module.exports =
   fh8976:{ options:[1, 2], answersType:"standard", question:"Reason for YP allowing themselves to be undressed with another young person - loved this person : TF3"}
   fh8977:{ options:[1, 2], answersType:"standard", question:"Reason for YP allowing themselves to be undressed with another young person - friends do it : TF3"}
   fh8978:{ options:[1, 2], answersType:"standard", question:"Reason for YP allowing themselves to be undressed with another young person - got carried away : TF3"}
-  fh8979:{ options:[1, 2], answersType:"standard", question:"YP regrets allowing themselves to be undressed with another young person, with private parts showing : TF3"}
+  fh8979:{ options:[1..4], answersType:"fh8821", question:"YP regrets allowing themselves to be undressed with another young person, with private parts showing : TF3"}
   fh9006:{ options:[1, 2], answersType:"standard", question:"Before the last time YP touched young persons private parts, YP had been drinking alcohol : TF3"}
-  fh9007:{ options:[1, 2], answersType:"standard", question:"YPs degree of intoxication before touching other young persons private parts : TF3"}
+  fh9007:{ options:[1..5], answersType:"fh8845", question:"YPs degree of intoxication before touching other young persons private parts : TF3"}
   fh9008:{ options:[1, 2], answersType:"standard", question:"Before the last time YP touched young persons private parts, YP had been using drugs : TF3"}
   fh9009:{ options:[1, 2], answersType:"standard", question:"YP or other person had condom with them, when YP touched other persons private parts : TF3"}
   fh9013:{ options:[1, 2], answersType:"standard", question:"Reason for YP touching other young persons private parts - to avoid being dumped : TF3"}
@@ -592,9 +592,9 @@ module.exports =
   fh9016:{ options:[1, 2], answersType:"standard", question:"Reason for YP touching other young persons private parts - love this person : TF3"}
   fh9017:{ options:[1, 2], answersType:"standard", question:"Reason for YP touching other young persons private parts - friends do it : TF3"}
   fh9018:{ options:[1, 2], answersType:"standard", question:"Reason for YP touching other young persons private parts - got carried away : TF3"}
-  fh9019:{ options:[1, 2], answersType:"standard", question:"YP regrets touching other young persons private parts : TF3"}
+  fh9019:{ options:[1..4], answersType:"fh8821", question:"YP regrets touching other young persons private parts : TF3"}
   fh9045:{ options:[1, 2], answersType:"standard", question:"Before the last time young person touched YPs private parts, YP had been drinking alcohol : TF3"}
-  fh9046:{ options:[1, 2], answersType:"standard", question:"YPs degree of intoxication before young person touched YPs private parts : TF3"}
+  fh9046:{ options:[1..5], answersType:"fh8845", question:"YPs degree of intoxication before young person touched YPs private parts : TF3"}
   fh9047:{ options:[1, 2], answersType:"standard", question:"Before the last time young person touched YPs private parts, YP had been using drugs : TF3"}
   fh9048:{ options:[1, 2], answersType:"standard", question:"YP or other young person had condom with them, when YPs private parts were touched : TF3"}
   fh9052:{ options:[1, 2], answersType:"standard", question:"Reason for YP letting private parts be touched - to avoid being dumped : TF3"}
@@ -603,27 +603,27 @@ module.exports =
   fh9055:{ options:[1, 2], answersType:"standard", question:"Reason for YP letting private parts be touched - loved this person : TF3"}
   fh9056:{ options:[1, 2], answersType:"standard", question:"Reason for YP letting private parts be touched - friends do it : TF3"}
   fh9057:{ options:[1, 2], answersType:"standard", question:"Reason for YP letting private parts be touched - got carried away : TF3"}
-  fh9058:{ options:[1, 2], answersType:"standard", question:"YP regrets letting their private parts be touched : TF3"}
+  fh9058:{ options:[1..4], answersType:"fh8821", question:"YP regrets letting their private parts be touched : TF3"}
   fh9066:{ options:[1, 2], answersType:"standard", question:"Before the last time YP had oral sex, YP had been drinking alcohol : TF3"}
-  fh9067:{ options:[1, 2], answersType:"standard", question:"YPs degree of intoxication before oral sex : TF3"}
+  fh9067:{ options:[1..5], answersType:"fh8845", question:"YPs degree of intoxication before oral sex : TF3"}
   fh9068:{ options:[1, 2], answersType:"standard", question:"Before the last time YP had oral sex, YP had been using drugs : TF3 : TF3"}
   fh9069:{ options:[1, 2], answersType:"standard", question:"YP or other young person had a condom with them, when had oral sex : TF3"}
   fh9070:{ options:[1, 2], answersType:"standard", question:"YP or other young person used a condom, when last time had oral sex : TF3"}
-  fh9074:{ options:[1, 2], answersType:"standard", question:"Number of times YP or partner used condom, when had oral sex : TF3"}
+  fh9074:{ options:[1..5], answersType:"fh9074", question:"Number of times YP or partner used condom, when had oral sex : TF3"}
   fh9075:{ options:[1, 2], answersType:"standard", question:"Reason for YP having oral sex - to avoid being dumped : TF3"}
   fh9076:{ options:[1, 2], answersType:"standard", question:"Reason for YP having oral sex - going out together, seemed natural : TF3"}
   fh9077:{ options:[1, 2], answersType:"standard", question:"Reason for YP having oral sex - wanted to know what it was like : TF3"}
   fh9078:{ options:[1, 2], answersType:"standard", question:"Reason for YP having oral sex - love this person : TF3"}
   fh9079:{ options:[1, 2], answersType:"standard", question:"Reason for YP having oral sex - friends do it : TF3"}
   fh9080:{ options:[1, 2], answersType:"standard", question:"Reason for YP having oral sex - got carried away : TF3"}
-  fh9081:{ options:[1, 2], answersType:"standard", question:"YPs regrets having oral sex : TF3"}
+  fh9081:{ options:[1..4], answersType:"fh8821", question:"YPs regrets having oral sex : TF3"}
   fh9106:{ options:[1, 2], answersType:"standard", question:"Before the last time YP had sexual intercourse, YP had been drinking alcohol : TF3"}
-  fh9107:{ options:[1, 2], answersType:"standard", question:"YPs degree of intoxication before sexual intercourse : TF3"}
+  fh9107:{ options:[1..5], answersType:"fh8845", question:"YPs degree of intoxication before sexual intercourse : TF3"}
   fh9108:{ options:[1, 2], answersType:"standard", question:"Before the last time YP had sexual intercourse, YP had been using drugs : TF3"}
   fh9109:{ options:[1, 2], answersType:"standard", question:"YP or other young person used a condom, when last had sexual intercourse : TF3"}
   fh9110:{ options:[1, 2], answersType:"standard", question:"YP or other young person used another type of contraceptive, when last had sexual intercourse : TF3"}
-  fh9111:{ options:[1, 2], answersType:"standard", question:"Other type of contraceptive used when last had sexual intercourse : TF3"}
-  fh9112:{ options:[1, 2], answersType:"standard", question:"Number of times YP or partner used condom, when had sexual intercourse : TF3"}
+  fh9111:{ options:[1..4], answersType:"fh9111", question:"Other type of contraceptive used when last had sexual intercourse : TF3"}
+  fh9112:{ options:[1..5], answersType:"fh9074", question:"Number of times YP or partner used condom, when had sexual intercourse : TF3"}
   fh9116:{ options:[1, 2], answersType:"standard", question:"Reason for YP having sexual intercourse - to avoid being dumped : TF3"}
   fh9117:{ options:[1, 2], answersType:"standard", question:"Reason for YP having sexual intercourse - wanted to lose virginity : TF3"}
   fh9118:{ options:[1, 2], answersType:"standard", question:"Reason for YP having sexual intercourse - going out together, seemed natural : TF3"}
@@ -631,30 +631,30 @@ module.exports =
   fh9120:{ options:[1, 2], answersType:"standard", question:"Reason for YP having sexual intercourse - loves this person : TF3"}
   fh9121:{ options:[1, 2], answersType:"standard", question:"Reason for YP having sexual intercourse - friends do it : TF3"}
   fh9122:{ options:[1, 2], answersType:"standard", question:"Reason for YP having sexual intercourse - got carried away : TF3"}
-  fh9123:{ options:[1, 2], answersType:"standard", question:"YP regrets having sexual intercourse : TF3"}
-  fh9124:{ options:[1, 2], answersType:"standard", question:"Number of young people YP has had sexual intercourse with in the last year : TF3"}
+  fh9123:{ options:[1..4], answersType:"fh8821", question:"YP regrets having sexual intercourse : TF3"}
+  fh9124:{ options:false, answersType:false, question:"Number of young people YP has had sexual intercourse with in the last year : TF3"}
   fh9125:{ options:[1, 2], answersType:"standard", question:"Some of young people YP had sexual intercourse with in the last year were new partners : TF3"}
-  fh9126:{ options:[1, 2], answersType:"standard", question:"Number of young people YP has ever had sexual intercourse with : TF3"}
-  mz010:{ options:[1, 2], answersType:"standard", question:"Pregnancy size"}
-  mz010a:{ options:[1, 2], answersType:"standard", question:"Pregnancy size (summary)"}
-  mz013:{ options:[1, 2], answersType:"standard", question:"28-day survivors"}
-  mz014:{ options:[1, 2], answersType:"standard", question:"1-year survivors"}
-  mz028b:{ options:[1, 2], answersType:"standard", question:"Grouped age of mother at delivery"}
-  a006:{ options:[1, 2], answersType:"standard", question:"Home ownership status"}
-  a525:{ options:[1, 2], answersType:"standard", question:"PRES marital status"}
-  b032:{ options:[1, 2], answersType:"standard", question:"Parity"}
+  fh9126:{ options:false, answersType:false, question:"Number of young people YP has ever had sexual intercourse with : TF3"}
+  mz010:{ options:[1..4], answersType:"mz010", question:"Pregnancy size"}
+  mz010a:{ options:[1, 2], answersType:"mz010a", question:"Pregnancy size (summary)"}
+  mz013:{ options:[1, 2, 3], answersType:"mz013", question:"28-day survivors"}
+  mz014:{ options:[1, 2], answersType:"mz013", question:"1-year survivors"}
+  mz028b:{ options:false, answersType:false, question:"Grouped age of mother at delivery"}
+  a006:{ options:[0..6], answersType:"a006", question:"Home ownership status"}
+  a525:{ options:[1..6], answersType:"a525", question:"PRES marital status"}
+  b032:{ options:false, answersType:false, question:"Parity"}
   b650:{ options:[1, 2], answersType:"standard", question:"Ever smoked"}
-  b663:{ options:[1, 2], answersType:"standard", question:"Tobacco smoked REG PRE PREG"}
-  b665:{ options:[1, 2], answersType:"standard", question:"Tobacco smoked in 1ST 3MTHS of PREG"}
-  b667:{ options:[1, 2], answersType:"standard", question:"Tobacco smoked in last 2WKS"}
-  c645a:{ options:[1, 2], answersType:"standard", question:"Mums highest ed qualification"}
-  c755:{ options:[1, 2], answersType:"standard", question:"Social Class - Maternal"}
-  c765:{ options:[1, 2], answersType:"standard", question:"Social Class - Paternal"}
-  c800:{ options:[1, 2], answersType:"standard", question:"Ethnic group"}
-  c801:{ options:[1, 2], answersType:"standard", question:"PTNRS ethnic group"}
-  c802:{ options:[1, 2], answersType:"standard", question:"Mums mothers ethnic group"}
-  c803:{ options:[1, 2], answersType:"standard", question:"Mums fathers ethnic group"}
-  c804:{ options:[1, 2], answersType:"standard", question:"Child ethnic background"}
+  b663:{ options:[1..5], answersType:"b663", question:"Tobacco smoked REG PRE PREG"}
+  b665:{ options:[1..5], answersType:"b663", question:"Tobacco smoked in 1ST 3MTHS of PREG"}
+  b667:{ options:[1..5], answersType:"b663", question:"Tobacco smoked in last 2WKS"}
+  c645a:{ options:[0..5], answersType:"c645a", question:"Mums highest ed qualification"}
+  c755:{ options:[1..6].concat([65]), answersType:"c755", question:"Social Class - Maternal"}
+  c765:{ options:[1..6].concat([65]), answersType:"c755", question:"Social Class - Paternal"}
+  c800:{ options:[1..9], answersType:"ethnicity", question:"Ethnic group"}
+  c801:{ options:[1..9], answersType:"ethnicity", question:"PTNRS ethnic group"}
+  c802:{ options:[1..9], answersType:"ethnicity", question:"Mums mothers ethnic group"}
+  c803:{ options:[1..9], answersType:"ethnicity", question:"Mums fathers ethnic group"}
+  c804:{ options:[1, 2], answersType:"c804", question:"Child ethnic background"}
   bestgest:{ options:[1, 2], answersType:"standard", question:"The best gestation we can get"}
   LINKAGE_WEIGHT:{ options:[1, 2], answersType:"standard", question:"<none>"}
   Resultchla:{ options:[1, 2], answersType:"standard", question:"<none>"}

@@ -13,11 +13,14 @@ module.exports =
   drinkFrequency:{1:"Never", 2:"Once or twice", 3:"Less than monthly", 4:"Monthly", 5:"Weekly", 6:"Daily or almost daily"}
   drugFrequency:{1:"Once or twice", 2:"Less than monthly", 3:"Monthly", 4:"Weekly", 5:"Daily or almost daily"}
   drugFrequency2:{0:"Never", 1:"Rarely", 2:"From time to time", 3:"Fairly often", 4:"Very often"}
+  drugFrequency3:{1:"Never", 2:"Rarely", 3:"From time to time", 4:"Fairly often", 5:"Very often"}
   badBehaviourFrequency:{1:"Not at all", 2:"Just Once", 3:"2-5 times", 4:"6 or more times"}
   neighbourNumbers:{1:"None", 2:"One or some", 3:"Most or all"}
+  numbers:{1:"0", 2:"1-2", 3:"3-5", 4:"6-9", 5:"10-19", 6:"20-39", 7:"40-99", 8:"100+"}
   problems:{1:"Not a problem", 2:"Bit of a problem", 3:"Big problem"}
   timeFrequency:{1:"Hardly ever/never", 2:"< once a week", 3:"At least once a week", 4:"Most days"}
   personTypes:{1:"Sporty", 2:"Keeners", 3:"Skaters", 4:"Chavs", 5:"Bimbos", 6:"Populars", 7:"Goths", 8:"Loners", 9:"Average/none"}
+  ethnicity:{1:"White", 2:"Black Caribbean", 3:"Black African", 4:"Other black", 5:"Indian", 6:"Pakistani", 7:"Bangladeshi", 8:"Chinese", 9:"Other"}
   cct2500:{1:"Much more important to have close friends", 2:"Slightly more important to have close friends", 3:"Both equally important", 4:"Slightly more important to have close ties with family", 5:"Much more important to have close ties with family", 6:"Don't know", 7:"Don't want to answer"}
   cct2501:{1:"None", 2:"One", 3:"2-3", 4:"4-5", 5:"6-9", 6:"10 or more", 7:"Don't know", 8:"Don't want to answer"}
   cct2950:{1:"Full time education", 2:"Part-time education", 3:"On a full-time training course, not as part of a job", 4:"On a full-time training course as part of a job", 5:"On a part-time training course, not as part of a job", 6:"On a part-time training course as part of a job", 7:"Not engaged in any education or training"}
@@ -56,3 +59,22 @@ module.exports =
   fh8220:{1:"None", 2:"Up to 1", 3:"Up to 2", 4:"Up to 4", 5:"> 4"}
   fh8325:{1:"None", 2:"1-2", 3:"3-5", 4:"6-10", 5:"> 10"}
   fh8461:{1:"<10", 2:"10+"}
+  fh8511:{1:"Only ever tried drinking once or twice", 2:"Used to drink sometimes, never drink now", 3:"Sometimes drink, but less than once a week", 4:"Usually drink 1/2 days a week", 5:"Usually drink > 2 days a week, not every day", 6:"Usually drink every day"}
+  fh8611:{1:"Only once/twice ever", 2:"Used to take sometimes, never now", 3:"Sometimes, less than once a week", 4:"1-6 times a week", 5:"> 6 times a week", 6:"Every day"}
+  fh8616:{7:"In the last 3 days", 6:"In the past two weeks", 5:"In the last month", 4:"In the last 3 months", 3:"In the last 6 months", 2:"More than 6 months ago", 1:"Never used"}
+  fh8620:{1:"Not used in the last year", 2:"Marijuana", 3:"Resin", 4:"Other"}
+  fh8624:{1:"Smoked in joints/spiffs/blunts", 2:"Smoked in pipes/bongs", 3:"Eaten it", 4:"Another way"}
+  fh8821:{1:"Not at all", 2:"A bit", 3:"Quite a lot", 4:"Very much"}
+  fh8822:{1:"Same sex", 2:"Opposite sex", 3:"Both sexes"}
+  fh8845:{1:"Not tipsy", 2:"Bit tipsy", 3:"Quite tipsy", 4:"Very tipsy", 5:"Drunk"}
+  fh9074:{1:"Never", 2:"Sometimes", 3:"Half the time", 4:"Most of the time", 5:"Every time"}
+  fh9111:{1:"Withdrawal", 2:"The pill", 3:"Morning-after pill", 4:"Something else"}
+  mz010:{1:"Singleton", 2:"Twin", 3:"Triplet", 4:"Quadruplet"}
+  mz010a:{1:"Singleton", 2:"Multiple"}
+  mz013:{1:"No survivors", 2:"1 survivor", 3:"All survived"}
+  a006:{0:"Mortgaged", 1:"Owned", 2:"Council Rented", 3:"Rent private furnished", 4:"Rent private unfurnished", 5:"HA Rented", 6:"Other"}
+  a525:{1:"Never married", 2:"Widowed", 3:"Divorced", 4:"Separated", 5:"1st marriage", 6:"Marriage 2 or 3"}
+  b663:{1:"N", 2:"Yes, cigarettes", 3:"Yes, cigars", 4:"Yes, pipe", 5:"Yes, other"}
+  c645a:{0:"None", 1:"CSE", 2:"Vocational", 3:"O level", 4:"A level", 5:"Degree"}
+  c755:{1:"I", 2:"II", 3:"III (non-manual)", 4:"III (manual)", 5:"IV", 6:"V", 65:"Armed Forces"}
+  c804:{1:"White", 2:"Non-white"}
