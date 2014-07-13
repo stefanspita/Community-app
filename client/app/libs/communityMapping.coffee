@@ -3,5 +3,5 @@ module.exports = (fileText, separator = " ") ->
   lines = fileText.split(/\r\n|\r|\n/g)
   for line in lines
     if line.length
-      communities.push line.split(separator)
+      communities.push _.reject(line.split(separator), (val) -> val is "")
   communities

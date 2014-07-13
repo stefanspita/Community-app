@@ -16,8 +16,10 @@ module.exports = class View extends BaseView
   randomize: =>
     @nodesList = _.unique(_.flatten(@finalData))
     randomOrder = _.sample(@nodesList, @nodesList.length)
-    nodesInComms = Math.round(randomOrder.length / @finalData.length)
-    @randomCommunities = _.values(_.groupBy randomOrder, (node, index) ->
-      return Math.floor(index / nodesInComms))
+    @randomCommunities = []
+    start = 0
+    for comm, index in @finalData
+      @randomCommunities.push randomOrder.slice(start, start + comm.length)
+      start += comm.length
     @store.set {randomCommunities:@randomCommunities}
     @render()

@@ -14,6 +14,10 @@ module.exports = class View extends BaseView
   afterRender: =>
     resultsView = new ResultsView()
     @$el.find("#resultsTemplate").html resultsView.render().$el
+    if @store.get("initialData")
+      @$el.find("#initialData").hide()
+    if @store.get("finalData")
+      @$el.find("#finalData").hide()
 
   processInitial: =>
     @store.set {initialData: dataMapping(event.target.result, ",", true)}

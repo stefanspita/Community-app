@@ -2,7 +2,7 @@ BaseView = require "../view"
 possibleValues = require "../../data/possibleValues"
 DetailView= require "./correlationDetail"
 OptionView = require "../option"
-calculateCorrelation = require "../../libs/calculateCorrelation"
+correlationHelpers = require "../../libs/correlationHelpers"
 
 module.exports = class View extends BaseView
   template: require("./templates/attributeCorrelation")
@@ -23,7 +23,7 @@ module.exports = class View extends BaseView
 
   updateData: ->
     formData = @$("form").serializeArray()
-    {summary, question} = calculateCorrelation(formData, @initialData, @finalData)
+    {summary, question} = correlationHelpers.getFullAttributeCorrelation(formData, @initialData, @finalData)
     @$(".question").html question
     @$('.detail').empty()
 

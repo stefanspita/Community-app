@@ -1,0 +1,15 @@
+{{#if error}}
+    <p class="error">{{error}}</p>
+{{else}}
+    {{#if noData}}
+        <button id="calculate">Calculate Comparison</button>
+    {{else}}
+        <div class="filter">
+            <label>Select an attribute to view it in more detail</label>
+            <form class="options"></form>
+            {{!<a id="addOption" href="javascript:void(0)">Add new Filter</a>}}
+        </div>
+        <h3 class="question"></h3>
+        <div class="detail"></div>
+    {{/if}}
+{{/if}}
