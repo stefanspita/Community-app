@@ -5,7 +5,7 @@ ResultsView = require "./results"
 
 module.exports = class View extends BaseView
   el: "body"
-  template: require("../templates/communityHome")
+  template: require("./templates/communityHome")
 
   events:
     "change #initial": "loadFile"

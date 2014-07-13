@@ -1,7 +1,7 @@
 BookmarkView = require("./bookmark")
 module.exports = AppView = Backbone.View.extend
   el: "body"
-  template: require("../templates/home")
+  template: require("./templates/home")
   events:
     "click #add-bookmark": "createBookmark"
 

@@ -15,7 +15,7 @@ dataMap = (result) ->
   return final
 
 module.exports = class View extends BaseView
-  template: require("../../templates/tabs/correlationDetail")
+  template: require("./templates/correlationDetail")
 
   afterRender: =>
     BarsLine
@@ -26,4 +26,4 @@ module.exports = class View extends BaseView
       width:400
 
   getRenderData: =>
-    {title:"Answer: #{@options.data.answerText}"}
+    {title:@options.data.answerText}

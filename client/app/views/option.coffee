@@ -1,7 +1,7 @@
 BaseView = require "./view"
 
 module.exports = class View extends BaseView
-  template: require("../templates/option")
+  template: require("./templates/option")
 
   events:
     "click a.delete": "deleteOption"

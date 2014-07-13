@@ -1,7 +1,7 @@
 BaseView = require "../view"
 
 module.exports = class View extends BaseView
-  template: require("../../templates/tabs/randomizationTool")
+  template: require("./templates/randomizationTool")
 
   events:
     "click a.randomize":"randomize"

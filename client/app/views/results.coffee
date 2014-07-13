@@ -1,9 +1,10 @@
 BaseView = require "./view"
 AttributeCorrelation = require "./tabs/attributeCorrelation"
 RandomizationTool = require "./tabs/randomizationTool"
+CompareRandom = require "./tabs/compareRandom"
 
 module.exports = class View extends BaseView
-  template: require("../templates/results")
+  template: require("./templates/results")
 
   events:
     "click .byCat li": "showTab"
@@ -33,6 +34,8 @@ module.exports = class View extends BaseView
           view = new AttributeCorrelation({formData})
         when "randomizationTool"
           view = new RandomizationTool()
+        when "compareRandom"
+          view = new CompareRandom()
       @$("#mainTemplate").empty()
       if view
         @$("#mainTemplate").append view.render().$el

@@ -35,7 +35,7 @@ ul.byCat {
 .byCat li {
     display: block;
     border-right: none;
-    background: #FF6A00;
+    background: #43708C;
     padding: 5px 10px;
     cursor: pointer;
     font-size: 20px;
@@ -47,7 +47,7 @@ ul.byCat {
     border: 1px solid white;
 }
 .byCat li.active {
-    background: #43708C;
+    background: #FF6A00;
 }
 
 .detail h3 {

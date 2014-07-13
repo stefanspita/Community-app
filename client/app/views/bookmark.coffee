@@ -1,6 +1,6 @@
 module.exports = Bookmark = Backbone.View.extend
   tagName: "li"
-  template: require("../templates/bookmark")
+  template: require("./templates/bookmark")
   events:
     "click a.delete": "deleteBookmark"
 
