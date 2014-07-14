@@ -51,7 +51,7 @@ ul.byCat {
 }
 
 .detail h3 {
-    width:48%;
+    width:100%;
     text-align: center;
     float: right;
 }
@@ -59,4 +59,12 @@ ul.byCat {
     text-align: left;
     display: inline-block;
     width:100%;
+}
+.graph1, .graph2 {
+    display: inline-block;
+}
+
+span.subtitle {
+    width:48%;
+    display:inline-block;
 }

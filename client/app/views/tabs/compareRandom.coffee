@@ -1,6 +1,6 @@
 BaseView = require "../view"
 possibleValues = require "../../data/possibleValues"
-DetailView= require "./correlationDetail"
+DoubleDetailView= require "./comparisonDetail"
 OptionView = require "../option"
 correlationHelpers = require "../../libs/correlationHelpers"
 
@@ -10,7 +10,6 @@ module.exports = class View extends BaseView
   events:
     "click #addOption": "addOption"
     "change select": "updateData"
-    "click #calculate":"calculate"
 
   init: ->
     @initialData = @store.get("initialData")
@@ -36,17 +35,16 @@ module.exports = class View extends BaseView
 
   updateData: ->
     formData = @$("form").serializeArray()
-    {summary, question} = correlationHelpers.getFullAttributeCorrelation(formData, @initialData, @finalData)
-    @$(".question").html question
+    realData = correlationHelpers.getFullAttributeCorrelation(formData, @initialData, @finalData)
+    randomData = correlationHelpers.getFullAttributeCorrelation(formData, @initialData, @store.get("randomCommunities"))
+    @$(".question").html realData.question
     @$('.detail').empty()
 
-    for val in summary
-      detailView = new DetailView({data:val})
+    for val, index in realData.summary
+      detailView = new DoubleDetailView({realData:val, randomData:randomData.summary[index]})
       @$('.detail').append detailView.render().$el
 
   addOption: ->
-    if @filteredKeys.length
-      @optionCount += 1
-      optionView = new OptionView({name:"option#{@optionCount}", headers:@filteredKeys})
-      @$el.find("form").append optionView.render().$el
-      @$el.find("#calculate").addClass("hidden")
+    @optionCount += 1
+    optionView = new OptionView({name:"option#{@optionCount}", headers:_.keys(possibleValues)})
+    @$el.find("form").append optionView.render().$el

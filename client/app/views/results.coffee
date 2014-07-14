@@ -30,8 +30,7 @@ module.exports = class View extends BaseView
       template = @$('.byCat li.active').data("template")
       switch template
         when "attributeCorrelation"
-          formData = @$("form").serializeArray()
-          view = new AttributeCorrelation({formData})
+          view = new AttributeCorrelation()
         when "randomizationTool"
           view = new RandomizationTool()
         when "compareRandom"
