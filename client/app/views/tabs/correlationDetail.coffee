@@ -25,9 +25,6 @@ module.exports = class View extends BaseView
       height:250
       width:400
     chart.trigger("visible")
-    @listenTo chart, "render", ->
-      console.log "FUCK YOU"
-    #@$(".graph").html chart.el
 
   getRenderData: =>
     {title:@options.data.answerText}

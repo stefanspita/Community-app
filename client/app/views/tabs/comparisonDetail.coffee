@@ -18,18 +18,21 @@ module.exports = class View extends BaseView
   template: require("./templates/comparisonDetail")
 
   afterRender: =>
-    BarsLine
+    chart1 = new BarsLine
       data:@options.realData
-      elem:@$('.graph1')[0]
+      el:@$('.graph1')[0]
       processData: dataMap
       height:250
       width:400
-    BarsLine
+    chart2 = new BarsLine
       data:@options.randomData
-      elem:@$('.graph2')[0]
+      el:@$('.graph2')[0]
       processData: dataMap
       height:250
       width:400
+
+    chart1.trigger("visible")
+    chart2.trigger("visible")
 
   getRenderData: =>
     {title:@options.realData.answerText}
