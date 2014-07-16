@@ -149,11 +149,8 @@ module.exports = class BarsOrdinalScale extends Base
     @appendBars()
     @appendText()
     @obtainMaxTicks()
-    console.log "TRIGGERING RENDER"
     @trigger("render")
     @update(@opts.data, @opts.eventData)
-
-
 
   update: (args...) ->
     freshData = args[0]

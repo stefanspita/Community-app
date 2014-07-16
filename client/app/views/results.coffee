@@ -2,6 +2,7 @@ BaseView = require "./view"
 AttributeCorrelation = require "./tabs/attributeCorrelation"
 RandomizationTool = require "./tabs/randomizationTool"
 CompareRandom = require "./tabs/compareRandom"
+Viewer = require "./tabs/viewer"
 
 module.exports = class View extends BaseView
   template: require("./templates/results")
@@ -12,9 +13,13 @@ module.exports = class View extends BaseView
   init: ->
     @initialData = @store.get("initialData") ? {}
     @finalData = @store.get("finalData") ? {}
+    Backbone.on "communitiesFiltered", (@communities) =>
+      @showTab(false, "viewer")
 
-  showTab: (e) =>
-    $elem = $(e.target)
+  showTab: (e, viewName) =>
+    if e
+      $elem = $(e.target)
+    else $elem = @$("[data-template='#{viewName}']")
     @$('.byCat li').removeClass "active"
     $elem.addClass("active")
     @templateSwitch()
@@ -35,6 +40,8 @@ module.exports = class View extends BaseView
           view = new RandomizationTool()
         when "compareRandom"
           view = new CompareRandom()
+        when "viewer"
+          view = new Viewer({@communities})
       @$("#mainTemplate").empty()
       if view
         @$("#mainTemplate").append view.render().$el
