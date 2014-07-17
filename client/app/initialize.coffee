@@ -1,6 +1,6 @@
 # The function called from index.html
 $(document).ready ->
-  Swag.Config.partialsPath = './views/templates/'
+  Swag.registerHelpers()
   app = require("application")
   Router = require("router")
   Store = require "./models/store"

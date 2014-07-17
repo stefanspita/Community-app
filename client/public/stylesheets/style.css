@@ -4,6 +4,17 @@ body {
     text-align: center;
 }
 
+.leftAligned {
+    text-align: left;
+}
+.attribute {
+    text-align: center;
+    padding:0 3px 0 3px;
+}
+div.details {
+    overflow-x: scroll;
+}
+
 div.box {
     max-width:48%;
     border: 1px solid #000000;

@@ -1,0 +1,12 @@
+<table>
+    <tr>
+        {{#each headers}}<th class="attribute">{{.}}</th>{{/each}}
+    </tr>
+    {{#eachProperty persons}}
+        <tr>
+        {{#each value}}
+            <td class="attribute">{{.}}</td>
+        {{/each}}
+        </tr>
+    {{/eachProperty}}
+</table>
