@@ -11,8 +11,19 @@ body {
     text-align: center;
     padding:0 3px 0 3px;
 }
+th.attribute {
+    padding:3px;
+}
 div.details {
     overflow-x: scroll;
+}
+
+/* Sortable tables */
+table.sortable thead {
+    background-color:#eee;
+    color:#666666;
+    font-weight: bold;
+    cursor: default;
 }
 
 div.box {

@@ -1,0 +1,16 @@
+<table class="sortable">
+    <thead>
+        <tr>
+            {{#each headers}}<th class="attribute" title="This is my tooltip">{{.}}</th>{{/each}}
+        </tr>
+    </thead>
+    <tbody>
+        {{#each persons}}
+            <tr>
+                {{#each .}}
+                    <td class="attribute">{{.}}</td>
+                {{/each}}
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

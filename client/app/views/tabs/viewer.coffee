@@ -1,5 +1,5 @@
 BaseView = require "../view"
-detailTemplate = require("./templates/personList")
+TableView = require("./tableView")
 
 module.exports = class View extends BaseView
   template: require("./templates/viewer")
@@ -20,15 +20,20 @@ module.exports = class View extends BaseView
     {@communities}
 
   afterRender: ->
+    @clearDetails()
+
+  clearDetails: ->
+    @$(".details").empty()
     @$(".details").hide()
 
   openDetails: (e) ->
-    @$(".details").hide()
+    @clearDetails()
     index = $(e.target).data("index")
     community = @communities[index]
     initialData = @store.get("initialData")
     persons = _.pick initialData, community
-    @$("##{index}").html detailTemplate({persons, headers:initialData.header})
+    detailView = new TableView({persons})
+    @$("##{index}").html detailView.render().$el
     @$("##{index}").show()
 
 
