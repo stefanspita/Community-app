@@ -7,10 +7,4 @@ module.exports = class View extends BaseView
     @persons = _.toArray @options.persons
 
   getRenderData: ->
-    {@persons, headers:@store.get("initialData").header}
-
-  afterRender: ->
-    table = @$("table")[0]
-    sorttable.makeSortable(table)
-
-
+    {persons:_.first(@persons, 20), headers:@store.get("initialData").header}

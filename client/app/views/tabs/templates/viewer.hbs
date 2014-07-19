@@ -1,9 +1,13 @@
 <div class="filters"></div>
 <div class="leftAligned">
-    {{#eachIndex communities}}
-        <h4>Community {{index}} - formed of {{length item}} persons </h4>
-        <div>{{#each item}} {{.}} - {{/each}}</div>
-        <button class="expand" data-index="{{index}}">Details</button>
-        <div class="details" id="{{index}}"></div>
-    {{/eachIndex}}
+    {{#if communities}}
+        {{#eachIndex communities}}
+            <h4>Community formed of {{length item}} persons </h4>
+            <div>{{#each item}} {{.}} - {{/each}}</div>
+            <button class="expand" data-index="{{index}}">Details</button>
+            <div class="details" id="{{index}}"></div>
+        {{/eachIndex}}
+    {{else}}
+        <div class="details"></div>
+    {{/if}}
 </div>
