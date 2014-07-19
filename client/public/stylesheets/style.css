@@ -7,12 +7,18 @@ body {
 .leftAligned {
     text-align: left;
 }
+span.sorter {
+    font-size:20px;
+}
 .attribute {
     text-align: center;
     padding:0 3px 0 3px;
 }
 th.attribute {
     padding:3px;
+}
+.attribute {
+    white-space:nowrap;
 }
 div.details {
     overflow-x: scroll;

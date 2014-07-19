@@ -8,20 +8,20 @@ module.exports = class View extends BaseView
     "click .expand":"openDetails"
 
   init: ->
-    @store.filter ?= {groupings:[], filters:[], attributes:[]}
+    @store.filter ?= {groupings:{}, filters:{}, attributes:{}, sorter:{}}
     if @options.communities
-      @store.filter.groupings.push {communities: @options.communities }
+      @store.filter.groupings.communities = @options.communities
 
   getRenderData: ->
-    if @store.filter.groupings.length
+    if _.keys(@store.filter.groupings).length
       @communities = _.filter @store.get("finalData"), (comm, index) =>
-        index in @store.filter.communities
+        index in @store.filter.groupings.communities
     else @communities = false
     {@communities}
 
   afterRender: ->
     @clearDetails()
-    unless @store.filter.groupings.length
+    unless _.keys(@store.filter.groupings).length
       @showAllUsers()
 
   clearDetails: ->
@@ -39,6 +39,6 @@ module.exports = class View extends BaseView
     @$("##{index}").show()
 
   showAllUsers: ->
-    detailView = new TableView({persons:@store.get("initialData")})
+    detailView = new TableView({persons:_.omit(@store.get("initialData"), "header")})
     @$(".details").html detailView.render().$el
     @$(".details").show()
