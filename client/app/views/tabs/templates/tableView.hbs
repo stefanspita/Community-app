@@ -1,7 +1,7 @@
 <table class="sortable">
     <thead>
         <tr>
-            {{#eachIndex headers}}<th class="attribute header" title="This is my tooltip" data-key="{{item}}">{{item}}
+            {{#eachIndex headers}}<th class="attribute header" data-index="{{index}}" data-key="{{item}}">{{item}}
                 <span class="sorter">
                     {{#is index ../sorter}}
                         {{#is ../../order "asc"}}&#65516;
@@ -15,9 +15,9 @@
     <tbody>
         {{#each persons}}
             <tr>
-                {{#each .}}
-                    <td class="attribute">{{.}}</td>
-                {{/each}}
+                {{#eachIndex .}}
+                    <td class="attribute" data-index="{{index}}">{{item}}</td>
+                {{/eachIndex}}
             </tr>
         {{/each}}
     </tbody>
