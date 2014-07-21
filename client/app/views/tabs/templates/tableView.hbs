@@ -1,24 +1,2 @@
-<table class="sortable">
-    <thead>
-        <tr>
-            {{#eachIndex headers}}<th class="attribute header" data-index="{{index}}" data-key="{{item}}">{{item}}
-                <span class="sorter">
-                    {{#is index ../sorter}}
-                        {{#is ../../order "asc"}}&#65516;
-                        {{else}}&#65514;
-                        {{/is}}
-                    {{/is}}
-                </span>
-            </th>{{/eachIndex}}
-        </tr>
-    </thead>
-    <tbody>
-        {{#each persons}}
-            <tr>
-                {{#eachIndex .}}
-                    <td class="attribute" data-index="{{index}}">{{item}}</td>
-                {{/eachIndex}}
-            </tr>
-        {{/each}}
-    </tbody>
-</table>
+<div class="table"></div>
+<div id="pager"></div>

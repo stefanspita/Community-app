@@ -20,7 +20,7 @@ th.attribute {
 .attribute {
     white-space:nowrap;
 }
-div.details {
+div.table {
     overflow-x: scroll;
 }
 

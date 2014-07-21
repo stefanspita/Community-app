@@ -2,6 +2,7 @@ BaseView = require "../view"
 forceInt = require "../../libs/forceInt"
 possibleValues = require "../../data/possibleValues"
 answerTypes = require "../../data/answerTypes"
+tableTemplate = require("./templates/table")
 
 module.exports = class View extends BaseView
   template: require("./templates/tableView")
@@ -12,6 +13,7 @@ module.exports = class View extends BaseView
   init: ->
     @persons = _.toArray @options.persons
     @headers = @store.get("initialData").header
+    @displayRows = _.first(@persons, 15)
 
   setTooltip: (e) =>
     ind = $(e.target).data("index")
@@ -30,11 +32,23 @@ module.exports = class View extends BaseView
   unsetTooltip: (e) ->
     $(e.target).removeAttr( "title" )
 
-  getRenderData: ->
-    {persons:_.first(@persons, 20), @headers, sorter:forceInt(_.keys(@store.filter.sorter)[0]), order:_.values(@store.filter.sorter)[0]}
+  updateTableView: =>
+    @$(".table").html tableTemplate {@displayRows, @headers, sorter:forceInt(_.keys(@store.filter.sorter)[0]), order:_.values(@store.filter.sorter)[0]}
 
   afterRender: ->
     @$(".attribute").hover(@setTooltip, @unsetTooltip)
+    @updateTableView()
+    if @persons.length > 15
+      @$("#pager").pagination
+        items:@persons.length
+        itemsOnPage:15
+        cssStyle: 'light-theme'
+        onPageClick:@pageChange
+
+  pageChange: (pageNumber) =>
+    pageNumber -= 1
+    @displayRows = @persons.slice(pageNumber * 15, pageNumber * 15 + 15)
+    @updateTableView()
 
   sortBy: (e) =>
     ind = $(e.target).data("index")
@@ -49,4 +63,6 @@ module.exports = class View extends BaseView
       if @store.filter.sorter[ind] is "desc"
         return -1 * forceInt(person[ind])
       else return forceInt(person[ind])
+    @displayRows = _.first(@persons, 15)
+    @updateTableView()
     @render()
