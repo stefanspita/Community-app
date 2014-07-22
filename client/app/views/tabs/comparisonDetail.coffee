@@ -9,13 +9,16 @@ dataMap = (result) ->
     if a is 80
       year = "#{a}-#{a+20}%"
     else year = "#{a}-#{a+19}%"
-    final.push {plus:b, minus:0, year, sorter:a}
+    final.push {plus:b.size, minus:0, year, sorter:a, communities:b.communities}
   final = _.sortBy final, (v) ->
     v.sorter
   return final
 
 module.exports = class View extends BaseView
   template: require("./templates/comparisonDetail")
+
+  onClick: (d, i) =>
+    Backbone.trigger "communitiesFiltered", d.communities
 
   afterRender: =>
     chart1 = new BarsLine
@@ -24,6 +27,7 @@ module.exports = class View extends BaseView
       processData: dataMap
       height:250
       width:400
+      onClick:@onClick
     chart2 = new BarsLine
       data:@options.randomData
       el:@$('.graph2')[0]

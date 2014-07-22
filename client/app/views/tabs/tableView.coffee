@@ -9,11 +9,21 @@ module.exports = class View extends BaseView
 
   events:
     "click .header": "sortBy"
+    "click a.communityGouping":"communityGouping"
 
   init: ->
     @persons = _.toArray @options.persons
     @headers = @store.get("initialData").header
     @displayRows = _.first(@persons, 15)
+    @finaldata = @store.get("finalData")
+
+  communityGouping: (e) ->
+    person = $(e.target).data("person")
+    communities = []
+    for comm, index in @finaldata
+      if person in comm
+        communities.push index
+    Backbone.trigger "communitiesFiltered", communities
 
   setTooltip: (e) =>
     ind = $(e.target).data("index")
@@ -33,11 +43,19 @@ module.exports = class View extends BaseView
     $(e.target).removeAttr( "title" )
 
   updateTableView: =>
+    @displayRows = _.map @displayRows, (row) =>
+      unless  @store.filter.groupings.communities
+        person = row[0]
+        found = _.find @finaldata, (comm) ->
+          person in comm
+        if found
+          communityRow = """<a href="javascript:void(0)" data-person="#{person}" class="communityGouping">See Communities</a>"""
+      {row, communityRow}
     @$(".table").html tableTemplate {@displayRows, @headers, sorter:forceInt(_.keys(@store.filter.sorter)[0]), order:_.values(@store.filter.sorter)[0]}
 
   afterRender: ->
-    @$(".attribute").hover(@setTooltip, @unsetTooltip)
     @updateTableView()
+    @$(".attribute").hover(@setTooltip, @unsetTooltip)
     if @persons.length > 15
       @$("#pager").pagination
         items:@persons.length
