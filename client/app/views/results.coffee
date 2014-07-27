@@ -13,7 +13,7 @@ module.exports = class View extends BaseView
   init: ->
     @initialData = @store.get("initialData") ? {}
     @finalData = @store.get("finalData") ? {}
-    Backbone.on "communitiesFiltered", (@communities) =>
+    Backbone.on "communitiesFiltered", =>
       @showTab(false, "viewer")
 
   showTab: (e, viewName) =>
@@ -41,7 +41,7 @@ module.exports = class View extends BaseView
         when "compareRandom"
           view = new CompareRandom()
         when "viewer"
-          view = new Viewer({@communities})
+          view = new Viewer()
       @$("#mainTemplate").empty()
       if view
         @$("#mainTemplate").append view.render().$el

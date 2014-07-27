@@ -1,5 +1,6 @@
 BaseView = require "../view"
 TableView = require("./tableView")
+OptionSelector = require "./optionSelector"
 
 module.exports = class View extends BaseView
   template: require("./templates/viewer")
@@ -8,9 +9,8 @@ module.exports = class View extends BaseView
     "click .expand":"openDetails"
 
   init: ->
-    @store.filter ?= {groupings:{}, filters:{}, attributes:{}, sorter:{}}
-    if @options.communities
-      @store.filter.groupings.communities = @options.communities
+     Backbone.on "filterReset", =>
+      @render()
 
   getRenderData: ->
     if _.keys(@store.filter.groupings).length
@@ -23,6 +23,8 @@ module.exports = class View extends BaseView
     @clearDetails()
     unless _.keys(@store.filter.groupings).length
       @showAllUsers()
+    groupingView = new OptionSelector({data:_.keys(@store.filter.groupings), title:"Groupings", key:"groupings"})
+    @$(".groupings").html groupingView.render().$el
 
   clearDetails: ->
     @$(".details").empty()

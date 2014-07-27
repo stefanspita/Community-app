@@ -1,0 +1,10 @@
+{{#if data}}
+    <h4>{{title}}</h4>
+    {{#each data}}
+        <span class="filter">{{.}} <i class="fa fa-minus-circle remove" data-group="{{.}}"></i></span>
+    {{/each}}
+
+    {{#if editable}}
+        <a class="delete" href="javascript:void(0);">Remove</a>}}
+    {{/if}}
+{{/if}}

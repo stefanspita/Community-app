@@ -18,7 +18,8 @@ module.exports = class View extends BaseView
   template: require("./templates/correlationDetail")
 
   onClick: (d, i) =>
-    Backbone.trigger "communitiesFiltered", d.communities
+    @store.filter.groupings.communities = d.communities
+    Backbone.trigger "communitiesFiltered"
 
   afterRender: =>
     chart = new BarsLine

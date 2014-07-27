@@ -7,6 +7,29 @@ body {
 .leftAligned {
     text-align: left;
 }
+.remove {
+    -webkit-transition: font-size 0.3s;
+    transition: font-size 0.3s;
+}
+.remove {
+    font-size: 13px;
+}
+.remove:hover {
+    font-size: 16px;
+}
+.filters {
+    text-align: left;
+}
+.filters span.filter {
+    padding: 1px 2px;
+    border: 1px solid #d3d3d3;
+    border-radius: 10px;
+    display: inline-block;
+}
+.columns3 {
+    width:30%;
+    display: inline-block;
+}
 span.sorter {
     font-size:20px;
 }
