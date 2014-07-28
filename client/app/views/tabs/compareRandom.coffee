@@ -26,8 +26,9 @@ module.exports = class View extends BaseView
     {error, noData}
 
   afterRender: =>
-    #@$("#addOption").show()
     @addOption()
+    if @store.get("randomCommunities")
+      @updateData()
 
   calculate: =>
     @filteredKeys = correlationHelpers.getComparisonKeys(_.keys(possibleValues), @initialData, @finalData, @store.get("randomCommunities"))
@@ -41,7 +42,7 @@ module.exports = class View extends BaseView
     @$('.detail').empty()
 
     for val, index in realData.summary
-      detailView = new DoubleDetailView({realData:val, randomData:randomData.summary[index]})
+      detailView = new DoubleDetailView({realData:val, randomData:randomData.summary[index], question:formData[0].value})
       @$('.detail').append detailView.render().$el
 
   addOption: ->

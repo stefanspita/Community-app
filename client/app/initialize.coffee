@@ -5,7 +5,7 @@ $(document).ready ->
   Router = require("router")
   Store = require "./models/store"
   app.store = new Store()
-  app.store.filter = {groupings:{}, filters:{}, attributes:{}, sorter:{}}
+  app.store.filter = {groupings:{}, filters:{}, attributes:[], sorter:{}}
   app.router = new Router()
   Backbone.history.start()
   return

@@ -23,7 +23,8 @@ module.exports = class View extends BaseView
     for comm, index in @finaldata
       if person in comm
         communities.push index
-    Backbone.trigger "communitiesFiltered", communities
+    @store.filter.groupings = {communities}
+    Backbone.trigger "communitiesFiltered"
 
   setTooltip: (e) =>
     ind = $(e.target).data("index")
@@ -43,6 +44,11 @@ module.exports = class View extends BaseView
     $(e.target).removeAttr( "title" )
 
   updateTableView: =>
+    if @store.filter.attributes.length
+      attributes = _.map @store.filter.attributes, (header) =>
+        _.indexOf @headers, header
+      attributes.push 0
+    else attributes = [0..683]
     @displayRows = _.map @displayRows, (row) =>
       unless  @store.filter.groupings.communities
         person = row[0]
@@ -51,7 +57,7 @@ module.exports = class View extends BaseView
         if found
           communityRow = """<a href="javascript:void(0)" data-person="#{person}" class="communityGouping">See Communities</a>"""
       {row, communityRow}
-    @$(".table").html tableTemplate {@displayRows, @headers, sorter:forceInt(_.keys(@store.filter.sorter)[0]), order:_.values(@store.filter.sorter)[0]}
+    @$(".table").html tableTemplate {@displayRows, @headers, sorter:forceInt(_.keys(@store.filter.sorter)[0]), order:_.values(@store.filter.sorter)[0], attributes}
 
   afterRender: ->
     @updateTableView()
@@ -83,4 +89,3 @@ module.exports = class View extends BaseView
       else return forceInt(person[ind])
     @displayRows = _.first(@persons, 15)
     @updateTableView()
-    @render()

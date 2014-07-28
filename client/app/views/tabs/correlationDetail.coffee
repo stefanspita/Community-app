@@ -19,6 +19,7 @@ module.exports = class View extends BaseView
 
   onClick: (d, i) =>
     @store.filter.groupings.communities = d.communities
+    @store.filter.attributes = [@options.question]
     Backbone.trigger "communitiesFiltered"
 
   afterRender: =>

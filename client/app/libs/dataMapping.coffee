@@ -1,5 +1,5 @@
 module.exports = (fileText, separator = " ", header = false) ->
-  communities = {}
+  people = {}
   lines = fileText.split(/\r\n|\r|\n/g)
   if header
     header = lines[0]
@@ -8,6 +8,6 @@ module.exports = (fileText, separator = " ", header = false) ->
   for line in lines
     if line.length
       localLine = line.split(separator)
-      communities[localLine[0]] = localLine
-  communities["header"] = header
-  communities
+      people[localLine[0]] = localLine
+  people["header"] = header
+  people

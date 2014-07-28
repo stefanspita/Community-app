@@ -1,10 +1,16 @@
+<h4>{{title}}</h4>
 {{#if data}}
-    <h4>{{title}}</h4>
     {{#each data}}
-        <span class="filter">{{.}} <i class="fa fa-minus-circle remove" data-group="{{.}}"></i></span>
+        <span class="filter">{{.}} <span class="remove" data-group="{{.}}">&#9747;</span></span>
     {{/each}}
-
-    {{#if editable}}
-        <a class="delete" href="javascript:void(0);">Remove</a>}}
-    {{/if}}
+{{/if}}
+{{#if options}}
+    <form>
+        <select name="new">
+            {{#each options}}
+                <option>{{.}}</option>
+            {{/each}}
+        </select>
+    </form>
+    <button class="add">Add</button>
 {{/if}}

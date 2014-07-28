@@ -25,6 +25,10 @@ module.exports = class View extends BaseView
       @showAllUsers()
     groupingView = new OptionSelector({data:_.keys(@store.filter.groupings), title:"Groupings", key:"groupings"})
     @$(".groupings").html groupingView.render().$el
+    groupingView = new OptionSelector({data:@store.filter.attributes, title:"Attributes Filter", key:"attributes", options:@store.get("initialData").header})
+    @$(".attributes").html groupingView.render().$el
+    groupingView = new OptionSelector({data:_.keys(@store.filter.filters), title:"Filters", key:"filters", options:@store.get("initialData").header, values:true})
+    @$(".dataFilter").html groupingView.render().$el
 
   clearDetails: ->
     @$(".details").empty()

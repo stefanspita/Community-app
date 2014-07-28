@@ -18,8 +18,8 @@ module.exports = class View extends BaseView
     @listenTo Backbone, 'filterOption:removed', @updateData
 
   afterRender: =>
-    #@$("#addOption").show()
     @addOption()
+    @updateData()
 
   updateData: ->
     formData = @$("form").serializeArray()
@@ -28,7 +28,7 @@ module.exports = class View extends BaseView
     @$('.detail').empty()
 
     for val in summary
-      detailView = new DetailView({data:val})
+      detailView = new DetailView({data:val, question:formData[0].value})
       @$('.detail').append detailView.render().$el
 
   addOption: ->
