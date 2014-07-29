@@ -3,18 +3,17 @@ possibleValues = require "../../data/possibleValues"
 DoubleDetailView= require "./comparisonDetail"
 OptionView = require "../option"
 correlationHelpers = require "../../libs/correlationHelpers"
+QuestionSelect = require "./questionSelect"
 
 module.exports = class View extends BaseView
   template: require("./templates/compareRandom")
 
   events:
-    "click #addOption": "addOption"
     "change select": "updateData"
 
   init: ->
     @initialData = @store.get("initialData")
     @finalData = @store.get("finalData")
-    @optionCount = 0
     @filteredKeys = []
     @listenTo Backbone, 'filterOption:removed', @updateData
 
@@ -46,6 +45,5 @@ module.exports = class View extends BaseView
       @$('.detail').append detailView.render().$el
 
   addOption: ->
-    @optionCount += 1
-    optionView = new OptionView({name:"option#{@optionCount}", headers:_.keys(possibleValues)})
+    optionView = new QuestionSelect({name:"option"})
     @$el.find("form").append optionView.render().$el

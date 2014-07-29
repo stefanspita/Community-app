@@ -3,7 +3,9 @@ body {
     margin:auto;
     text-align: center;
 }
-
+h4 {
+    margin-top: 0;
+}
 .leftAligned {
     text-align: left;
 }

@@ -1,16 +1,12 @@
 <h4>{{title}}</h4>
 {{#if data}}
     {{#each data}}
-        <span class="filter">{{.}} <span class="remove" data-group="{{.}}">&#9747;</span></span>
+        <span title="{{title}}" class="filter">{{question}} <span class="remove" data-group="{{question}}">&#9747;</span></span>
     {{/each}}
 {{/if}}
-{{#if options}}
+{{#if editable}}
     <form>
-        <select name="new">
-            {{#each options}}
-                <option>{{.}}</option>
-            {{/each}}
-        </select>
+        <span class="questionSelect"></span>
     </form>
     <button class="add">Add</button>
 {{/if}}

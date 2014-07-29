@@ -1,6 +1,7 @@
 BaseView = require "../view"
 TableView = require("./tableView")
 OptionSelector = require "./optionSelector"
+FilterSelector = require "./filterSelector"
 
 module.exports = class View extends BaseView
   template: require("./templates/viewer")
@@ -25,9 +26,9 @@ module.exports = class View extends BaseView
       @showAllUsers()
     groupingView = new OptionSelector({data:_.keys(@store.filter.groupings), title:"Groupings", key:"groupings"})
     @$(".groupings").html groupingView.render().$el
-    groupingView = new OptionSelector({data:@store.filter.attributes, title:"Attributes Filter", key:"attributes", options:@store.get("initialData").header})
+    groupingView = new OptionSelector({data:@store.filter.attributes, title:"Attributes Filter", key:"attributes", editable:true})
     @$(".attributes").html groupingView.render().$el
-    groupingView = new OptionSelector({data:_.keys(@store.filter.filters), title:"Filters", key:"filters", options:@store.get("initialData").header, values:true})
+    groupingView = new FilterSelector({title:"Filters", key:"filters"})
     @$(".dataFilter").html groupingView.render().$el
 
   clearDetails: ->
@@ -40,11 +41,23 @@ module.exports = class View extends BaseView
     community = @communities[index]
     initialData = @store.get("initialData")
     persons = _.pick initialData, community
+    if _.keys(@store.filter.filters).length
+      persons = @filterPeople(persons)
     detailView = new TableView({persons})
     @$("##{index}").html detailView.render().$el
     @$("##{index}").show()
 
   showAllUsers: ->
-    detailView = new TableView({persons:_.omit(@store.get("initialData"), "header")})
+    persons = _.omit(@store.get("initialData"), "header")
+    if _.keys(@store.filter.filters).length
+      persons = @filterPeople(persons)
+    detailView = new TableView({persons})
     @$(".details").html detailView.render().$el
     @$(".details").show()
+
+  filterPeople: (list) ->
+    for key, val of @store.filter.filters
+      ind = _.indexOf @store.get("initialData").header, key
+      list = _.filter list, (person) ->
+        person[ind] is val
+    list

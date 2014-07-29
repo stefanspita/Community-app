@@ -1,20 +1,18 @@
 BaseView = require "../view"
 possibleValues = require "../../data/possibleValues"
 DetailView= require "./correlationDetail"
-OptionView = require "../option"
+QuestionSelect = require "./questionSelect"
 correlationHelpers = require "../../libs/correlationHelpers"
 
 module.exports = class View extends BaseView
   template: require("./templates/attributeCorrelation")
 
   events:
-    "click #addOption": "addOption"
     "change select": "updateData"
 
   init: ->
     @initialData = @store.get("initialData")
     @finalData = @store.get("finalData")
-    @optionCount = 0
     @listenTo Backbone, 'filterOption:removed', @updateData
 
   afterRender: =>
@@ -32,6 +30,5 @@ module.exports = class View extends BaseView
       @$('.detail').append detailView.render().$el
 
   addOption: ->
-    @optionCount += 1
-    optionView = new OptionView({name:"option#{@optionCount}", headers:_.keys(possibleValues)})
+    optionView = new QuestionSelect({name:"option"})
     @$el.find("form").append optionView.render().$el

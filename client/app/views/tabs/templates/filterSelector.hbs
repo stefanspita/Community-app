@@ -1,0 +1,11 @@
+<h4>{{title}}</h4>
+{{#if data}}
+    {{#each data}}
+        <span class="filter" title="{{title}}">{{question}}: {{answer}} <span class="remove" data-key="{{question}}">&#9747;</span></span>
+    {{/each}}
+{{/if}}
+<form>
+    <span class="questionSelect"></span>
+    <span class="valSelect"></span>
+</form>
+<button class="add">Add</button>
