@@ -1,4 +1,11 @@
-var americano = require('americano');
+var express = require('express');
+fs = require("fs");
+var app = express();
+app.use(express.static(__dirname + '/client/public'));
 
-var port = process.env.PORT || 9250;
-americano.start({name: 'bookmark', port: port});
+app.get('/', function(req, res){
+
+});
+
+console.log("App listening on http://localhost:3000");
+app.listen(3000);
