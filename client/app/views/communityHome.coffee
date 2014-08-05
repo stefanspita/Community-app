@@ -13,8 +13,21 @@ module.exports = class View extends BaseView
     "change #final": "loadFile"
 
   init: ->
-    request "getData", null, null, (err, data) =>
-      console.log err, data
+    request "getData/initialData", null, null, (err, result) =>
+      if err
+        console.log err
+        alert "An error occurred while saving the data. Please contact the administrator to solve th problem."
+      else if result?.data?.length
+        @store.set {initialData: helpers.dataMapping(result.data)}
+        @render()
+
+    request "getData/finalData", null, null, (err, result) =>
+      if err
+        console.log err
+        alert "An error occurred while saving the data. Please contact the administrator to solve th problem."
+      else if result?.data[0]?.finalData
+        @store.set {finalData:result.data[0].finalData}
+        @render()
 
   afterRender: =>
     resultsView = new ResultsView()
@@ -33,7 +46,6 @@ module.exports = class View extends BaseView
         console.log err
         alert "An error occurred while saving the data. Please contact the administrator to solve th problem."
       else console.log "DONE"
-
     @render()
 
   processFinal: =>

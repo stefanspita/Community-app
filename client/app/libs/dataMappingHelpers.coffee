@@ -3,6 +3,7 @@ module.exports =
     people = {}
     for person in personList
       _.extend people, person
+    people = _.omit people, "_id"
     people
 
   dbDataMapping: (fileText, separator = " ", header = false) ->

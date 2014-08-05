@@ -6,7 +6,6 @@ module.exports = ->
     req =
       dataType: "json"
       url: "#{path}#{url}"
-      data: JSON.stringify(data)
       success: (result) ->
         err = if result then null else "No Data"
         cb err, result
@@ -17,6 +16,8 @@ module.exports = ->
       req.method = method
       req.type = method
     else req.method = "GET"
+    if data
+      req.data = JSON.stringify(data)
 
     $.ajaxSetup
       async: true
