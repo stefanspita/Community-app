@@ -7,7 +7,9 @@ module.exports = class View extends BaseView
   getRenderData: ->
     if @options.excluded
       vals = _.omit possibleValues, @options.excluded
+    else if @options.included
+      vals = _.pick possibleValues, @options.included
     else vals = possibleValues
-    options = _.map vals, (question, key) ->
+    @options.options = _.map vals, (question, key) ->
       {value:key, label:key, title:question.question}
-    _.extend @options, {options}
+    @options

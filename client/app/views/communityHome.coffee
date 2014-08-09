@@ -16,7 +16,7 @@ module.exports = class View extends BaseView
     request "getData/initialData", null, null, (err, result) =>
       if err
         console.log err
-        alert "An error occurred while saving the data. Please contact the administrator to solve th problem."
+        alert "An error occurred while fetching the data. Please contact the administrator to solve th problem."
       else if result?.data?.length
         @store.set {initialData: helpers.dataMapping(result.data)}
         @render()
@@ -24,7 +24,7 @@ module.exports = class View extends BaseView
     request "getData/finalData", null, null, (err, result) =>
       if err
         console.log err
-        alert "An error occurred while saving the data. Please contact the administrator to solve th problem."
+        alert "An error occurred while fetching the data. Please contact the administrator to solve th problem."
       else if result?.data[0]?.finalData
         @store.set {finalData:result.data[0].finalData}
         @render()
