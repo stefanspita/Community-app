@@ -116,6 +116,14 @@ ul.byCat {
     display: inline-block;
     width:100%;
 }
+.graph {
+    display: inline-block;
+    width:50%;
+}
+.moreDetails {
+    float: right;
+    width:45%;
+}
 .graph1, .graph2 {
     display: inline-block;
 }

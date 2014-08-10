@@ -34,4 +34,6 @@ module.exports = class View extends BaseView
     chart.trigger("visible")
 
   getRenderData: =>
-    {title:@options.data.answerText}
+    if @options.probability then displayProbability = true
+    probability = @options.probability?[@options.data.val]?.toFixed(2) ? 0
+    {title:@options.data.answerText, probability, displayProbability}

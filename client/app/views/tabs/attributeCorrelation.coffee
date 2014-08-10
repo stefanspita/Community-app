@@ -32,11 +32,13 @@ module.exports = class View extends BaseView
     @$('.detail').empty()
 
     for val in summary
-      detailView = new DetailView({data:val, question:formData[0].value})
+      if @included
+        q = _.findWhere @included, {question:(formData[0].value)}
+      detailView = new DetailView({data:val, question:formData[0].value, probability:q?.probability})
       @$('.detail').append detailView.render().$el
 
   addOption: ->
-    optionView = new QuestionSelect({name:"option", included:@included})
+    optionView = new QuestionSelect({name:"option", @included, @sorter})
     @$el.find("form").append optionView.render().$el
 
   getCommunityAttributes: =>
@@ -46,8 +48,10 @@ module.exports = class View extends BaseView
         alert "An error occurred while fetching the data. Please contact the site administrator."
       else if result?.data?.length
         @included = result.data
+        @sorter = true
         @render()
 
   restoreAttributes: =>
     @included = false
+    @sorter = false
     @render()

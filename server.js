@@ -1,3 +1,4 @@
+require('coffee-script');
 var express = require('express');
 _ = require("underscore");
 fs = require("fs");
@@ -30,16 +31,27 @@ app.get('/getData/finalData', function(req, res) {
 });
 
 app.get('/getCommunityAttributes', function(req, res) {
-    calculateCorrelation(db, function(err, results){
-        if(err) throw err;
-        else res.json({data:results});
+    var collection = db.collection('correlationData');
+    collection.find().toArray(function (err, results) {
+        if(!results.length) {
+            calculateCorrelation(db, function(err, results){
+                if(err) throw err;
+                else
+                    collection.insert({correlation:results}, function (err) {
+                        if (err) throw err;
+                    });
+                res.json({data:results});
+            });
+        }
+        else res.json({data:results[0].correlation});
     });
+
 });
 
 app.post('/saveData/finalData', function(req, res) {
     var data = JSON.parse(_.keys(req.body)[0]);
     var collection = db.collection("finalData");
-    collection.insert(data, function (err, docs) {
+    collection.insert(data, function (err) {
         if (err) throw err;
     });
     res.json({success: true});
