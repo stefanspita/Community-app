@@ -18,6 +18,6 @@ module.exports = class View extends BaseView
       label = key
       if @options.sorter
         data = _.findWhere(@options.included, {question:key})
-        label = "#{key} - probability: #{data?.probability?.total?.toFixed(2)}"
+        label = "#{key} - top probability: #{data?.probability?.total?.toFixed(2)}%"
       {value:key, label, title:question.question}
     @options

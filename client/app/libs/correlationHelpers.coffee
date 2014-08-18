@@ -4,7 +4,7 @@ answerTypes = require "../data/answerTypes"
 
 getIndexes = (formData, initialData) ->
   indexes = []
-  for option, index in formData
+  for option in formData
     if option.value
       indexes.push _.indexOf initialData.header, option.value
   indexes
@@ -14,7 +14,7 @@ getCorrelationPercentages = (ind, initialData, finalData) =>
   for community, index in finalData
     attributesSet = _.countBy community, (node) =>
       if initialData[node]
-        if initialData[node][ind] > -10
+        if parseInt(initialData[node][ind]) > -10
           return true
       return false
     attributeVals = {}

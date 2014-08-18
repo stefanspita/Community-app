@@ -1,5 +1,9 @@
 <h3>{{title}}</h3>
 {{#if displayProbability}}
-    <div class="moreDetails">Probability of this answer being community defining: {{probability}}</div>
+    <div class="moreDetails">
+        <p>Probability of this answer being community defining: <span class="thick">{{probability}}%</span></p>
+        <p>Probability of the results not being defined by random chance: <span class="thick">{{nonRandomChance}}%</span></p>
+        <p>Percentage of this answer being used in the whole data set: <span class="thick">{{totalProbability}}%</span></p>
+    </div>
 {{/if}}
 <div class="graph"></div>

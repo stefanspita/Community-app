@@ -124,6 +124,9 @@ ul.byCat {
     float: right;
     width:45%;
 }
+.thick {
+    font-weight: bold;
+}
 .graph1, .graph2 {
     display: inline-block;
 }
