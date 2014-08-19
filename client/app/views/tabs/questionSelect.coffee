@@ -3,6 +3,7 @@ possibleValues = require "../../data/possibleValues"
 
 module.exports = class View extends BaseView
   template: require("./templates/select")
+  tagName:"span"
 
   getRenderData: ->
     if @options.excluded
@@ -10,14 +11,17 @@ module.exports = class View extends BaseView
     else if @options.included
       if @options.sorter
         @options.included = _.sortBy @options.included, (opt) =>
-          -1 * opt.probability.total
+          -1 * opt.probability[@options.sorter]
       included = _.pluck @options.included, "question"
       vals = _.pick possibleValues, included
     else vals = possibleValues
     @options.options = _.map vals, (question, key) =>
       label = key
       if @options.sorter
+        suffix = "non-random probability"
+        if @options.sorter is "total"
+          suffix = "correlation probability"
         data = _.findWhere(@options.included, {question:key})
-        label = "#{key} - top probability: #{data?.probability?.total?.toFixed(2)}%"
+        label = "#{key} - #{suffix}: #{data?.probability?[@options.sorter]?.toFixed(2)}%"
       {value:key, label, title:question.question}
     @options

@@ -35,6 +35,18 @@ h4 {
     display: inline-block;
     vertical-align: top;
 }
+.columns2 {
+    width:48%;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+}
+.columns2 input {
+    width:35px;
+}
+.columns2 p {
+    margin:0;
+}
 span.sorter {
     font-size:20px;
 }

@@ -38,7 +38,7 @@ calculateCorrelation = (data, communities) ->
   questionData
 
 checkCommunity = (communities, data, ind, answers, total) ->
-  probability = {total:0, nonRandomChance:{}, totalProbability:{}}
+  probability = {total:0, maxNonRandomChance:0, nonRandomChance:{}, totalProbability:{}}
   count = {}
   for answer in answers
     probability.totalProbability[answer] = total[answer] / total.sum
@@ -73,6 +73,8 @@ checkCommunity = (communities, data, ind, answers, total) ->
       decrease = Math.min(10, count[answer]) / 10
       probability[answer] = probability[answer] / count[answer] * 100 * decrease
       probability.total = Math.max(probability[answer], probability.total)
+      if probability[answer] is probability.total
+        probability.maxNonRandomChance = probability.nonRandomChance[answer]
   probability
 
 module.exports = (db, callback) ->

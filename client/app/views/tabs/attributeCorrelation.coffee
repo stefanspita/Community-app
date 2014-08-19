@@ -12,6 +12,22 @@ module.exports = class View extends BaseView
     "change select": "updateData"
     "click .calculate":"getCommunityAttributes"
     "click .restore":"restoreAttributes"
+    "click .sortByRandom":"sortByRandom"
+    "click .sortByCorrelation":"sortByCorrelation"
+    "change .filters input":"filterQuestions"
+
+  sortByRandom: =>
+    @sorter = "maxNonRandomChance"
+    @render()
+
+  sortByCorrelation: =>
+    @sorter = "total"
+    @render()
+
+  filterQuestions: =>
+    @correlationFilter = @$("#correlationFilter").val()
+    @randomFilter = @$("#randomFilter").val()
+    @render()
 
   init: ->
     @initialData = @store.get("initialData")
@@ -19,11 +35,24 @@ module.exports = class View extends BaseView
     @listenTo Backbone, 'filterOption:removed', @updateData
 
   getRenderData: ->
-    {@included}
+    {@included, @sorter, @correlationFilter, @randomFilter}
 
   afterRender: =>
+    if @correlationFilter
+      @applyFilters()
     @addOption()
     @updateData()
+
+  applyFilters: =>
+    correlationFilter = parseInt(@correlationFilter)
+    randomFilter = parseInt(@randomFilter)
+    @included = _.filter @correlationData, (question) =>
+      check = true
+      if correlationFilter and (question.probability?.total < correlationFilter)
+        check = false
+      if randomFilter and (question.probability?.maxNonRandomChance < randomFilter)
+        check = false
+      check
 
   updateData: ->
     formData = @$("form").serializeArray()
@@ -39,7 +68,7 @@ module.exports = class View extends BaseView
 
   addOption: ->
     optionView = new QuestionSelect({name:"option", @included, @sorter})
-    @$el.find("form").append optionView.render().$el
+    @$el.find("form p").prepend optionView.render().$el
 
   getCommunityAttributes: =>
     request "getCommunityAttributes", null, null, (err, result) =>
@@ -47,11 +76,13 @@ module.exports = class View extends BaseView
         console.log err
         alert "An error occurred while fetching the data. Please contact the site administrator."
       else if result?.data?.length
+        @correlationData = result.data
         @included = result.data
-        @sorter = true
+        @sorter = "total"
         @render()
 
   restoreAttributes: =>
+    @correlationFilter = false
     @included = false
     @sorter = false
     @render()
