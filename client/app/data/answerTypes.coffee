@@ -121,6 +121,13 @@ module.exports =
     7: "40-99"
     8: "100+"
 
+  number:
+    0:"0"
+    1:"1"
+    2:"2"
+    3:"3"
+    4:"4"
+
   problems:
     1: "Not a problem"
     2: "Bit of a problem"

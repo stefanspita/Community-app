@@ -521,14 +521,8 @@ module.exports =
     question: "Respondent obtained qualification: A/AS levels"
 
   cct2903:
-    options: [
-      1
-      2
-      3
-      4
-      5
-      6
-    ]
+    options: false
+    max:10
     answersType: false
     question: "Number of A/AS levels respondent obtained"
 
@@ -541,14 +535,8 @@ module.exports =
     question: "Respondent obtained qualification: A/A2s"
 
   cct2905:
-    options: [
-      1
-      2
-      3
-      4
-      5
-      6
-    ]
+    options: false
+    max:9
     answersType: false
     question: "Number of A/A2s respondent obtained"
 
@@ -561,15 +549,8 @@ module.exports =
     question: "Respondent obtained qualification: AVCEs (formerly vocational A levels)"
 
   cct2907:
-    options: [
-      1
-      2
-      3
-      4
-      5
-      6
-    ]
-    answersType: false
+    options: [1..3]
+    answersType: "number"
     question: "Number of AVCEs respondent obtained"
 
   cct2908:
@@ -597,14 +578,8 @@ module.exports =
     question: "Respondent obtained qualification: Foundation or Intermediate GNVQs"
 
   cct2911:
-    options: [
-      1
-      2
-      3
-      4
-      5
-      6
-    ]
+    options: false
+    max:9
     answersType: false
     question: "Number of Foundation or Intermediate GNVQs"
 
@@ -617,14 +592,8 @@ module.exports =
     question: "Respondent obtained qualification: NVQs"
 
   cct2913:
-    options: [
-      1
-      2
-      3
-      4
-      5
-      6
-    ]
+    options: false
+    max:6
     answersType: false
     question: "Level of City and Guilds respondent obtained"
 
@@ -653,14 +622,8 @@ module.exports =
     question: "Respondent obtained qualification: City and Guilds"
 
   cct2917:
-    options: [
-      1
-      2
-      3
-      4
-      5
-      6
-    ]
+    options: false
+    max:8
     answersType: false
     question: "Level of NVQs obtained"
 
@@ -718,14 +681,8 @@ module.exports =
     question: "Respondent studying for qualification: A/AS levels"
 
   cct2958:
-    options: [
-      1
-      2
-      3
-      4
-      5
-      6
-    ]
+    options: false
+    max:5
     answersType: false
     question: "Number of A/AS levels respondent studying for"
 
@@ -738,14 +695,8 @@ module.exports =
     question: "Respondent studying for qualification: A/A2s"
 
   cct2960:
-    options: [
-      1
-      2
-      3
-      4
-      5
-      6
-    ]
+    options: false
+    max:5
     answersType: false
     question: "Number of A/A2s respondent studying for"
 
@@ -758,15 +709,8 @@ module.exports =
     question: "Respondent studying for qualification: AVCEs (formerly vocational A levels)"
 
   cct2962:
-    options: [
-      1
-      2
-      3
-      4
-      5
-      6
-    ]
-    answersType: false
+    options: [1..3]
+    answersType: "number"
     question: "Number of AVCEs respondent studying for"
 
   cct2963:
@@ -794,14 +738,8 @@ module.exports =
     question: "Respondent studying for qualification: Foundation or Intermediate GNVQs"
 
   cct2966:
-    options: [
-      1
-      2
-      3
-      4
-      5
-      6
-    ]
+    options: false
+    max:16
     answersType: false
     question: "Number of Foundation or Intermediate GNVQs respondent studying for"
 
@@ -814,15 +752,8 @@ module.exports =
     question: "Respondent studying for qualification: NVQs"
 
   cct2968:
-    options: [
-      1
-      2
-      3
-      4
-      5
-      6
-    ]
-    answersType: false
+    options: [1..4]
+    answersType: "number"
     question: "Level of NVQs obtained"
 
   cct2969:
@@ -850,14 +781,8 @@ module.exports =
     question: "Respondent studying for qualification: City and Guilds"
 
   cct2972:
-    options: [
-      1
-      2
-      3
-      4
-      5
-      6
-    ]
+    options: false
+    max:6
     answersType: false
     question: "Level of City and Guilds respondent studying for"
 
@@ -928,15 +853,8 @@ module.exports =
     question: "Likelihood of respondent applying to university for degree in next 5 years"
 
   cct3000:
-    options: [
-      1
-      2
-      3
-      4
-      5
-      6
-      7
-    ]
+    options: false
+    max:6
     answersType: false
     question: "Number of choices of university respondent put on UCAS form"
 
@@ -1619,6 +1537,7 @@ module.exports =
 
   cct5001:
     options: false
+    max:19
     answersType: false
     question: "Age when respondent smoked first whole cigarette (years)"
 
@@ -1642,7 +1561,8 @@ module.exports =
     question: "Respondent smoked cigarettes in past 30 days"
 
   cct5011:
-    options: false
+    options:false
+    max:19
     answersType: false
     question: "Age when respondent last smoked whole cigarette (years)"
 
@@ -1656,6 +1576,7 @@ module.exports =
 
   cct5013:
     options: false
+    max:35
     answersType: false
     question: "Number of cigarettes respondent smokes every day on average"
 
@@ -1669,7 +1590,8 @@ module.exports =
 
   cct5015:
     options: false
-    answersType: "standard"
+    max:180
+    answersType: false
     question: "Number of cigarettes respondent smokes every week on average"
 
   cct5020:
@@ -1682,6 +1604,7 @@ module.exports =
 
   cct5025:
     options: false
+    max:19
     answersType: false
     question: "Age when respondent first had whole alcoholic drink"
 
@@ -1807,6 +1730,7 @@ module.exports =
 
   cct5051:
     options: false
+    max:19
     answersType: false
     question: "Age respondent first tried cannabis"
 
@@ -1824,6 +1748,7 @@ module.exports =
 
   cct5053:
     options: false
+    max:20
     answersType: false
     question: "Age when respondent last tried cannabis (years)"
 
@@ -1840,6 +1765,7 @@ module.exports =
 
   cct5056:
     options: false
+    max:40
     answersType: false
     question: "Number of joints/spliffs, pipes or bongs have on typical day when smoke cannabis"
 
@@ -4076,6 +4002,7 @@ module.exports =
 
   fh8411:
     options: false
+    max:16
     answersType: false
     question: "YPs age in years when first tried a cigarette : TF3"
 
@@ -4129,6 +4056,7 @@ module.exports =
 
   fh8431:
     options: false
+    max:16
     answersType: false
     question: "YPs age in years when first smoked a whole cigarette : TF3"
 
@@ -4169,6 +4097,7 @@ module.exports =
 
   fh8451:
     options: false
+    max:40
     answersType: false
     question: "Number of cigarettes YP smokes every day on average : TF3"
 
@@ -4234,6 +4163,7 @@ module.exports =
 
   fh8512:
     options: false
+    max:17
     answersType: false
     question: "YPs age in years when first had a full drink : TF3"
 
@@ -4253,31 +4183,37 @@ module.exports =
 
   fh8520:
     options: false
+    max:40
     answersType: false
     question: "Largest number of whole drinks YP has ever consumed in 24 hours : TF3"
 
   fh8521:
     options: false
+    max:40
     answersType: false
     question: "Largest number of whole drinks YP has ever consumed in 24 hours, in the last 2 years : TF3"
 
   fh8530:
     options: false
+    max:40
     answersType: false
     question: "Number full drinks needed to make YP feel tipsy or have a buzz, first 5 or so times ever had a full drink : TF3"
 
   fh8531:
     options: false
+    max:40
     answersType: false
     question: "Number full drinks needed to make YP feel dizzy or slur speech, first 5 or so times ever had a full drink : TF3"
 
   fh8532:
     options: false
+    max:40
     answersType: false
     question: "Number full drinks needed to make YP stumble or find it hard to walk properly, first 5 or so times ever had a full drink : TF3"
 
   fh8533:
     options: false
+    max:40
     answersType: false
     question: "Number full drinks needed to make YP pass out or fall asleep when didn't want to, first 5 or so times ever had a full drink : TF3"
 
@@ -4325,26 +4261,31 @@ module.exports =
 
   fh8545:
     options: false
+    max:40
     answersType: false
     question: "Number drinks YP usually has on a typical day when they have had a drink, in the last 6 months : TF3"
 
   fh8550:
     options: false
+    max:40
     answersType: false
     question: "Number full drinks needed to make YP feel tipsy or have a buzz, over the last 6 months : TF3"
 
   fh8551:
     options: false
+    max:40
     answersType: false
     question: "Number full drinks needed to make YP feel dizzy or slur speech, over the last 6 months : TF3"
 
   fh8552:
     options: false
+    max:40
     answersType: false
     question: "Number full drinks needed to make YP stumble or find it hard to walk properly, over the last 6 months : TF3"
 
   fh8553:
     options: false
+    max:40
     answersType: false
     question: "Number full drinks needed to make YP pass out or fall asleep when didn't want to, over the last 6 months : TF3"
 
@@ -4678,6 +4619,7 @@ module.exports =
 
   fh8612:
     options: false
+    max:16
     answersType: false
     question: "Age of YP when first tried cannabis : TF3"
 
@@ -4759,6 +4701,7 @@ module.exports =
 
   fh8631:
     options: false
+    max:100
     answersType: false
     question: "Number of joints/spliffs/pipes/bongs YP would have, on a typical day : TF3"
 
@@ -4772,6 +4715,7 @@ module.exports =
 
   fh8633:
     options: false
+    max:10
     answersType: false
     question: "Number of people YP most commonly shares the cannabis with : TF3"
 
@@ -5727,6 +5671,7 @@ module.exports =
 
   fh9124:
     options: false
+    max:10
     answersType: false
     question: "Number of young people YP has had sexual intercourse with in the last year : TF3"
 
@@ -5740,6 +5685,7 @@ module.exports =
 
   fh9126:
     options: false
+    max:10
     answersType: false
     question: "Number of young people YP has ever had sexual intercourse with : TF3"
 
@@ -5780,6 +5726,7 @@ module.exports =
 
   mz028b:
     options: false
+    max:44
     answersType: false
     question: "Grouped age of mother at delivery"
 
@@ -5810,6 +5757,7 @@ module.exports =
 
   b032:
     options: false
+    max:22
     answersType: false
     question: "Parity"
 
