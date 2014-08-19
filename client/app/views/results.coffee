@@ -3,6 +3,7 @@ AttributeCorrelation = require "./tabs/attributeCorrelation"
 RandomizationTool = require "./tabs/randomizationTool"
 CompareRandom = require "./tabs/compareRandom"
 Viewer = require "./tabs/viewer"
+UploadsView = require "./tabs/uploads"
 
 module.exports = class View extends BaseView
   template: require("./templates/results")
@@ -42,6 +43,8 @@ module.exports = class View extends BaseView
           view = new CompareRandom()
         when "viewer"
           view = new Viewer()
+        when "uploads"
+          view = new UploadsView()
       @$("#mainTemplate").empty()
       if view
         @$("#mainTemplate").append view.render().$el

@@ -44,18 +44,18 @@ module.exports = class View extends BaseView
     request "saveData/initialData", arr, "POST", (err) =>
       if err
         console.log err
-        alert "An error occurred while saving the data. Please contact the administrator to solve th problem."
+        alert "An error occurred while saving the data. Please contact the administrator to solve the problem."
       else console.log "DONE"
     @render()
 
   processFinal: =>
     obj = {finalData: communityMapping(event.target.result)}
+    @store.set obj
     request "saveData/finalData", obj, "POST", (err) =>
       if err
         console.log err
-        alert "An error occurred while saving the data. Please contact the administrator to solve th problem."
+        alert "An error occurred while saving the data. Please contact the administrator to solve the problem."
       else console.log "DONE"
-    @store.set obj
     @render()
 
   loadFile: (e) =>

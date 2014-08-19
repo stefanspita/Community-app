@@ -51,21 +51,39 @@ app.get('/getCommunityAttributes', function(req, res) {
 app.post('/saveData/finalData', function(req, res) {
     var data = JSON.parse(_.keys(req.body)[0]);
     var collection = db.collection("finalData");
-    collection.insert(data, function (err) {
+    var correlationData = db.collection('correlationData');
+    correlationData.remove({}, function(err){
         if (err) throw err;
     });
-    res.json({success: true});
+    collection.remove({}, function(err){
+        if (err) throw err;
+        else {
+            collection.insert(data, function (err) {
+                if (err) throw err;
+                res.json({success: true});
+            });
+        }
+    });
 });
 
 app.post('/saveData/initialData', function(req, res) {
     var data = JSON.parse(_.keys(req.body)[0]);
     var collection = db.collection("initialData");
-    for (var i = 0; i < data.length; i++) {
-        collection.insert(data[i], function (err, docs) {
-            if (err) throw err;
-        });
-    }
-    res.json({success: true});
+    var correlationData = db.collection('correlationData');
+    correlationData.remove({}, function(err){
+        if (err) throw err;
+    });
+    collection.remove({}, function(err) {
+        if (err) throw err;
+        else {
+            for (var i = 0; i < data.length; i++) {
+                collection.insert(data[i], function (err) {
+                    if (err) throw err;
+                });
+            }
+        }
+        res.json({success: true});
+    });
 });
 
 console.log("App listening on http://localhost:3000");
