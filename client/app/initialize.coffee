@@ -8,4 +8,6 @@ $(document).ready ->
   app.store.filter = {groupings:{}, filters:{}, attributes:[], sorter:{}}
   app.router = new Router()
   Backbone.history.start()
+  window.onbeforeunload = ->
+    return "Going back to the previous page will exit this website. Data will have to be reloaded on re-entering it."
   return
