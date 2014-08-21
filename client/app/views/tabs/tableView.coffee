@@ -58,10 +58,10 @@ module.exports = class View extends BaseView
           communityRow = """<a href="javascript:void(0)" data-person="#{person}" class="communityGouping">See Communities</a>"""
       {row, communityRow}
     @$(".table").html tableTemplate {@displayRows, @headers, sorter:forceInt(_.keys(@store.filter.sorter)[0]), order:_.values(@store.filter.sorter)[0], attributes}
+    @$(".attribute").hover(@setTooltip, @unsetTooltip)
 
   afterRender: ->
     @updateTableView()
-    @$(".attribute").hover(@setTooltip, @unsetTooltip)
     if @persons.length > 15
       @$("#pager").pagination
         items:@persons.length
