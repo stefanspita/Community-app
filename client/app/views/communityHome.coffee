@@ -5,7 +5,7 @@ ResultsView = require "./results"
 request = require('../libs/ajaxRequest')()
 
 module.exports = class View extends BaseView
-  el: "body"
+  el: "div.main-app"
   template: require("./templates/communityHome")
 
   events:
@@ -13,6 +13,7 @@ module.exports = class View extends BaseView
     "change #final": "loadFile"
 
   init: ->
+    $(".loadingLayout").css("display", "block")
     request "getData/initialData", null, null, (err, result) =>
       if err
         console.log err
@@ -20,6 +21,7 @@ module.exports = class View extends BaseView
       else if result?.data?.length
         @store.set {initialData: helpers.dataMapping(result.data)}
         @render()
+      $(".loadingLayout").css("display", "none")
 
     request "getData/finalData", null, null, (err, result) =>
       if err

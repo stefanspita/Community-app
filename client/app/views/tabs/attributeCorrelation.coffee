@@ -71,6 +71,7 @@ module.exports = class View extends BaseView
     @$el.find("form p").prepend optionView.render().$el
 
   getCommunityAttributes: =>
+    $(".loadingLayout").css("display", "block")
     request "getCommunityAttributes", null, null, (err, result) =>
       if err
         console.log err
@@ -80,6 +81,7 @@ module.exports = class View extends BaseView
         @included = result.data
         @sorter = "total"
         @render()
+      $(".loadingLayout").css("display", "none")
 
   restoreAttributes: =>
     @correlationFilter = false
