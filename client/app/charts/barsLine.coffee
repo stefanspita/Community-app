@@ -3,13 +3,9 @@ Base = require "./chartBase"
 
 module.exports = class BarsOrdinalScale extends Base
 
-  config :
-    platform:"web"
-
   defaults :
     width:700
     height:350
-    platform:"browser"
     margin:
       top: 10
       right: 10
@@ -20,49 +16,13 @@ module.exports = class BarsOrdinalScale extends Base
       right:10
       bottom:20
       left:40
-    xKey:"date"
-    yKey:"balance"
-    isDataClean:true
-    minBarHeight: 5
     maxTicks:20
-    phoneMaxTicks:8
-    tabletMaxTicks:15
-    demo:false
-    tickData:false
-    showToolTip:true
-    formatToolTipDate:"YYYY"
-    highlight:false
 
   data:[]
-  eventData:[]
-  eventChange: ->
   onClick: ->
-  processDataDual: (raw) ->
-    [plusKey, minusKey] = @opts.yKey
-    xKey = @opts.xKey
-    mapFn = (item) ->
-      date: moment(item[xKey])
-      plus: item[plusKey]
-      minus: -1 * item[minusKey]
-    _.chain(raw).map(mapFn).sortBy("date").value()
 
   processData: (raw) ->
-    return @processDataDual(raw) if _.isArray(@opts.yKey)
-    @highlight={}
-    xKey = @opts.xKey
-    mapFn = (item) =>
-      yearFormat=if @opts.formatX then @opts.formatX(item[xKey]) else moment(item[xKey]).format("MMM-YYYY")
-      if @options.highlight and item.active
-        @highlight["#{yearFormat}"]=true
-      balance = item[@opts.yKey]
-      date: item[xKey]
-      year: yearFormat
-      plus: if balance > 0 then balance else 0
-      minus: if balance < 0 then balance else 0
-
-    _.chain(raw).map(mapFn).sortBy("date").value()
-
-  cleanData:(opts) ->
+    raw
 
   normalizeOptions: ->
     @margin = @opts.margin
@@ -76,27 +36,19 @@ module.exports = class BarsOrdinalScale extends Base
       @opts.data=@opts.rawData
     if @opts.processData?
       @processData=@opts.processData
-    @highlight={}
-    @trigger("normalize")
 
   setupScales: ->
-
     format = d3.format("s")
-    formatCurrency = (d) -> format(d)
-
     @xbar = d3.scale.ordinal().rangeRoundBands([0, @width], .1)
     @y = d3.scale.linear().range([(@height), (0)])
     @xAxis = d3.svg.axis().scale(@xbar).orient("bottom").tickSize(0)
-    @yAxis = d3.svg.axis().scale(@y).orient("left").tickFormat(formatCurrency).ticks(5).tickSize(0)
+    @yAxis = d3.svg.axis().scale(@y).orient("left").tickFormat(format).ticks(5).tickSize(0)
     if @options.xFormat #the format to the x axis can be set
       @xAxis.tickFormat(@options.xFormat)
 
   colors: ->
-    if @opts.demo
-      blues=reds=colors.grey
-    else
-      blues = colors.blue
-      reds = colors.orange
+    blues = colors.blue
+    reds = colors.orange
     @color = d3.scale.linear().range([blues[4], blues[0]])
     @colorRed = d3.scale.linear().range([reds[0], reds[2]])
 
@@ -130,27 +82,16 @@ module.exports = class BarsOrdinalScale extends Base
     .call(@yAxis)
 
   obtainMaxTicks: () =>
-
-    if @opts.platform is "phone"
-      @maxTicks = @opts.phoneMaxTicks
-    else if @opts.platform is "tablet"
-      @maxTicks = @opts.tabletMaxTicks
-    else
-      @maxTicks = @opts.maxTicks
-
+    @maxTicks = @opts.maxTicks
 
   render: ->
-
-    @cleanData() unless @opts.isDataClean
     @setupScales()
     @colors()
-    @trigger("color")
     @createsvg()
     @appendBars()
     @appendText()
     @obtainMaxTicks()
-    @trigger("render")
-    @update(@opts.data, @opts.eventData)
+    @update(@opts.data)
 
   update: (args...) ->
     freshData = args[0]
@@ -160,7 +101,6 @@ module.exports = class BarsOrdinalScale extends Base
     else
       @opts.data=freshData
       @opts.data = @processData(@opts.data)
-    @tickData() if @opts.tickData
 
     return unless @y
     @updateMinMax()
@@ -168,15 +108,7 @@ module.exports = class BarsOrdinalScale extends Base
     @updatePlusBars()
     @updateMinBars()
     @updateAxis()
-    @createToolTipBars(@opts.el,@plus,@minus) if @opts.showToolTip
-    @trigger("update", args) # for subviews to hook into
-
-
-  tickData: () ->
-    if @opts.data.length > @maxTicks and (@opts.platform is "phone" or @opts.platform is "tablet")
-      skip = Math.round(@opts.data.length / @maxTicks)
-      data= (year for year in @opts.data by skip)
-      @opts.data=data
+    @createToolTipBars(@opts.el,@plus,@minus)
 
   updateMinMax: =>
     max = d3.max @opts.data, @getd3("plus")
@@ -189,7 +121,6 @@ module.exports = class BarsOrdinalScale extends Base
       @colorRed.domain [min, 0]
 
   updateYears: ->
-
     years = _.pluck @opts.data, "year"
     if years.length > @maxTicks
       skip = Math.ceil(years.length / @maxTicks)
@@ -197,47 +128,28 @@ module.exports = class BarsOrdinalScale extends Base
     @xbar.domain years
 
   getColorMinus: (d) =>
-    if @opts.highlight
-      if @highlight["#{d.year}"]
-        colour = colors.red[3]
-      else
-        colour = colors.red[0]
-    else
-      colour = @colorRed(d.minus)
-
-    colour
+    @colorRed(d.minus)
 
   getColorPlus: (d) =>
-    if @opts.highlight
-      if @highlight["#{d.year}"]
-        colour =colors.blue[3]
-      else
-        colour =colors.blue[0]
-    else
-      colour = @color(d.plus)
-
-    colour
-
+    @color(d.plus)
 
   onEnterX: (d) => @xbar(d.year)
 
   onExitX: (d) => @xbar(d.year)
 
-  onY: (d) => @y(0)
+  onY: => @y(0)
 
-  onHeight: () => 0
+  onHeight: -> 0
 
-  onMinusHeight: () => 0
+  onMinusHeight: -> 0
 
-  onMinusY: (d) => @y(0)
+  onMinusY: => @y(0)
 
   onFill: (d) => @getColorPlus(d)
 
   onFillMinus: (d) => @getColorMinus(d)
 
-  getMinHeight: (d) =>
-    minHeight= if d.minus < 0 then 0 else @opts.minBarHeight
-    minHeight
+  getMinHeight: -> 0
 
   updatePlusBars: ->
     @plus = @bars.selectAll(".plus").data(@opts.data,(d) -> d.date)
@@ -290,25 +202,19 @@ module.exports = class BarsOrdinalScale extends Base
     .remove()
 
   updateAxis: ->
-
     @updateYears()
-    highlight=@highlight
-    activeHighlight= @opts.highlight
-
     @xg.transition().duration(1000)
     .attr("transform", "translate(0," + @y(0) + ")")
     .call(@xAxis)
     .each "end", ->
-      #either if the highligh is not activated or the label has to be highlighted then
-      #we set the bakcground white and color blue
       d3.select(this).selectAll("g")
-      .attr("stroke",(d) -> if not activeHighlight or highlight["#{d}"]  then "#3e7ba1" else "#6A90A1")
+      .attr("stroke",(d) -> "#3e7ba1")
 
       d3.select(this).selectAll("g").insert("rect", "text")
       .attr("width", 36)
       .attr("height", 12)
       .attr("x", -18)
-      .attr("fill",(d) -> if not activeHighlight or highlight["#{d}"] then "white" else "#BABABA")
+      .attr("fill",(d) -> "white")
       .attr("opacity",0.85)
 
     @yg.transition().duration(1000).call(@yAxis)
