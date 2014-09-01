@@ -149,7 +149,7 @@ module.exports = class BarsOrdinalScale extends Base
 
   onFillMinus: (d) => @getColorMinus(d)
 
-  getMinHeight: -> 0
+  getMinHeight: -> 5
 
   updatePlusBars: ->
     @plus = @bars.selectAll(".plus").data(@opts.data,(d) -> d.date)
