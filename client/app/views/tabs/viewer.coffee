@@ -24,11 +24,11 @@ module.exports = class View extends BaseView
     @clearDetails()
     unless _.keys(@store.filter.groupings).length
       @showAllUsers()
-    groupingView = new OptionSelector({data:_.keys(@store.filter.groupings), title:"Groupings", key:"groupings"})
+    groupingView = new OptionSelector({data:_.keys(@store.filter.groupings), title:"Data Grouping", key:"groupings"})
     @$(".groupings").html groupingView.render().$el
-    groupingView = new OptionSelector({data:@store.filter.attributes, title:"Attributes Filter", key:"attributes", editable:true})
+    groupingView = new OptionSelector({data:@store.filter.attributes, title:"Question Filter", key:"attributes", editable:true})
     @$(".attributes").html groupingView.render().$el
-    groupingView = new FilterSelector({title:"Filters", key:"filters"})
+    groupingView = new FilterSelector({title:"Attribute Filter", key:"filters"})
     @$(".dataFilter").html groupingView.render().$el
 
   clearDetails: ->
