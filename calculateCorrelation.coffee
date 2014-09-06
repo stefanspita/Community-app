@@ -59,19 +59,16 @@ checkCommunity = (communities, data, ind, answers, total) ->
       probability.nonRandomChance[answer] ?= 0
       commFraction = attributeVals[answer] / responded.true
       if commFraction >= Math.max(probability.totalProbability[answer], 0.8)
-        probability[answer] += commFraction - probability.totalProbability[answer]
+        probability[answer] += commFraction
         count[answer] += 1
         probability.nonRandomChance[answer] += (Math.pow(responded.true / community.length, 3 / responded.true))
 
   for answer in answers
     probability.totalProbability[answer] *= 100
-    if count[answer] is 0
-      probability[answer] = 0
-      probability.nonRandomChance[answer] = 0
-    else
+    unless count[answer] is 0
       probability.nonRandomChance[answer] = probability.nonRandomChance[answer] / count[answer] * 100
       decrease = Math.min(10, count[answer]) / 10
-      probability[answer] = probability[answer] / count[answer] * 100 * decrease
+      probability[answer] = ((probability[answer] / count[answer]) * 100 - probability.totalProbability[answer]) * decrease
       probability.total = Math.max(probability[answer], probability.total)
       if probability[answer] is probability.total
         probability.maxNonRandomChance = probability.nonRandomChance[answer]
