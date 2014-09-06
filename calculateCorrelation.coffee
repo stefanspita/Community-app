@@ -22,7 +22,6 @@ calculateCorrelation = (data, communities) ->
   communities = communities[0].finalData
   questionData = []
   for question, opts of possibleValues
-    sum = 0
     if opts.options
       questionIndex = _.indexOf data.header, question
       total = _.countBy data, (val) ->
@@ -42,6 +41,7 @@ checkCommunity = (communities, data, ind, answers, total) ->
   count = {}
   for answer in answers
     probability.totalProbability[answer] = total[answer] / total.sum
+
   for community in communities
     responded = _.countBy community, (node) =>
       if data[node]
