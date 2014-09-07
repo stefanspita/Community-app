@@ -25,7 +25,7 @@ calculateCorrelation = (data, communities) ->
     if opts.options
       questionIndex = _.indexOf data.header, question
       total = _.countBy data, (val) ->
-        if parseInt(val[questionIndex]) > -10
+        if parseInt(val[questionIndex]) >= 0
           return val[questionIndex]
         else return false
       total = _.omit total, "false"
@@ -45,10 +45,16 @@ checkCommunity = (communities, data, ind, answers, total) ->
   for community in communities
     responded = _.countBy community, (node) =>
       if data[node]
-        if parseInt(data[node][ind]) > -10
+        if parseInt(data[node][ind]) >= 0
           return true
       return false
     if (not responded.true) or (responded.true < 3) then continue
+    respondedAll = _.countBy community, (node) =>
+      if data[node]
+        if parseInt(data[node][ind]) > -10
+          return true
+      return false
+
     attributeVals = _.countBy community, (node) =>
       if data[node]
         return data[node][ind]
@@ -61,7 +67,7 @@ checkCommunity = (communities, data, ind, answers, total) ->
       if commFraction >= Math.max(probability.totalProbability[answer], 0.8)
         probability[answer] += commFraction
         count[answer] += 1
-        probability.nonRandomChance[answer] += (Math.pow(responded.true / community.length, 3 / responded.true))
+        probability.nonRandomChance[answer] += (Math.pow(respondedAll.true / community.length, 3 / respondedAll.true))
 
   for answer in answers
     probability.totalProbability[answer] *= 100
