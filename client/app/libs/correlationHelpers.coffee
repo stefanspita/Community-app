@@ -15,7 +15,7 @@ getCorrelationPercentages = (ind, initialData, finalData, h) =>
   for community, index in finalData
     attributesSet = _.countBy community, (node) =>
       if initialData[node]
-        if parseInt(initialData[node][ind]) > -10
+        if parseInt(initialData[node][ind]) >= 0
           return true
       return false
     attributeVals = {}

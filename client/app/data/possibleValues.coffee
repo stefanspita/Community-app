@@ -1264,7 +1264,7 @@ module.exports =
       2
       3
     ]
-    answersType: "frequency"
+    answersType: "shortFrequency"
     question: "Difficult to do work or college/university work because of amount of time exercising"
 
   cct4107:
@@ -1273,7 +1273,7 @@ module.exports =
       2
       3
     ]
-    answersType: "frequency"
+    answersType: "shortFrequency"
     question: "Respondent exercised in order to lose weight or avoid gaining weight"
 
   cct4108:
