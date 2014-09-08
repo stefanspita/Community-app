@@ -1627,7 +1627,7 @@ module.exports =
       4
       5
     ]
-    answersType: "cct5031"
+    answersType: "cct5030"
     question: "Number of units respondent has on typical day when drinking"
 
   cct5032:
