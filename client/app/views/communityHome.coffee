@@ -1,7 +1,7 @@
 BaseView = require "./view"
 helpers = require "../libs/dataMappingHelpers"
 communityMapping = require "../libs/communityMapping"
-ResultsView = require "./results"
+ResultsView = require "./viewChanger"
 request = require('../libs/ajaxRequest')()
 
 module.exports = class View extends BaseView
