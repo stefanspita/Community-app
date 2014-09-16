@@ -1,21 +1,15 @@
-app = require "application"
-$ = jQuery
+# base view from which every other view in the application inherits
 
-bindingFn = (selector, $) ->
-  (model, val) ->
-    $(selector).each ->
-      $elem = $(@)
-      if @tagName in ["INPUT", "SELECT"]
-        $elem.val(val)
-      else
-        $elem.text(val)
+app = require "application"
 
 # Base class for all views.
 module.exports = class View extends Backbone.View
   init: ->
 
   initialize: =>
+    # the store model is made available in every view
     @store = app.store
+
     @subViews = {}
     @subViewsByType = {}
     @init.apply this, arguments
@@ -29,14 +23,14 @@ module.exports = class View extends Backbone.View
   className: "main-view"
 
   render: =>
+    # set the template of the view and send the getRenderData outputs to it, for display
     @$el.html (@template @getRenderData())
+
+    # call this function when the template is fully loaded
     @afterRender()
-    @setupBindings() if (@bindings and @model)
+
     this
 
   afterRender: ->
     return
 
-  setupBindings: ->
-    for key, val of @bindings
-      @listenTo @model, "change:#{key}", bindingFn(val, @$)

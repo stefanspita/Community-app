@@ -1,3 +1,6 @@
+# a placeholder for the table view is defined in this file
+# the filters are applied at this stage, to only send the respondents matching them
+
 BaseView = require "../view"
 TableView = require("./tableView")
 OptionSelector = require "./optionSelector"
@@ -24,6 +27,8 @@ module.exports = class View extends BaseView
     @clearDetails()
     unless _.keys(@store.filter.groupings).length
       @showAllUsers()
+
+    # filter views are defined here
     groupingView = new OptionSelector({data:_.keys(@store.filter.groupings), title:"Data Grouping", key:"groupings"})
     @$(".groupings").html groupingView.render().$el
     groupingView = new OptionSelector({data:@store.filter.attributes, title:"Question Filter", key:"attributes", editable:true})
@@ -35,6 +40,7 @@ module.exports = class View extends BaseView
     @$(".details").empty()
     @$(".details").hide()
 
+  # this function is called when the user clicks on the "details" button to see the members of a community
   openDetails: (e) ->
     @clearDetails()
     index = $(e.target).data("index")

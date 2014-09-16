@@ -1,3 +1,6 @@
+# this view is displayed for each possible answer of a question . It creates a chart and displays the answer text and
+# the probabilities calculated for it
+
 BaseView = require "../view"
 forceInt = require "../../libs/forceInt"
 BarsLine = require "../../charts/barsLine"

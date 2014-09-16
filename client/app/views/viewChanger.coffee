@@ -1,3 +1,5 @@
+# the main template changing view, which also holds the left side main menu
+
 BaseView = require "./view"
 AttributeCorrelation = require "./tabs/attributeCorrelation"
 RandomizationTool = require "./tabs/randomizationTool"
@@ -8,15 +10,19 @@ UploadsView = require "./tabs/uploads"
 module.exports = class View extends BaseView
   template: require("./templates/results")
 
+  # click event for the main menu
   events:
     "click .byCat li": "showTab"
 
   init: ->
     @initialData = @store.get("initialData") ? {}
     @finalData = @store.get("finalData") ? {}
+
+    # when a bar on a chert is clicked this listener handles changing the template to the table view
     Backbone.on "communitiesFiltered", =>
       @showTab(false, "viewer")
 
+  # set class "active" on the element clicked
   showTab: (e, viewName) =>
     if e
       $elem = $(e.target)
@@ -31,6 +37,7 @@ module.exports = class View extends BaseView
   afterRender: ->
     @templateSwitch()
 
+  # select the right template depending on the active element in the menu
   templateSwitch: ->
     if @validate() is ""
       template = @$('.byCat li.active').data("template")
@@ -49,6 +56,7 @@ module.exports = class View extends BaseView
       if view
         @$("#mainTemplate").append view.render().$el
 
+  # if not enough data, in the application, just display an error message
   validate: ->
     error = ""
     initialDataLength = _.keys(@initialData).length

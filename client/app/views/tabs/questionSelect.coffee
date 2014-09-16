@@ -1,3 +1,6 @@
+# the select box view which displays all the questions is defined here
+# custom sorting is also defined on it, depending on the values displayed in it (descending sorting by community defining probability)
+
 BaseView = require "../view"
 possibleValues = require "../../data/possibleValues"
 

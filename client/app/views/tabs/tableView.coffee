@@ -1,3 +1,6 @@
+# the table view is defined here
+# more specific options like sorting, paging and tooltip setting on the individual elements are implemented
+
 BaseView = require "../view"
 forceInt = require "../../libs/forceInt"
 possibleValues = require "../../data/possibleValues"

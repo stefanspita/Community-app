@@ -1,3 +1,5 @@
+# this view is used to overwrite the existing data, by uploading new questionnaire/community data files
+
 BaseView = require "../view"
 helpers = require "../../libs/dataMappingHelpers"
 communityMapping = require "../../libs/communityMapping"
@@ -14,6 +16,8 @@ module.exports = class View extends BaseView
     arr = helpers.dbDataMapping(event.target.result, ",", true)
     initialData = helpers.dataMapping(arr)
     @store.set {initialData}
+
+    # the data is sent to the following custom route on which the server listens
     request "saveData/initialData", arr, "POST", (err) =>
       if err
         console.log err
@@ -23,6 +27,8 @@ module.exports = class View extends BaseView
   processFinal: =>
     obj = {finalData: communityMapping(event.target.result)}
     @store.set obj
+
+    # the data is sent to the following custom route on which the server listens
     request "saveData/finalData", obj, "POST", (err) =>
       if err
         console.log err

@@ -1,3 +1,6 @@
+# this is the comparison view. It either creates individual views for every answer of a question selected by the user, or
+# it displays an error message when no random communities have been generated yet.
+
 BaseView = require "../view"
 possibleValues = require "../../data/possibleValues"
 DoubleDetailView= require "./comparisonDetail"

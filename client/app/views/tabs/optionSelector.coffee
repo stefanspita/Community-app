@@ -1,3 +1,6 @@
+# filter views to show all the set filters and give the user the ability to add new ones or remove existing ones
+# used by answer filter and community grouping filter
+
 BaseView = require "../view"
 QuestionSelect = require "./questionSelect"
 possibleValues = require "../../data/possibleValues"

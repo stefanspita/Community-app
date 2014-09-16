@@ -1,17 +1,11 @@
+# basic view to display a select box with the various options passed into it when defined
+
 BaseView = require "./view"
 
 module.exports = class View extends BaseView
   template: require("./templates/option")
 
-  events:
-    "click a.delete": "deleteOption"
-
   init: ->
 
   getRenderData: ->
     @options
-
-  deleteOption: ->
-    @remove()
-    Backbone.trigger 'filterOption:removed'
-    return

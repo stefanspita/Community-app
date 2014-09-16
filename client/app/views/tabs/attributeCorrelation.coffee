@@ -1,3 +1,9 @@
+# this is the first view being displayed if all required data is loaded in. It creates a view for each possible answer of the
+# question selected by user
+# It also has simple filters defined on it to sort the questions in the select box by the community defining probability or
+# by the non-random probability
+# Other filters are used to add a minimum probability value for the questions displayed in the select box
+
 BaseView = require "../view"
 possibleValues = require "../../data/possibleValues"
 DetailView= require "./correlationDetail"

@@ -1,3 +1,5 @@
+# this view is used to generate a random set of communities and set it on the store model
+
 BaseView = require "../view"
 
 module.exports = class View extends BaseView
