@@ -1,7 +1,10 @@
+# this file calculates the distribution of answers for a question in the whole set of communities
+
 forceInt = require "./forceInt"
 possibleValues = require "../data/possibleValues"
 answerTypes = require "../data/answerTypes"
 
+# get the index of the question codes passed in as input. this index will be used to get the question's answers from the whole questionnaire data
 getIndexes = (formData, initialData) ->
   indexes = []
   for option in formData
@@ -9,6 +12,7 @@ getIndexes = (formData, initialData) ->
       indexes.push _.indexOf initialData.header, option.value
   indexes
 
+# for each community, the possible answer uses and the total number of responses are counted (answer >= 0)
 getCorrelationPercentages = (ind, initialData, finalData, h) =>
   correlationResults = []
   if possibleValues[h].max then step = possibleValues[h].max / 5
@@ -30,6 +34,8 @@ getCorrelationPercentages = (ind, initialData, finalData, h) =>
     correlationResults.push {totalNodes:community.length, attributesSet:forceInt(attributesSet.true), attributeVals, index}
   correlationResults
 
+# map of each answer in each community to 5 ranges of values, defined by the lower limit (0, 20, 40, 60, 80)
+# only include communities having more than 2 responses for the question
 getSummary = (results, ind, h) ->
   summary = []
   if possibleValues[h].options
@@ -54,6 +60,8 @@ getSummary = (results, ind, h) ->
     summary = getRangeSummary(results, ind, h)
   {summary, question:possibleValues[h].question}
 
+# if the answers for the question are actual numbers, 5 ranges of answers are created between 0 and the maximum answer defined
+# in the "data/possibleValues.coffee" file.
 getRangeSummary = (results, ind, h) ->
   step = possibleValues[h].max / 5
   summary = []
@@ -80,6 +88,15 @@ getRangeSummary = (results, ind, h) ->
   summary
 
 
+###
+  Inputs:
+  - formData: the form data contains an array with the user selected question code in it
+  - initialData: questionnaire data
+  - finalData: communities list
+
+  Outputs:
+  - the distribution of answers for a question in the whole set of communities
+###
 module.exports =
   getFullAttributeCorrelation: (formData, initialData, finalData) ->
     indexes = getIndexes(formData, initialData)

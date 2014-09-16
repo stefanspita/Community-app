@@ -1,3 +1,15 @@
+# JQuery AJAX functions used to send or request data data from the server.
+###
+  Inputs:
+  - url: the custom url matching one of the url listeners on the server
+  - data: data to be sent. If undefined, nothing is being sent
+  - method: GET or POST
+  - cb: callback function, which gets called when the request is fulfilled by the server
+
+  Outputs:
+  - a configured function, which gets called in the view, when a client requests it
+###
+
 path = "http://localhost:3000/"
 
 module.exports = ->

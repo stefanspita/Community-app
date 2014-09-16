@@ -1,3 +1,6 @@
+# The particularities of the bar chart used in the application are defined here.
+# For example, the onClick function, if passed into the chart options, is called when a bar on the chart is clicked
+
 colors = require "./colors"
 Base = require "./chartBase"
 

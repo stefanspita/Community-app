@@ -1,3 +1,5 @@
+# sets of answers are grouped into different categories, so they can be reused by different questions
+
 module.exports =
   standard:
     1: "Yes"

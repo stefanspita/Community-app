@@ -1,3 +1,6 @@
+# all questions in the data set defined by the ALSPAC question code, possible answer codes, answer category defined in "answerTypes.coffee"
+# and the question text
+
 module.exports =
   cct1000:
     options: [

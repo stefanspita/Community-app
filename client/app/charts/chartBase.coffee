@@ -1,3 +1,5 @@
+# base file for any type of D3 chart to use (the application ended up in only using one)
+
 getWidth = ($elem) ->
   width = $elem.width()
   if width then return width
